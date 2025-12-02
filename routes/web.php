@@ -2,7 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\GitController;
 
 Route::get('/', function () {
     return view('home');
@@ -11,8 +10,6 @@ Route::get('/', function () {
 Route::get('/about', function () {
     return view('about');
 })->name('about');
-
-Route.get('/create-master-branch-secret-route', [GitController::class, 'createMasterBranch']);
 
 Route::get('/how-it-works', function () {
     return view('how-it-works');
