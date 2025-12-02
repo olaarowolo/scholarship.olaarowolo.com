@@ -17,12 +17,12 @@
     <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon_io/favicon-16x16.png') }}">
     <link rel="manifest" href="{{ asset('assets/favicon_io/site.webmanifest') }}">
 
-    <!-- Optimized Meta Tags for SEO -->
+    <!-- Optimized Meta Tags for SEO and WhatsApp -->
     <meta name="description" content="Apply for the OA Scholarship to achieve your educational dreams. Check eligibility, required documents, and the application process.">
     <meta name="keywords" content="Scholarship, OA Scholarship, Financial Aid, Education Support, University Scholarship, Academic Excellence">
     <meta name="author" content="OA Scholarship Foundation">
 
-    <!-- Open Graph Meta Tags -->
+    <!-- Open Graph Meta Tags (Optimized for WhatsApp Sharing) -->
     <meta property="og:title" content="Apply for the OA Scholarship">
     <meta property="og:description" content="Achieve your educational dreams with the OA Scholarship. Learn about eligibility, required documents, and the application process.">
     <meta property="og:image" content="{{ asset('assets/favicon_io/og-image.jpg') }}">
@@ -36,6 +36,10 @@
     <meta name="twitter:title" content="Apply for the OA Scholarship">
     <meta name="twitter:description" content="Achieve your educational dreams with the OA Scholarship. Learn about eligibility, required documents, and the application process.">
     <meta name="twitter:image" content="{{ asset('assets/favicon_io/og-image.jpg') }}">
+
+    <!-- WhatsApp Optimization -->
+    <meta property="og:site_name" content="OA Scholarship">
+    <meta property="og:locale" content="en_US">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2367QRTG56"></script>
