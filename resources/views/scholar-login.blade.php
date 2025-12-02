@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 
 @section('content')
@@ -92,3 +93,12 @@
                 <p class="text-sm text-gray-600">
                     Don't have an account?
                     <a href="{{ route('apply') }}" class="text-primary hover:text-secondary font-medium">Apply for Scholarship</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+@include('components.footer')
+
+@endsection
