@@ -12,9 +12,9 @@
 
     <!-- TITLE and Favicon -->
     <title>OA Local Scholarship</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/favicon_io/oa-logo-yellow-bgrd-480x480.png') }}">
-    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon_io/oa-logo-yellow-bgrd-480x480.png') }}">
-    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon_io/oa-logo-yellow-bgrd-480x480.png') }}">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://scholarship.olaarowolo.com/assets/img/favicon/olaarowolo.com_logo_black.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://scholarship.olaarowolo.com/assets/img/favicon/olaarowolo.com_logo_black.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://scholarship.olaarowolo.com/assets/img/favicon/olaarowolo.com_logo_black.png">
 
     <!-- HTML Meta Tags -->
     <title>OA Local Scholarship</title>
