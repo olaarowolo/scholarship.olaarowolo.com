@@ -12,28 +12,30 @@
 
     <!-- TITLE and Favicon -->
     <title>OA Local Scholarship</title>
-    <link rel="apple-touch-icon" sizes="180x180" href="https://scholarship.olaarowolo.com/assets/img/favicon/olaarowolo.com_logo_black.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="https://scholarship.olaarowolo.com/assets/img/favicon/olaarowolo.com_logo_black.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="https://scholarship.olaarowolo.com/assets/img/favicon/olaarowolo.com_logo_black.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="{{ asset('assets/favicon_io/apple-touch-icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ asset('assets/favicon_io/favicon-32x32.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ asset('assets/favicon_io/favicon-16x16.png') }}">
+    <link rel="manifest" href="{{ asset('assets/favicon_io/site.webmanifest') }}">
 
-    <!-- HTML Meta Tags -->
-    <title>OA Local Scholarship</title>
-    <meta name="description" content="High-level experience in nuclear safety analysis and multinational nuclear project development.">
+    <!-- Optimized Meta Tags for SEO -->
+    <meta name="description" content="Apply for the OA Scholarship to achieve your educational dreams. Check eligibility, required documents, and the application process.">
+    <meta name="keywords" content="Scholarship, OA Scholarship, Financial Aid, Education Support, University Scholarship, Academic Excellence">
+    <meta name="author" content="OA Scholarship Foundation">
 
-    <!-- Facebook Meta Tags -->
-    <meta property="og:url" content="https://www.olaarowolo.com/scholarship">
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Apply for the OA Scholarship">
+    <meta property="og:description" content="Achieve your educational dreams with the OA Scholarship. Learn about eligibility, required documents, and the application process.">
+    <meta property="og:image" content="{{ asset('assets/favicon_io/og-image.jpg') }}">
+    <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="OA Local Scholarship">
-    <meta property="og:description" content="Explore the professional profile of Olasunkanmi Arowolo, a Lecturer in Journalism, Media & Development Communication Expert, and enthusiastic DevOps. Discover his academic achievements, creative skills, publications, and contact information. Connect with Ola to bring ideas to life.">
-    <meta property="og:image" content="{{ asset('assets/favicon_io/oa-logo-yellow-bgrd-480x480.png') }}">
 
-    <!-- Twitter Meta Tags -->
+    <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="olaarowolo.com">
     <meta property="twitter:url" content="https://www.olaarowolo.com/">
-    <meta name="twitter:title" content="OA's Portfolio ðŸ‘‹">
-    <meta name="twitter:description" content="Explore the professional profile of Olasunkanmi Arowolo, a Lecturer in Journalism, Media & Development Communication Expert, and enthusiastic DevOps. Discover his academic achievements, creative skills, publications, and contact information. Connect with Ola to bring ideas to life.">
-    <meta name="twitter:image" content="{{ asset('assets/favicon_io/oa-logo-yellow-bgrd-480x480.png') }}">
+    <meta name="twitter:title" content="Apply for the OA Scholarship">
+    <meta name="twitter:description" content="Achieve your educational dreams with the OA Scholarship. Learn about eligibility, required documents, and the application process.">
+    <meta name="twitter:image" content="{{ asset('assets/favicon_io/og-image.jpg') }}">
 
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2367QRTG56"></script>
