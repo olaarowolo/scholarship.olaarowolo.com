@@ -63,9 +63,19 @@ Route::get('/apply-utme-jamb-form', function () {
 
 Route::post('/apply-form', [ApplicationController::class, 'submit'])->name('apply-form.submit');
 
+Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->name('dashboard');
+
+Route::get('/resources', function () {
+    return view('resources');
+})->name('resources');
+
+Route::get('/testimonials', function () {
+    return view('testimonials');
+})->name('testimonials');
 
 require __DIR__.'/auth.php';
 

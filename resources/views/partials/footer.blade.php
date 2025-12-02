@@ -43,7 +43,28 @@
                     {{-- <li><a href="{{ route('sponsor-information') }}" class="text-base text-gray-300 hover:text-white">Sponsor Information</a></li> --}}
                     <li><a href="{{ route('terms') }}" class="text-base text-gray-300 hover:text-white">Terms & Conditions</a></li>
                     <li><a href="{{ route('contact') }}" class="text-base text-gray-300 hover:text-white">Contact Us</a></li>
+                    <li><a href="{{ route('resources') }}" class="text-base text-gray-300 hover:text-white">Resources</a></li>
                 </ul>
+            </div>
+        </div>
+        <!-- Newsletter Subscription -->
+        <div class="bg-transparent py-12">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h2 class="text-2xl font-extrabold text-white sm:text-3xl">
+                    Stay Updated with Our Newsletter
+                </h2>
+                <p class="mt-4 text-lg text-white">
+                    Subscribe to receive the latest updates about the OA Scholarship, application deadlines, and more.
+                </p>
+                <form action="{{ route('newsletter.subscribe') }}" method="POST" class="mt-6">
+                    @csrf
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <input type="email" name="email" placeholder="Enter your email address" required class="w-full sm:w-auto px-4 py-3 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary">
+                        <button type="submit" class="btn-primary text-lg font-bold px-8 py-3 rounded-full shadow-lg">
+                            Subscribe
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
         <!-- Social Media and Copyright -->
@@ -66,6 +87,11 @@
                 <p class="text-base text-gray-400 text-center md:text-right">
                     &copy; 2024 OA Scholarship. All rights reserved.
                 </p>
+            </div>
+            <div class="mt-4 text-sm text-gray-500">
+                <ul class="list-disc list-inside">
+                    <a href="{{ route('resources') }}" class="hover:text-white">Resources</a>
+                </ul>
             </div>
         </div>
     </div>
