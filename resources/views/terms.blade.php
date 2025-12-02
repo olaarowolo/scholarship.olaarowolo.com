@@ -80,8 +80,7 @@
             font-style: italic;
         }
 
-        /* App Style Button /
-        .btn-back {
+h        .btn-back {
             color: var(--primary);
             font-weight: 600;
             transition: color 0.2s;

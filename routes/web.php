@@ -54,3 +54,18 @@ Route::get('/terms', function () {
 Route::get('/terms-acceptance', [TermsController::class, 'showAcceptancePage'])->name('terms.acceptance');
 Route::post('/terms-acceptance', [TermsController::class, 'acceptTerms'])->name('terms.accept');
 
+Route::get('/apply-form', function () {
+    return view('apply-form');
+})->name('apply-form');
+Route::get('/apply-utme-jamb-form', function () {
+    return view('apply-utme-jamb-form');
+})->name('apply-form');
+
+Route::post('/apply-form', [ApplicationController::class, 'submit'])->name('apply-form.submit');
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->name('dashboard');
+
+require __DIR__.'/auth.php';
+

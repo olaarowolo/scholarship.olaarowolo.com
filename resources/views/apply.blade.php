@@ -154,52 +154,49 @@
             </div>
 
             <!-- Coming Soon Notice -->
-            <div class="card bg-white p-8 rounded-xl shadow-lg text-center">
+            <div class="card bg-gradient-to-r from-gray-50 to-gray-100 p-8 rounded-xl shadow-lg text-center">
                 <div class="mb-6">
                     <i class="fas fa-tools text-6xl text-gray-400 mb-4"></i>
-                    <h3 class="text-2xl font-bold text-gray-900 mb-2">Applicant Portal Coming Soon</h3>
-                    <p class="text-gray-600 mb-6">
+                    <h3 class="text-3xl font-extrabold text-gray-900 mb-4">Applicant Portal Coming Soon</h3>
+                    <p class="text-lg text-gray-600 mb-6 leading-relaxed">
                         We're currently building a secure online application system. In the meantime, you can prepare your documents and stay updated.
                     </p>
                 </div>
 
-                <div class="grid md:grid-cols-2 gap-6 mb-8">
-                    <div class="text-left">
-                        <h4 class="font-semibold text-gray-900 mb-3">Required Documents:</h4>
-                        <ul class="text-sm text-gray-600 space-y-2">
-                            <li>• WAEC/GCE Results</li>
-                            <li>• JAMB Result Slip</li>
-                            <li>• Birth Certificate</li>
-                            <li>• Proof of Indigene Status</li>
-                            <li>• Passport Photograph</li>
+                <div class="grid md:grid-cols-2 gap-8 mb-12">
+                    <div class="text-left bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="font-semibold text-xl text-gray-900 mb-4">Required Documents:</h4>
+                        <ul class="text-base text-gray-700 space-y-3 list-disc list-inside">
+                            <li>WAEC/GCE Results</li>
+                            <li>JAMB Result Slip</li>
+                            <li>Birth Certificate</li>
+                            <li>Proof of Indigene Status</li>
+                            <li>Passport Photograph</li>
                         </ul>
                     </div>
-                    <div class="text-left">
-                        <h4 class="font-semibold text-gray-900 mb-3">Eligibility Check:</h4>
-                        <ul class="text-sm text-gray-600 space-y-2">
-                            <li>• Iba Town Indigene</li>
-                            <li>• Strong Academic Record</li>
-                            <li>• University Admission</li>
-                            <li>• Financial Need</li>
-                            <li>• Community Involvement</li>
+                    <div class="text-left bg-white p-6 rounded-lg shadow-md">
+                        <h4 class="font-semibold text-xl text-gray-900 mb-4">Eligibility Check:</h4>
+                        <ul class="text-base text-gray-700 space-y-3 list-disc list-inside">
+                            <li>Iba Town Indigene</li>
+                            <li>Strong Academic Record</li>
+                            <li>University Admission</li>
+                            <li>Financial Need</li>
+                            <li>Community Involvement</li>
                         </ul>
                     </div>
                 </div>
 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <div class="flex flex-col sm:flex-row gap-6 justify-center">
                     <a href="{{ route('how-it-works') }}" class="btn-primary text-lg font-bold px-8 py-3 rounded-full shadow-lg inline-flex items-center justify-center">
                         View Application Process
                     </a>
-                    {{-- <a href="{{ route('contact') }}" class="inline-flex items-center justify-center px-8 py-3 border border-secondary text-base font-medium rounded-full text-primary bg-white hover:bg-gray-100 transition duration-300 shadow-md">
-                        Get Updates
-                    </a> --}}
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Footer/Contact Section -->
-    @include('components.footer')
+    @include('partials.footer')
 
 
     <script>

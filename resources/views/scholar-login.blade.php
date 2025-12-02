@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('content')
@@ -99,6 +98,7 @@
     </div>
 </section>
 
-@include('components.footer')
+@include('partials.footer')
+@include('partials.footer')
 
 @endsection

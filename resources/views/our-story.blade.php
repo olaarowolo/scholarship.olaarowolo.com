@@ -137,7 +137,8 @@
                             </h3>
                             <ul role="list" class="mt-4 space-y-3">
                                 <li><a href="{{ route('scholar-login') }}" class="text-base text-gray-300 hover:text-white">Scholar Login</a></li>
-                                <li><a href="{{ route('sponsor-information') }}" class="text-base text-gray-300 hover:text-white">Sponsor Information</a></li>
+                                {{-- <li><a href="{{ route('sponsor-information') }}" class="text-base text-gray-300 hover:text-white">Sponsor Information</a></li> --}}
+
                                 <li><a href="{{ route('terms') }}" class="text-base text-gray-300 hover:text-white">Terms & Conditions</a></li>
                             </ul>
                     </div>

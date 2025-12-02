@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>OA Scholarship Application</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -36,9 +37,10 @@
         }
     </style>
 </head>
-<body class="bg-gray-50 flex justify-center items-start min-h-screen py-16">
+<body class="bg-gray-50 min-h-screen flex flex-col">
 
-    <div class="w-full max-w-4xl bg-white p-8 sm:p-12 rounded-2xl shadow-2xl border border-gray-200">
+    <main class="flex-grow flex justify-center items-start py-16">
+        <div class="w-full max-w-4xl bg-white p-8 sm:p-12 rounded-2xl shadow-2xl border border-gray-200">
 
         <header class="mb-8 text-center">
             <img class="h-10 w-auto mx-auto mb-4"
@@ -52,9 +54,16 @@
             </p>
         </header>
 
-        <!-- Authentication & User ID Display -->
-        <div class="text-xs text-right text-gray-400 mb-6">
-            <span id="auth-status">Authenticating...</span>
+        <!-- Application Form -->
+
+        <!-- Go Back Home Button -->
+        <div class="mb-6 text-left">
+            <a href="{{ url('/') }}" class="inline-flex items-center px-4 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition duration-300">
+                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+                </svg>
+                Go Back Home
+            </a>
         </div>
 
         <!-- Step Progress Bar -->
@@ -84,11 +93,8 @@
 
     </div>
 
-    <!-- Firebase SDK Imports -->
+    <!-- Application Script -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
-        import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js";
-        import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
         // Global State
         const state = {
@@ -473,47 +479,7 @@
         window.validateStep = validateStep;
 
 
-        // --- FIREBASE INITIALIZATION ---
 
-        const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
-        const firebaseConfig = typeof __firebase_config !== 'undefined' ? JSON.parse(__firebase_config) : {};
-        const initialAuthToken = typeof __initial_auth_token !== 'undefined' ? __initial_auth_token : undefined;
-
-        async function initializeFirebase() {
-            try {
-                if (Object.keys(firebaseConfig).length === 0) {
-                    console.error("Firebase config is missing.");
-                    document.getElementById('auth-status').textContent = 'Error: Firebase Config Missing';
-                    state.isAuthReady = true;
-                    return;
-                }
-
-                const firebaseApp = initializeApp(firebaseConfig);
-                state.db = getFirestore(firebaseApp);
-                state.auth = getAuth(firebaseApp);
-
-                // Auth Listener and Sign-In
-                onAuthStateChanged(state.auth, async (user) => {
-                    if (user) {
-                        state.userId = user.uid;
-                    } else {
-                        if (initialAuthToken) {
-                            await signInWithCustomToken(state.auth, initialAuthToken);
-                        } else {
-                            await signInAnonymously(state.auth);
-                        }
-                    }
-                    state.isAuthReady = true;
-                    document.getElementById('auth-status').textContent = `Logged in as: ${state.userId}`;
-                    renderStep(); // Re-render after auth to ensure button states are correct
-                });
-
-            } catch (error) {
-                console.error("Error initializing Firebase:", error);
-                document.getElementById('auth-status').textContent = 'Error: Initialization Failed';
-                state.isAuthReady = true;
-            }
-        }
 
         // --- SUBMISSION HANDLER ---
 
@@ -524,44 +490,46 @@
             renderStep(); // Update button to show loading state
             renderStatusMessage(null);
 
-            if (!state.db || !state.userId) {
-                renderStatusMessage('System error: Authentication or database connection failed.', 'error');
-                state.isLoading = false;
-                renderStep();
-                return;
-            }
-
             try {
-                // Collect and structure data
-                const applicationData = {
-                    ...state.data.personal,
-                    ...state.data.academic,
-                    submissionDate: new Date().toISOString(),
-                    status: 'Submitted',
-                    // Save file metadata only (actual files require Firebase Storage, which is not included here)
-                    fileNames: {
-                        jambResult: state.data.documents.jambResult?.name,
-                        waecResult: state.data.documents.waecResult?.name,
-                        indigeneCert: state.data.documents.indigeneCert?.name,
-                    },
-                };
+                // Prepare FormData for submission
+                const formData = new FormData();
+                formData.append('fullName', state.data.personal.fullName);
+                formData.append('email', state.data.personal.email);
+                formData.append('phone', state.data.personal.phone);
+                formData.append('address', state.data.personal.address);
+                formData.append('isIndigene', state.data.personal.isIndigene);
+                formData.append('jambScore', state.data.academic.jambScore);
+                formData.append('waecGceYear', state.data.academic.waecGceYear);
+                formData.append('institution', state.data.academic.institution);
+                formData.append('course', state.data.academic.course);
+                formData.append('admissionStatus', state.data.academic.admissionStatus);
+                formData.append('jambResult', state.data.documents.jambResult);
+                formData.append('waecResult', state.data.documents.waecResult);
+                formData.append('indigeneCert', state.data.documents.indigeneCert);
 
-                // Define the private collection path
-                const applicationDocRef = doc(state.db,
-                    `artifacts/${appId}/users/${state.userId}/applications`,
-                    'latest_application'
-                );
+                // CSRF token for Laravel
+                const csrfToken = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+                if (csrfToken) {
+                    formData.append('_token', csrfToken);
+                }
 
-                await setDoc(applicationDocRef, applicationData, { merge: true });
+                const response = await fetch('/apply-form', {
+                    method: 'POST',
+                    body: formData,
+                });
 
-                renderStatusMessage('Application submitted successfully! You will be redirected shortly.', 'success');
+                const result = await response.json();
 
-                // Simulate dashboard view/redirection
-                setTimeout(() => {
-                    state.isLoading = false;
-                    state.step = 4; // Move to success screen
-                    renderStep();
-                }, 2000);
+                if (response.ok && result.success) {
+                    renderStatusMessage(`Application submitted successfully! Application ID: ${result.application_id}`, 'success');
+                    setTimeout(() => {
+                        state.isLoading = false;
+                        state.step = 4; // Move to success screen
+                        renderStep();
+                    }, 2000);
+                } else {
+                    throw new Error(result.message || 'Submission failed');
+                }
 
             } catch (error) {
                 console.error("Error submitting application:", error);
@@ -574,7 +542,6 @@
 
         // --- Application Start ---
         window.onload = () => {
-            initializeFirebase();
             renderStep();
         };
     </script>

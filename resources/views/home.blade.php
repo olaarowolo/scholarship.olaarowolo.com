@@ -203,7 +203,7 @@
             </div>
 
             <div class="mt-16 text-center">
-                <a href="{{ route('apply') }}" class="btn-primary text-lg font-bold px-10 py-4 rounded-full shadow-lg inline-flex items-center justify-center">
+                <a href="{{ route('apply') }}" class="bg-gray-400 text-gray-600 cursor-not-allowed text-lg font-bold px-10 py-4 rounded-full shadow-lg inline-flex items-center justify-center" disabled>
                     Check Eligibility & Apply Now
                 </a>
             </div>
@@ -242,6 +242,6 @@
     </section>
 
     <!-- 5. Footer/Contact Section -->
-    @include('components.footer')
+    @include('partials.footer')
 
 @endsection

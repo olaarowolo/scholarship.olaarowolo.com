@@ -75,7 +75,7 @@
                     <a href="{{ route('home') }}#impact" class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Impact</a>
                     <a href="{{ route('contact') }}" class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Contact</a>
                     <!-- CTA Button -->
-                    <a href="{{ route('apply') }}" class="btn-primary text-sm font-semibold px-6 py-2.5 rounded-full ml-4">
+                    <a href="#" class="bg-gray-400 text-gray-600 cursor-not-allowed text-sm font-semibold px-6 py-2.5 rounded-full ml-4" disabled>
                         Apply Now
                     </a>
                 </div>
@@ -99,7 +99,7 @@
                 <a href="{{ route('how-it-works') }}" class="text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">How to Apply</a>
                 <a href="{{ route('home') }}#impact" class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Impact</a>
                 <a href="{{ route('contact') }}" class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
-                <a href="{{ route('apply') }}" class="btn-primary block w-full text-center mt-4 px-3 py-2 rounded-full text-base font-medium">Apply Now</a>
+                <a href="{{ route('apply') }}" class="bg-gray-400 text-gray-600 cursor-not-allowed block w-full text-center mt-4 px-3 py-2 rounded-full text-base font-medium" disabled>Apply Now</a>
             </div>
         </div>
     </nav>
@@ -295,7 +295,7 @@
             <div class="space-y-6">
                 <div class="card bg-gray-50 p-6 rounded-xl">
                     <h3 class="text-lg font-semibold text-primary mb-2">When is the application window open?</h3>
-                    <p class="text-gray-600">Applications are typically open twice a year. Check our homepage for current application windows.</p>
+                    <p class="text-gray-600">Applications are typically open once a year. Check our homepage for current application windows.</p>
                 </div>
 
                 <div class="card bg-gray-50 p-6 rounded-xl">
@@ -317,7 +317,7 @@
     </section>
 
     <!-- Footer/Contact Section -->
-    @include('components.footer')
+@include('partials.footer')
 
 
     <script>

@@ -15,7 +15,7 @@
             <a href="#impact" class="text-gray-600 hover:text-primary px-2 py-1 text-sm font-medium transition duration-200">Impact</a>
             <a href="#contact" class="text-gray-600 hover:text-primary px-2 py-1 text-sm font-medium transition duration-200">Contact</a>
             <!-- CTA Button -->
-            <a href="{{ route('apply') }}" class="btn-primary text-xs font-semibold px-4 py-1.5 rounded-full ml-2">
+            <a href="{{ route('apply') }}" class="btn-disabled text-xs font-semibold px-4 py-1.5 rounded-full ml-2">
                 Apply Now
             </a>
         </div>
@@ -39,6 +39,16 @@
         <a href="#process" class="text-gray-600 hover:text-primary py-3 text-center text-lg font-medium transition duration-200" onclick="toggleMenu()">How to Apply</a>
         <a href="#impact" class="text-gray-600 hover:text-primary py-3 text-center text-lg font-medium transition duration-200" onclick="toggleMenu()">Impact</a>
         <a href="#contact" class="text-gray-600 hover:text-primary py-3 text-center text-lg font-medium transition duration-200" onclick="toggleMenu()">Contact</a>
-        <a href="{{ route('apply') }}" class="btn-primary text-center mt-6 px-6 py-3 rounded-full text-lg font-semibold shadow-lg">Apply Now</a>
+        <a href="{{ route('apply') }}" class="btn-disabled text-center mt-6 px-6 py-3 rounded-full text-lg font-semibold shadow-lg">Apply Now</a>
     </div>
 </div>
+
+<!-- Greyed-out Apply Buttons -->
+<style>
+    .btn-disabled {
+        background-color: #d1d5db; /* Gray */
+        color: #9ca3af; /* Darker Gray */
+        cursor: not-allowed;
+        pointer-events: none;
+    }
+</style>
