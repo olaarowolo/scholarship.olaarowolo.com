@@ -64,7 +64,7 @@
                     <a href="{{ route('home') }}">
                         <img class="h-10 w-auto"
                              src="{{ asset('assets/img/favicon/olaarowolo.com_logo_black.png') }}"
-                             alt="Ola Arowolo Scholarship Logo">
+                             alt="OA Scholarship Logo">
                     </a>
                 </div>
 
@@ -84,7 +84,7 @@
                 <div class="flex items-center sm:hidden">
                     <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary" aria-expanded="false" onclick="toggleMenu()">
                         <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
+                        <svg class="block h-6 w-6" xmlns="http://www.worg/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
@@ -111,7 +111,7 @@
                 How It <span class="text-primary">Works</span>
             </h1>
             <p class="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
-                Your step-by-step guide to applying for the Ola Arowolo Local Scholarship and securing your path to higher education.
+                Your step-by-step guide to applying for the OA Local Scholarship and securing your path to higher education.
             </p>
         </div>
     </header>
@@ -135,7 +135,7 @@
                 <!-- Step 1 -->
                 <div class="flex flex-col md:flex-row mb-12 items-center">
                     <div class="md:w-1/2 md:pr-10 text-center md:text-right">
-                        <h3 class="text-2xl font-bold text-primary mb-1">1. Initial Screening</h3>
+                        <h3 class="text-2xl font-bold text-primary mb-1">Initial Screening</h3>
                         <p class="text-gray-600 text-sm md:text-base">Submit your online application, providing details of your background, WAEC/GCE results, and JAMB score.</p>
                         <div class="mt-4 text-sm text-gray-500">
                             <strong>Requirements:</strong> Valid contact info, academic records, indigene verification
@@ -150,7 +150,7 @@
                 <!-- Step 2 -->
                 <div class="flex flex-col md:flex-row mb-12 items-center md:flex-row-reverse">
                     <div class="md:w-1/2 md:pl-10 text-center md:text-left">
-                        <h3 class="text-2xl font-bold text-primary mb-1">2. Local Verification</h3>
+                        <h3 class="text-2xl font-bold text-primary mb-1"> Local Verification</h3>
                         <p class="text-gray-600 text-sm md:text-base">Successful candidates are contacted for physical verification of residency and indigene status by local committees.</p>
                         <div class="mt-4 text-sm text-gray-500">
                             <strong>Process:</strong> Community verification, document review, eligibility confirmation
@@ -165,7 +165,7 @@
                 <!-- Step 3 -->
                 <div class="flex flex-col md:flex-row mb-12 items-center">
                     <div class="md:w-1/2 md:pr-10 text-center md:text-right">
-                        <h3 class="text-2xl font-bold text-primary mb-1">3. Admission Confirmation</h3>
+                        <h3 class="text-2xl font-bold text-primary mb-1">Admission Confirmation</h3>
                         <p class="text-gray-600 text-sm md:text-base">Upon securing provisional admission, beneficiaries submit confirmation documents to activate the funding cycle.</p>
                         <div class="mt-4 text-sm text-gray-500">
                             <strong>Documents:</strong> Admission letter, fee schedule, acceptance proof
@@ -180,7 +180,7 @@
                 <!-- Step 4 -->
                 <div class="flex flex-col md:flex-row items-center md:flex-row-reverse">
                     <div class="md:w-1/2 md:pl-10 text-center md:text-left">
-                        <h3 class="text-2xl font-bold text-primary mb-1">4. Performance Tracking</h3>
+                        <h3 class="text-2xl font-bold text-primary mb-1">Performance Tracking</h3>
                         <p class="text-gray-600 text-sm md:text-base">Scholars submit semester results for review. Funds for the next academic year are disbursed based on maintained CGPA.</p>
                         <div class="mt-4 text-sm text-gray-500">
                             <strong>Funding:</strong> Performance-based disbursement, annual reviews, continued support
@@ -209,7 +209,7 @@
                     Eligibility Criteria
                 </h2>
                 <p class="mt-4 text-lg text-gray-600">
-                    Who can apply for the Ola Arowolo Local Scholarship?
+                    Who can apply for the OA Local Scholarship?
                 </p>
             </div>
 
@@ -317,59 +317,8 @@
     </section>
 
     <!-- Footer/Contact Section -->
-    <footer class="bg-gray-900 text-white">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <div class="xl:grid xl:grid-cols-3 xl:gap-8">
-                <!-- Contact Info -->
-                <div class="space-y-4 xl:col-span-1">
-                    <img class="h-10 w-auto mb-4"
-                         src="{{ asset('assets/img/favicon/olaarowolo.com_logo_black.png') }}"
-                         alt="Ola Arowolo Logo" style="filter: invert(1) grayscale(100%) brightness(200%);">
-                    <p class="text-gray-400 text-sm">A commitment to educational equity for Iba indigenes.</p>
-                    <div class="text-sm text-gray-400 space-y-1 pt-2">
-                        <div class="flex items-center space-x-2">
-                             <i class="fa-solid fa-envelope"></i>
-                             <p>Email: <a href="mailto:scholarship@olaarowolo.com" class="hover:text-white">scholarship@olaarowolo.com</a></p>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                             <i class="fa-solid fa-location-dot"></i>
-                             <p>Location: Iba Town, Ojo, Lagos, Nigeria</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Navigation Links -->
-                <div class="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
-                    <div class="md:grid md:grid-cols-2 md:gap-8">
-                        <div>
-                            <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-                                Quick Links
-                            </h3>
-                            <ul role="list" class="mt-4 space-y-3">
-                                <li><a href="{{ route('home') }}#mission" class="text-base text-gray-300 hover:text-white">Our Story</a></li>
-                                <li><a href="{{ route('how-it-works') }}" class="text-base text-gray-300 hover:text-white">Application Steps</a></li>
-                                <li><a href="{{ route('home') }}#impact" class="text-base text-gray-300 hover:text-white">View Impact</a></li>
-                            </ul>
-                        </div>
-                        <div class="mt-12 md:mt-0">
-                            <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-                                Portal & Legal
-                            </h3>
-                            <ul role="list" class="mt-4 space-y-3">
-                                <li><a href="{{ route('apply') }}" class="text-base text-gray-300 hover:text-white">Scholar Login</a></li>
-                                <li><a href="#" class="text-base text-gray-300 hover:text-white">Sponsor Information</a></li>
-                                <li><a href="#" class="text-base text-gray-300 hover:text-white">Terms & Conditions</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-12 border-t border-gray-700 pt-8 text-center">
-                <p class="text-base text-gray-400">
-                    &copy; 2024 Ola Arowolo Scholarship. All rights reserved.
-                </p>
-            </div>
-        </div>
-    </footer>
+    @include('components.footer')
+
 
     <script>
         // Function to toggle mobile menu visibility

@@ -62,7 +62,7 @@
     // Function to toggle mobile menu visibility
     function toggleMenu() {
         const menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('hidden');
+        menu.classList.toggle('translate-y-full');
     }
 
     // Function for smooth scrolling
@@ -84,88 +84,12 @@
 </script>
 
     <!-- Navigation Bar -->
-    <nav class="bg-white shadow-md sticky top-0 z-50 transition-shadow duration-300 border-b border-accent">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
-                    <img class="h-10 w-auto"
-                         src="{{ asset('assets/img/favicon/olaarowolo.com_logo_black.png') }}"
-                         alt="Ola Arowolo Scholarship Logo">
-                </div>
+    @include('components.navbar')
 
-                <!-- Desktop Links -->
-                <div class="hidden sm:ml-6 sm:flex sm:space-x-8 items-center">
-                    <a href="#mission" class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Our Mission</a>
-                    <a href="#process" class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">How to Apply</a>
-                    <a href="#impact" class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Impact</a>
-                    <a href="#contact" class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Contact</a>
-                    <!-- CTA Button -->
-                    <a href="{{ route('apply') }}" class="btn-primary text-sm font-semibold px-6 py-2.5 rounded-full ml-4">
-                        Apply Now
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="flex items-center sm:hidden">
-                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary" aria-expanded="false" onclick="toggleMenu()">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Menu (Hidden by default) -->
-        <div class="sm:hidden hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#mission" class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium" onclick="toggleMenu()">Our Mission</a>
-                <a href="#process" class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium" onclick="toggleMenu()">How to Apply</a>
-                <a href="#impact" class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium" onclick="toggleMenu()">Impact</a>
-                <a href="#contact" class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium" onclick="toggleMenu()">Contact</a>
-                <a href="{{ route('apply') }}" class="btn-primary block w-full text-center mt-4 px-3 py-2 rounded-full text-base font-medium">Apply Now</a>
-            </div>
-        </div>
-    </nav>
 
     <!-- 1. Hero Section -->
-    <header class="hero-bg relative overflow-hidden pt-20 pb-28 sm:pt-28 lg:pt-36">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="lg:grid lg:grid-cols-12 lg:gap-12 items-center">
-                <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-7 lg:text-left">
-                    <div class="text-sm font-semibold uppercase tracking-widest text-primary">
-                        Empowering Local Excellence
-                    </div>
-                    <h1 class="mt-4 text-5xl tracking-tight font-extrabold text-gray-900 sm:text-6xl lg:text-5xl xl:text-7xl">
-                        The <span class="text-primary block lg:inline">Scholarship</span> for Iba Town's Brightest
-                    </h1>
-                    <p class="mt-6 text-xl text-gray-600 max-w-xl mx-auto lg:mx-0">
-                        Providing financial and mentorship support to emerging leaders to access and excel in quality university education.
-                    </p>
-                    <div class="mt-10 flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4">
-                        <a href="{{ route('apply') }}" class="btn-primary text-lg font-bold px-10 py-4 rounded-full shadow-lg inline-flex items-center justify-center">
-                            Start Application &rarr;
-                        </a>
-                        <a href="#process" class="inline-flex items-center justify-center px-10 py-4 border border-secondary text-base font-medium rounded-full text-primary bg-white hover:bg-gray-100 transition duration-300 shadow-md">
-                            View Process
-                        </a>
-                    </div>
-                    <p class="mt-4 text-sm text-gray-500 sm:text-center lg:text-left">
-                        Next Application Window: Dec. 8, 2025 - Jan. 16, 2026
-                    </p>
-                </div>
+    @include('components.header')
 
-                <!-- Mockup Image/Illustration Placeholder -->
-                <div class="mt-16 lg:mt-0 lg:col-span-5">
-                    <div class="aspect-w-4 aspect-h-3 rounded-3xl overflow-hidden shadow-2xl card transform hover:scale-[1.01]">
-                        <img class="w-full object-cover h-auto rounded-3xl" src="{{ asset('assets/img/2025_UTME_Scholarship_Application_for_Iba_Indigenes -  Web Open.jpg') }}" alt="Students studying together">
-                    </div>
-                </div>
-            </div>
-        </div>
-    </header>
 
     <!-- 2. Mission Section -->
     <section id="mission" class="py-24 bg-white">
@@ -213,7 +137,7 @@
         </div>
     </section>
 
-    <!-- 3. Application Process Section -->
+    <!-- Application Process Section -->
     <section id="process" class="py-24 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-16">
@@ -232,7 +156,7 @@
                 <!-- Step 1 -->
                 <div class="flex flex-col md:flex-row mb-12 items-center">
                     <div class="md:w-1/2 md:pr-10 text-center md:text-right">
-                        <h3 class="text-2xl font-bold text-primary mb-1">1. Initial Screening</h3>
+                        <h3 class="text-2xl font-bold text-primary mb-1">Initial Screening</h3>
                         <p class="text-gray-600 text-sm md:text-base">Submit your online application, providing details of your background, WAEC/GCE results, and JAMB score.</p>
                     </div>
                     <div class="relative my-4 md:my-0">
@@ -244,7 +168,7 @@
                 <!-- Step 2 -->
                 <div class="flex flex-col md:flex-row mb-12 items-center md:flex-row-reverse">
                     <div class="md:w-1/2 md:pl-10 text-center md:text-left">
-                        <h3 class="text-2xl font-bold text-primary mb-1">2. Local Verification</h3>
+                        <h3 class="text-2xl font-bold text-primary mb-1">Local Verification</h3>
                         <p class="text-gray-600 text-sm md:text-base">Successful candidates are contacted for physical verification of residency and indigene status by local committees.</p>
                     </div>
                     <div class="relative my-4 md:my-0">
@@ -256,7 +180,7 @@
                 <!-- Step 3 -->
                 <div class="flex flex-col md:flex-row mb-12 items-center">
                     <div class="md:w-1/2 md:pr-10 text-center md:text-right">
-                        <h3 class="text-2xl font-bold text-primary mb-1">3. Admission Confirmation</h3>
+                        <h3 class="text-2xl font-bold text-primary mb-1">Admission Confirmation</h3>
                         <p class="text-gray-600 text-sm md:text-base">Upon securing provisional admission, beneficiaries submit confirmation documents to activate the funding cycle.</p>
                     </div>
                     <div class="relative my-4 md:my-0">
@@ -268,7 +192,7 @@
                 <!-- Step 4 -->
                 <div class="flex flex-col md:flex-row items-center md:flex-row-reverse">
                     <div class="md:w-1/2 md:pl-10 text-center md:text-left">
-                        <h3 class="text-2xl font-bold text-primary mb-1">4. Performance Tracking</h3>
+                        <h3 class="text-2xl font-bold text-primary mb-1">Performance Tracking</h3>
                         <p class="text-gray-600 text-sm md:text-base">Scholars submit semester results for review. Funds for the next academic year are disbursed based on maintained CGPA.</p>
                     </div>
                     <div class="relative my-4 md:my-0">
@@ -301,7 +225,7 @@
                 <!-- Stat 2 -->
                 <div class="p-4 sm:p-6 bg-gray-50 rounded-xl shadow-inner border border-accent">
                     <p class="text-4xl sm:text-5xl font-extrabold text-primary">85%</p>
-                    <p class="mt-2 text-md sm:text-lg font-medium text-gray-600">JAMB Aced (250+)</p>
+                    <p class="mt-2 text-md sm:text-lg font-medium text-gray-600">JAMB Aced (10+)</p>
                 </div>
                 <!-- Stat 3 -->
                 <div class="p-4 sm:p-6 bg-gray-50 rounded-xl shadow-inner border border-accent">
@@ -318,57 +242,6 @@
     </section>
 
     <!-- 5. Footer/Contact Section -->
-    <footer id="contact" class="bg-gray-900 text-white">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <div class="xl:grid xl:grid-cols-3 xl:gap-8">
-                <!-- Contact Info -->
-                <div class="space-y-4 xl:col-span-1">
-                    <img class="h-10 w-auto mb-4"
-                         src="{{ asset('assets/img/favicon/olaarowolo.com_logo_black.png') }}"
-                         alt="Ola Arowolo Logo" style="filter: invert(1) grayscale(100%) brightness(200%);">
-                    <p class="text-gray-400 text-sm">A commitment to educational equity for Iba indigenes.</p>
-                    <div class="text-sm text-gray-400 space-y-1 pt-2">
-                        <div class="flex items-center space-x-2">
-                             <i class="fa-solid fa-envelope"></i>
-                             <p>Email: <a href="mailto:scholarship@olaarowolo.com" class="hover:text-white">scholarship@olaarowolo.com</a></p>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                             <i class="fa-solid fa-location-dot"></i>
-                             <p>Location: Iba Town, Ojo, Lagos, Nigeria</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Navigation Links -->
-                <div class="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
-                    <div class="md:grid md:grid-cols-2 md:gap-8">
-                        <div>
-                            <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-                                Quick Links
-                            </h3>
-                            <ul role="list" class="mt-4 space-y-3">
-                                <li><a href="#mission" class="text-base text-gray-300 hover:text-white">Our Story</a></li>
-                                <li><a href="#process" class="text-base text-gray-300 hover:text-white">Application Steps</a></li>
-                                <li><a href="#impact" class="text-base text-gray-300 hover:text-white">View Impact</a></li>
-                            </ul>
-                        </div>
-                        <div class="mt-12 md:mt-0">
-                            <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-                                Portal & Legal
-                            </h3>
-                            <ul role="list" class="mt-4 space-y-3">
-                                <li><a href="{{ route('apply') }}" class="text-base text-gray-300 hover:text-white">Scholar Login</a></li>
-                                <li><a href="#" class="text-base text-gray-300 hover:text-white">Sponsor Information</a></li>
-                                <li><a href="#" class="text-base text-gray-300 hover:text-white">Terms & Conditions</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-12 border-t border-gray-700 pt-8 text-center">
-                <p class="text-base text-gray-400">
-                    &copy; 2024 Ola Arowolo Scholarship. All rights reserved.
-                </p>
-            </div>
-        </div>
-    </footer>
+    @include('components.footer')
+
 @endsection

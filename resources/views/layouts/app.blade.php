@@ -31,7 +31,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="olaarowolo.com">
     <meta property="twitter:url" content="https://www.olaarowolo.com/">
-    <meta name="twitter:title" content="Ola Arowolo's Portfolio ðŸ‘‹">
+    <meta name="twitter:title" content="OA's Portfolio ðŸ‘‹">
     <meta name="twitter:description" content="Explore the professional profile of Olasunkanmi Arowolo, a Lecturer in Journalism, Media & Development Communication Expert, and enthusiastic DevOps. Discover his academic achievements, creative skills, publications, and contact information. Connect with Ola to bring ideas to life.">
     <meta name="twitter:image" content="{{ asset('assets/favicon_io/oa-logo-yellow-bgrd-480x480.png') }}">
 

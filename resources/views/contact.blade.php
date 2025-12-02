@@ -83,7 +83,7 @@
                     <a href="{{ route('home') }}">
                         <img class="h-10 w-auto"
                              src="{{ asset('assets/img/favicon/olaarowolo.com_logo_black.png') }}"
-                             alt="Ola Arowolo Scholarship Logo">
+                             alt="OA Scholarship Logo">
                     </a>
                 </div>
 

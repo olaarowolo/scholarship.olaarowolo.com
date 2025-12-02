@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ola Arowolo Scholarship Application</title>
+    <title>OA Scholarship Application</title>
     <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter -->
@@ -43,7 +43,7 @@
         <header class="mb-8 text-center">
             <img class="h-10 w-auto mx-auto mb-4"
                 src="https://scholarship.olaarowolo.com/assets/img/favicon/olaarowolo.com_logo_black.png"
-                alt="Ola Arowolo Scholarship Logo" />
+                alt="OA Scholarship Logo" />
             <h1 class="text-4xl font-extrabold text-primary">
                 Scholarship Application
             </h1>

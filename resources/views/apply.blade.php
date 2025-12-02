@@ -64,7 +64,7 @@
                     <a href="{{ route('home') }}">
                         <img class="h-10 w-auto"
                              src="{{ asset('assets/img/favicon/olaarowolo.com_logo_black.png') }}"
-                             alt="Ola Arowolo Scholarship Logo">
+                             alt="OA Scholarship Logo">
                     </a>
                 </div>
 
@@ -199,59 +199,8 @@
     </section>
 
     <!-- Footer/Contact Section -->
-    <footer class="bg-gray-900 text-white">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <div class="xl:grid xl:grid-cols-3 xl:gap-8">
-                <!-- Contact Info -->
-                <div class="space-y-4 xl:col-span-1">
-                    <img class="h-10 w-auto mb-4"
-                         src="{{ asset('assets/img/favicon/olaarowolo.com_logo_black.png') }}"
-                         alt="Ola Arowolo Logo" style="filter: invert(1) grayscale(100%) brightness(200%);">
-                    <p class="text-gray-400 text-sm">A commitment to educational equity for Iba indigenes.</p>
-                    <div class="text-sm text-gray-400 space-y-1 pt-2">
-                        <div class="flex items-center space-x-2">
-                             <i class="fa-solid fa-envelope"></i>
-                             <p>Email: <a href="mailto:scholarship@olaarowolo.com" class="hover:text-white">scholarship@olaarowolo.com</a></p>
-                        </div>
-                        <div class="flex items-center space-x-2">
-                             <i class="fa-solid fa-location-dot"></i>
-                             <p>Location: Iba Town, Ojo, Lagos, Nigeria</p>
-                        </div>
-                    </div>
-                </div>
-                <!-- Navigation Links -->
-                <div class="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
-                    <div class="md:grid md:grid-cols-2 md:gap-8">
-                        <div>
-                            <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-                                Quick Links
-                            </h3>
-                            <ul role="list" class="mt-4 space-y-3">
-                                <li><a href="{{ route('home') }}#mission" class="text-base text-gray-300 hover:text-white">Our Story</a></li>
-                                <li><a href="{{ route('how-it-works') }}" class="text-base text-gray-300 hover:text-white">Application Steps</a></li>
-                                <li><a href="{{ route('home') }}#impact" class="text-base text-gray-300 hover:text-white">View Impact</a></li>
-                            </ul>
-                        </div>
-                        <div class="mt-12 md:mt-0">
-                            <h3 class="text-sm font-semibold text-gray-400 tracking-wider uppercase">
-                                Portal & Legal
-                            </h3>
-                            <ul role="list" class="mt-4 space-y-3">
-                                <li><a href="{{ route('apply') }}" class="text-base text-gray-300 hover:text-white">Scholar Login</a></li>
-                                <li><a href="#" class="text-base text-gray-300 hover:text-white">Sponsor Information</a></li>
-                                <li><a href="#" class="text-base text-gray-300 hover:text-white">Terms & Conditions</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="mt-12 border-t border-gray-700 pt-8 text-center">
-                <p class="text-base text-gray-400">
-                    &copy; 2024 Ola Arowolo Scholarship. All rights reserved.
-                </p>
-            </div>
-        </div>
-    </footer>
+    @include('components.footer')
+
 
     <script>
         // Function to toggle mobile menu visibility
