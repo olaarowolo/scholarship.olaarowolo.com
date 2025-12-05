@@ -16,13 +16,13 @@ return new class extends Migration
             $table->string('application_id')->unique();
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('first_name');
-            $table->string('last_name');
-            $table->date('date_of_birth');
+            $table->string('last_name')->nullable();
+            $table->date('date_of_birth')->nullable();
             $table->text('address');
-            $table->string('lga');
-            $table->string('town');
+            $table->string('lga')->nullable();
+            $table->string('town')->nullable();
             $table->string('phone');
-            $table->string('jamb_reg_number');
+            $table->string('jamb_reg_number')->nullable();
             $table->decimal('jamb_score', 5, 2);
             $table->string('institution');
             $table->string('course');

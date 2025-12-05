@@ -1,59 +1,63 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    /* Define the black and white theme based on the logo */
-    :root {
-        --primary: #000000;
-        --secondary: #333333;
-        --background: #f8f8f8;
-        --text-dark: #1f2937;
-        --text-light: #ffffff;
-        --accent: #e5e7eb; /* Light gray for subtle accents/borders */
-    }
+    <style>
+        /* Define the black and white theme based on the logo */
+        :root {
+            --primary: #000000;
+            --secondary: #333333;
+            --background: #f8f8f8;
+            --text-dark: #1f2937;
+            --text-light: #ffffff;
+            --accent: #e5e7eb;
+            /* Light gray for subtle accents/borders */
+        }
 
-    body {
-        font-family: 'Inter', sans-serif;
-        scroll-behavior: smooth;
-        background-color: var(--background);
-    }
-    /* Custom styles for the primary black CTA button */
-    .btn-primary {
-        background-color: var(--primary);
-        color: var(--text-light);
-        transition: all 0.3s ease-in-out;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
-    }
-    .btn-primary:hover {
-        background-color: var(--secondary);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-        transform: translateY(-2px);
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--background);
+        }
 
-    /* Subtle card shadow and border */
-    .card {
-        border: 1px solid var(--accent);
-        transition: all 0.3s ease;
-    }
-    .card:hover {
-        box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
-        transform: translateY(-4px);
-    }
-</style>
+        /* Custom styles for the primary black CTA button */
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--text-light);
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
 
-<script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    'primary': '#000000',
-                    'secondary': '#333333',
-                    'accent': '#e5e7eb',
-                },
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        /* Subtle card shadow and border */
+        .card {
+            border: 1px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#000000',
+                        'secondary': '#333333',
+                        'accent': '#e5e7eb',
+                    },
+                }
             }
         }
-    }
-</script>
+    </script>
 
     <!-- Navigation Bar -->
     <nav class="bg-white shadow-md sticky top-0 z-50 transition-shadow duration-300 border-b border-accent">
@@ -62,18 +66,23 @@
                 <!-- Logo -->
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
-                        <img class="h-10 w-auto"
-                             src="{{ asset('assets/img/favicon/olaarowolo.com_logo_black.png') }}"
-                             alt="OA Scholarship Logo">
+                        <img class="h-10 w-auto" src="{{ asset('assets/img/favicon/olaarowolo.com_logo_black.png') }}"
+                            alt="OA Scholarship Logo">
                     </a>
                 </div>
 
                 <!-- Desktop Links -->
                 <div class="hidden sm:ml-6 sm:flex sm:space-x-8 items-center">
-                    <a href="{{ route('home') }}#mission" class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Our Mission</a>
-                    <a href="{{ route('how-it-works') }}" class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">How to Apply</a>
-                    <a href="{{ route('home') }}#impact" class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Impact</a>
-                    <a href="{{ route('contact') }}" class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Contact</a>
+                    <a href="{{ route('home') }}#mission"
+                        class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Our
+                        Mission</a>
+                    <a href="{{ route('how-it-works') }}"
+                        class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">How
+                        to Apply</a>
+                    <a href="{{ route('home') }}#impact"
+                        class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Impact</a>
+                    <a href="{{ route('contact') }}"
+                        class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Contact</a>
                     <!-- CTA Button -->
                     <a href="{{ route('apply') }}" class="btn-primary text-sm font-semibold px-6 py-2.5 rounded-full ml-4">
                         Apply Now
@@ -82,10 +91,14 @@
 
                 <!-- Mobile Menu Button -->
                 <div class="flex items-center sm:hidden">
-                    <button type="button" class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary" aria-expanded="false" onclick="toggleMenu()">
+                    <button type="button"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
+                        aria-expanded="false" onclick="toggleMenu()">
                         <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
                         </svg>
                     </button>
                 </div>
@@ -95,11 +108,17 @@
         <!-- Mobile Menu (Hidden by default) -->
         <div class="sm:hidden hidden" id="mobile-menu">
             <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="{{ route('home') }}#mission" class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Our Mission</a>
-                <a href="{{ route('how-it-works') }}" class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">How to Apply</a>
-                <a href="{{ route('home') }}#impact" class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Impact</a>
-                <a href="{{ route('contact') }}" class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
-                <a href="{{ route('apply') }}" class="btn-primary block w-full text-center mt-4 px-3 py-2 rounded-full text-base font-medium">Apply Now</a>
+                <a href="{{ route('home') }}#mission"
+                    class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Our Mission</a>
+                <a href="{{ route('how-it-works') }}"
+                    class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">How to Apply</a>
+                <a href="{{ route('home') }}#impact"
+                    class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Impact</a>
+                <a href="{{ route('contact') }}"
+                    class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+                <a href="{{ route('apply') }}"
+                    class="btn-primary block w-full text-center mt-4 px-3 py-2 rounded-full text-base font-medium">Apply
+                    Now</a>
             </div>
         </div>
     </nav>
@@ -111,7 +130,8 @@
                 Apply for the <span class="text-primary">Scholarship</span>
             </h1>
             <p class="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
-                Take the first step towards your educational dreams. Our application process is designed to be straightforward and accessible.
+                Take the first step towards your educational dreams. Our application process is designed to be
+                straightforward and accessible.
             </p>
         </div>
     </header>
@@ -136,7 +156,8 @@
                     <h3 class="text-2xl font-bold text-gray-900 mb-2">Next Application Window</h3>
                     <p class="text-xl text-primary font-semibold mb-4">December 8, 2025 - January 16, 2026</p>
                     <p class="text-gray-600 mb-6">
-                        Applications for the 2025/2026 academic year will open soon. Stay tuned for updates and prepare your documents.
+                        Applications for the 2025/2026 academic year will open soon. Stay tuned for updates and prepare your
+                        documents.
                     </p>
                     <div class="bg-yellow-50 border-l-4 border-yellow-400 p-4 mb-6">
                         <div class="flex">
@@ -145,7 +166,8 @@
                             </div>
                             <div class="ml-3">
                                 <p class="text-sm text-yellow-700">
-                                    <strong>Important:</strong> The applicant portal will be available during the application window. Early preparation is recommended.
+                                    <strong>Important:</strong> The applicant portal will be available during the
+                                    application window. Early preparation is recommended.
                                 </p>
                             </div>
                         </div>
@@ -159,7 +181,8 @@
                     <i class="fas fa-tools text-6xl text-gray-400 mb-4"></i>
                     <h3 class="text-3xl font-extrabold text-gray-900 mb-4">Applicant Portal Coming Soon</h3>
                     <p class="text-lg text-gray-600 mb-6 leading-relaxed">
-                        We're currently building a secure online application system. In the meantime, you can prepare your documents and stay updated.
+                        We're currently building a secure online application system. In the meantime, you can prepare your
+                        documents and stay updated.
                     </p>
                 </div>
 
@@ -187,8 +210,13 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-6 justify-center">
-                    <a href="{{ route('how-it-works') }}" class="btn-primary text-lg font-bold px-8 py-3 rounded-full shadow-lg inline-flex items-center justify-center">
+                    <a href="{{ route('how-it-works') }}"
+                        class="btn-primary text-lg font-bold px-8 py-3 rounded-full shadow-lg inline-flex items-center justify-center">
                         View Application Process
+                    </a>
+                    <a href="{{ route('apply-form') }}"
+                        class="bg-white text-primary border-2 border-primary hover:bg-gray-50 text-lg font-bold px-8 py-3 rounded-full shadow-lg inline-flex items-center justify-center transition duration-300">
+                        Start Application
                     </a>
                 </div>
             </div>

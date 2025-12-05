@@ -75,7 +75,9 @@ class ApplicationTest extends TestCase
             'email' => 'invalid-email',
         ];
 
-        $response = $this->actingAs($user)->post('/apply-form', $data);
+        $response = $this->actingAs($user)
+            ->withHeaders(['Accept' => 'application/json'])
+            ->post('/apply-form', $data);
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors(['fullName', 'email', 'phone', 'address', 'isIndigene', 'jambScore', 'waecGceYear', 'institution', 'course', 'admissionStatus', 'jambResult', 'waecResult', 'indigeneCert']);
@@ -101,7 +103,9 @@ class ApplicationTest extends TestCase
             'indigeneCert' => UploadedFile::fake()->create('indigene.pdf', 1000),
         ];
 
-        $response = $this->actingAs($user)->post('/apply-form', $data);
+        $response = $this->actingAs($user)
+            ->withHeaders(['Accept' => 'application/json'])
+            ->post('/apply-form', $data);
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors('jambScore');
@@ -127,7 +131,9 @@ class ApplicationTest extends TestCase
             'indigeneCert' => UploadedFile::fake()->create('indigene.pdf', 1000),
         ];
 
-        $response = $this->actingAs($user)->post('/apply-form', $data);
+        $response = $this->actingAs($user)
+            ->withHeaders(['Accept' => 'application/json'])
+            ->post('/apply-form', $data);
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors('jambResult');
@@ -153,7 +159,9 @@ class ApplicationTest extends TestCase
             'indigeneCert' => UploadedFile::fake()->create('indigene.pdf', 1000),
         ];
 
-        $response = $this->actingAs($user)->post('/apply-form', $data);
+        $response = $this->actingAs($user)
+            ->withHeaders(['Accept' => 'application/json'])
+            ->post('/apply-form', $data);
 
         $response->assertStatus(422);
         $response->assertJsonValidationErrors('jambResult');

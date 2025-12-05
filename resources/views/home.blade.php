@@ -1,87 +1,91 @@
 @extends('layouts.app')
 
 @section('content')
-<style>
-    /* Define the black and white theme based on the logo */
-    :root {
-        --primary: #000000;
-        --secondary: #333333;
-        --background: #f8f8f8;
-        --text-dark: #1f2937;
-        --text-light: #ffffff;
-        --accent: #e5e7eb; /* Light gray for subtle accents/borders */
-    }
+    <style>
+        /* Define the black and white theme based on the logo */
+        :root {
+            --primary: #000000;
+            --secondary: #333333;
+            --background: #f8f8f8;
+            --text-dark: #1f2937;
+            --text-light: #ffffff;
+            --accent: #e5e7eb;
+            /* Light gray for subtle accents/borders */
+        }
 
-    body {
-        font-family: 'Inter', sans-serif;
-        scroll-behavior: smooth;
-        background-color: var(--background);
-    }
-    /* Custom styles for the primary black CTA button */
-    .btn-primary {
-        background-color: var(--primary);
-        color: var(--text-light);
-        transition: all 0.3s ease-in-out;
-        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
-    }
-    .btn-primary:hover {
-        background-color: var(--secondary);
-        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
-        transform: translateY(-2px);
-    }
+        body {
+            font-family: 'Inter', sans-serif;
+            scroll-behavior: smooth;
+            background-color: var(--background);
+        }
 
-    /* Subtle card shadow and border */
-    .card {
-        border: 1px solid var(--accent);
-        transition: all 0.3s ease;
-    }
-    .card:hover {
-        box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
-        transform: translateY(-4px);
-    }
+        /* Custom styles for the primary black CTA button */
+        .btn-primary {
+            background-color: var(--primary);
+            color: var(--text-light);
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.06);
+        }
 
-    /* Hero section background texture */
-    .hero-bg {
-        background: linear-gradient(to bottom, #ffffff, #f1f1f1);
-    }
-</style>
+        .btn-primary:hover {
+            background-color: var(--secondary);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
 
-<script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    'primary': '#000000',
-                    'secondary': '#333333',
-                    'accent': '#e5e7eb',
-                },
+        /* Subtle card shadow and border */
+        .card {
+            border: 1px solid var(--accent);
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.1);
+            transform: translateY(-4px);
+        }
+
+        /* Hero section background texture */
+        .hero-bg {
+            background: linear-gradient(to bottom, #ffffff, #f1f1f1);
+        }
+    </style>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#000000',
+                        'secondary': '#333333',
+                        'accent': '#e5e7eb',
+                    },
+                }
             }
         }
-    }
 
-    // Function to toggle mobile menu visibility
-    function toggleMenu() {
-        const menu = document.getElementById('mobile-menu');
-        menu.classList.toggle('translate-y-full');
-    }
+        // Function to toggle mobile menu visibility
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('translate-y-full');
+        }
 
-    // Function for smooth scrolling
-    document.addEventListener('DOMContentLoaded', () => {
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                document.querySelector(this.getAttribute('href')).scrollIntoView({
-                    behavior: 'smooth'
+        // Function for smooth scrolling
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                    // Close mobile menu after clicking a link
+                    const menu = document.getElementById('mobile-menu');
+                    if (!menu.classList.contains('hidden')) {
+                        menu.classList.add('hidden');
+                    }
                 });
-                // Close mobile menu after clicking a link
-                const menu = document.getElementById('mobile-menu');
-                if (!menu.classList.contains('hidden')) {
-                    menu.classList.add('hidden');
-                }
             });
         });
-    });
-</script>
+    </script>
 
     <!-- Navigation Bar -->
     @include('components.navbar')
@@ -110,7 +114,8 @@
                         <h3 class="text-2xl font-bold text-gray-900">Community First</h3>
                     </div>
                     <p class="text-gray-600">
-                        Dedicated solely to supporting indigenes of Iba town, Ojo, Lagos, ensuring that funds are reinvested directly into the community's future leadership.
+                        Dedicated solely to supporting indigenes of Iba town, Ojo, Lagos, ensuring that funds are reinvested
+                        directly into the community's future leadership.
                     </p>
                 </div>
                 <!-- Value 2: Performance-based -->
@@ -120,7 +125,8 @@
                         <h3 class="text-2xl font-bold text-gray-900">Academic Excellence</h3>
                     </div>
                     <p class="text-gray-600">
-                        Funding is tied to academic performance, encouraging scholars to maintain high standards (e.g., First Class honors receive full subsequent funding).
+                        Funding is tied to academic performance, encouraging scholars to maintain high standards (e.g.,
+                        First Class honors receive full subsequent funding).
                     </p>
                 </div>
                 <!-- Value 3: Comprehensive Support -->
@@ -130,7 +136,8 @@
                         <h3 class="text-2xl font-bold text-gray-900">Beyond Finances</h3>
                     </div>
                     <p class="text-gray-600">
-                        Beyond financial aid, we offer mentorship, career guidance, and a support network to help scholars navigate university life and beyond.
+                        Beyond financial aid, we offer mentorship, career guidance, and a support network to help scholars
+                        navigate university life and beyond.
                     </p>
                 </div>
             </div>
@@ -157,10 +164,13 @@
                 <div class="flex flex-col md:flex-row mb-12 items-center">
                     <div class="md:w-1/2 md:pr-10 text-center md:text-right">
                         <h3 class="text-2xl font-bold text-primary mb-1">Initial Screening</h3>
-                        <p class="text-gray-600 text-sm md:text-base">Submit your online application, providing details of your background, WAEC/GCE results, and JAMB score.</p>
+                        <p class="text-gray-600 text-sm md:text-base">Submit your online application, providing details of
+                            your background, WAEC/GCE results, and JAMB score.</p>
                     </div>
                     <div class="relative my-4 md:my-0">
-                        <div class="h-10 w-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg ring-4 ring-white shadow-lg">1</div>
+                        <div
+                            class="h-10 w-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg ring-4 ring-white shadow-lg">
+                            1</div>
                     </div>
                     <div class="md:w-1/2 md:pl-10"></div>
                 </div>
@@ -169,10 +179,13 @@
                 <div class="flex flex-col md:flex-row mb-12 items-center md:flex-row-reverse">
                     <div class="md:w-1/2 md:pl-10 text-center md:text-left">
                         <h3 class="text-2xl font-bold text-primary mb-1">Local Verification</h3>
-                        <p class="text-gray-600 text-sm md:text-base">Successful candidates are contacted for physical verification of residency and indigene status by local committees.</p>
+                        <p class="text-gray-600 text-sm md:text-base">Successful candidates are contacted for physical
+                            verification of residency and indigene status by local committees.</p>
                     </div>
                     <div class="relative my-4 md:my-0">
-                        <div class="h-10 w-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg ring-4 ring-gray-50 shadow-lg">2</div>
+                        <div
+                            class="h-10 w-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg ring-4 ring-gray-50 shadow-lg">
+                            2</div>
                     </div>
                     <div class="md:w-1/2 md:pr-10"></div>
                 </div>
@@ -181,10 +194,13 @@
                 <div class="flex flex-col md:flex-row mb-12 items-center">
                     <div class="md:w-1/2 md:pr-10 text-center md:text-right">
                         <h3 class="text-2xl font-bold text-primary mb-1">Admission Confirmation</h3>
-                        <p class="text-gray-600 text-sm md:text-base">Upon securing provisional admission, beneficiaries submit confirmation documents to activate the funding cycle.</p>
+                        <p class="text-gray-600 text-sm md:text-base">Upon securing provisional admission, beneficiaries
+                            submit confirmation documents to activate the funding cycle.</p>
                     </div>
                     <div class="relative my-4 md:my-0">
-                        <div class="h-10 w-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg ring-4 ring-white shadow-lg">3</div>
+                        <div
+                            class="h-10 w-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg ring-4 ring-white shadow-lg">
+                            3</div>
                     </div>
                     <div class="md:w-1/2 md:pl-10"></div>
                 </div>
@@ -193,17 +209,21 @@
                 <div class="flex flex-col md:flex-row items-center md:flex-row-reverse">
                     <div class="md:w-1/2 md:pl-10 text-center md:text-left">
                         <h3 class="text-2xl font-bold text-primary mb-1">Performance Tracking</h3>
-                        <p class="text-gray-600 text-sm md:text-base">Scholars submit semester results for review. Funds for the next academic year are disbursed based on maintained CGPA.</p>
+                        <p class="text-gray-600 text-sm md:text-base">Scholars submit semester results for review. Funds for
+                            the next academic year are disbursed based on maintained CGPA.</p>
                     </div>
                     <div class="relative my-4 md:my-0">
-                        <div class="h-10 w-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg ring-4 ring-gray-50 shadow-lg">4</div>
+                        <div
+                            class="h-10 w-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg ring-4 ring-gray-50 shadow-lg">
+                            4</div>
                     </div>
                     <div class="md:w-1/2 md:pr-10"></div>
                 </div>
             </div>
 
             <div class="mt-16 text-center">
-                <a href="{{ route('apply') }}" class="bg-gray-400 text-gray-600 cursor-not-allowed text-lg font-bold px-10 py-4 rounded-full shadow-lg inline-flex items-center justify-center" disabled>
+                <a href="{{ route('apply') }}"
+                    class="bg-primary text-white hover:bg-secondary text-lg font-bold px-10 py-4 rounded-full shadow-lg inline-flex items-center justify-center transition duration-300">
                     Check Eligibility & Apply Now
                 </a>
             </div>
@@ -243,5 +263,4 @@
 
     <!-- 5. Footer/Contact Section -->
     @include('partials.footer')
-
 @endsection

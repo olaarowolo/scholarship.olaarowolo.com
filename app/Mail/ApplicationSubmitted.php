@@ -13,12 +13,14 @@ class ApplicationSubmitted extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $application;
+
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($application)
     {
-        //
+        $this->application = $application;
     }
 
     /**
@@ -27,7 +29,7 @@ class ApplicationSubmitted extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Application Submitted',
+            subject: 'Application Submitted Successfully',
         );
     }
 
@@ -37,7 +39,7 @@ class ApplicationSubmitted extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'view.name',
+            view: 'emails.application_submitted',
         );
     }
 

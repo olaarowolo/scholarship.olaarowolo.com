@@ -130,4 +130,20 @@ class RouteTest extends TestCase
 
         $response->assertRedirect('/login');
     }
+
+    public function test_apply_form_page_can_be_rendered()
+    {
+        $response = $this->get('/apply-form');
+
+        $response->assertStatus(200);
+        $response->assertViewIs('apply-form');
+    }
+
+    public function test_apply_utme_jamb_form_page_can_be_rendered()
+    {
+        $response = $this->get('/apply-utme-jamb-form');
+
+        $response->assertStatus(200);
+        $response->assertViewIs('apply-utme-jamb-form');
+    }
 }

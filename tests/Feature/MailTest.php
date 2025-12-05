@@ -26,8 +26,6 @@ class MailTest extends TestCase
 
         $mail = new ContactMail($data);
 
-        $mail->build();
-
         $this->assertEquals('Contact Form Submission from John Doe', $mail->envelope()->subject);
         $this->assertEquals('emails.contact', $mail->content()->view);
         $this->assertEquals($data, $mail->data);
@@ -42,10 +40,8 @@ class MailTest extends TestCase
 
         $mail = new ApplicationSubmitted($application);
 
-        $mail->build();
-
-        $this->assertStringContains('Application Submitted', $mail->envelope()->subject);
+        $this->assertStringContainsString('Application Submitted', $mail->envelope()->subject);
         $this->assertEquals('emails.application_submitted', $mail->content()->view);
-        $this->assertEquals($application, $mail->application);
+        $this->assertEquals($application->id, $mail->application->id);
     }
 }

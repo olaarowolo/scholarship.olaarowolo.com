@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\TermsController;
+use App\Http\Controllers\ApplicationController;
+// use App\Http\Controllers\NewsletterController;
 
 Route::get('/', function () {
     return view('home');
@@ -57,17 +59,18 @@ Route::post('/terms-acceptance', [TermsController::class, 'acceptTerms'])->name(
 Route::get('/apply-form', function () {
     return view('apply-form');
 })->name('apply-form');
+
 Route::get('/apply-utme-jamb-form', function () {
     return view('apply-utme-jamb-form');
-})->name('apply-form');
+})->name('apply-utme-jamb-form');
 
 Route::post('/apply-form', [ApplicationController::class, 'submit'])->name('apply-form.submit');
 
-Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
+// Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
-})->name('dashboard');
+})->middleware('auth')->name('dashboard');
 
 Route::get('/resources', function () {
     return view('resources');
@@ -79,3 +82,15 @@ Route::get('/testimonials', function () {
 
 require __DIR__.'/auth.php';
 
+// Admin Routes (Commented out until AdminController is created)
+/*
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
+    Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('dashboard');
+    Route::get('/applications', [App\Http\Controllers\AdminController::class, 'applications'])->name('applications');
+    Route::get('/applications/{id}', [App\Http\Controllers\AdminController::class, 'showApplication'])->name('applications.show');
+    Route::put('/applications/{id}/status', [App\Http\Controllers\AdminController::class, 'updateApplicationStatus'])->name('applications.update-status');
+    Route::get('/users', [App\Http\Controllers\AdminController::class, 'users'])->name('users');
+    Route::put('/users/{id}/role', [App\Http\Controllers\AdminController::class, 'updateUserRole'])->name('users.update-role');
+    Route::get('/analytics', [App\Http\Controllers\AdminController::class, 'analytics'])->name('analytics');
+});
+*/
