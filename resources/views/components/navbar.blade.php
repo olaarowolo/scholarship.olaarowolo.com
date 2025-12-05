@@ -10,11 +10,11 @@
                  alt="OA Scholarship Logo">
         </div>
 
-        <!-- Mobile Toggle -->
+        <!-- Modern Animated Hamburger -->
         <button class="nav-toggle" onclick="toggleMenu()">
-            <span></span>
-            <span></span>
-            <span></span>
+            <span class="line line1"></span>
+            <span class="line line2"></span>
+            <span class="line line3"></span>
         </button>
 
         <!-- Desktop Links -->
@@ -30,7 +30,9 @@
     </div>
 </nav>
 
-<!-- Mobile Menu -->
+<!-- ============================
+     MOBILE MENU
+============================= -->
 <div id="mobile-menu" class="mobile-menu">
     <a href="#mission" onclick="toggleMenu()">Our Mission</a>
     <a href="#process" onclick="toggleMenu()">How to Apply</a>
@@ -41,12 +43,16 @@
 </div>
 
 
+<!-- ============================
+     CUSTOM CSS
+============================= -->
 <style>
+
 /* ============================
    MOBILE FIRST NAV STYLES
-============================ */
+============================= */
 
-/* Floating container */
+/* Floating nav container */
 .navbar {
     position: fixed;
     top: 16px;
@@ -54,13 +60,11 @@
     transform: translateX(-50%);
     width: 100%;
     max-width: 1400px;
-
     background: rgba(255, 255, 255, 0.90);
     backdrop-filter: blur(12px);
     border: 1px solid #e5e7eb;
     border-radius: 40px;
     padding: 12px 20px;
-
     box-shadow: 0 10px 35px rgba(0,0,0,0.12);
     z-index: 1000;
 }
@@ -77,39 +81,56 @@
     width: auto;
 }
 
-/* MOBILE: hide desktop links */
+/* Hide desktop links on mobile */
 .nav-links {
     display: none;
 }
 
-/* Hamburger button */
+/* ============================
+   MODERN HAMBURGER ICON
+============================= */
 .nav-toggle {
+    width: 32px;
+    height: 26px;
     display: flex;
     flex-direction: column;
-    gap: 4px;
-    background: none;
+    justify-content: space-between;
     border: none;
+    background: none;
     cursor: pointer;
+    padding: 0;
 }
 
-.nav-toggle span {
-    width: 26px;
+.nav-toggle .line {
+    width: 100%;
     height: 3px;
-    background: #444;
+    background: #222;
     border-radius: 3px;
+    transition: all 0.3s ease;
 }
 
-/* Mobile slide-up menu */
+/* Hamburger → X animation */
+.nav-toggle.active .line1 {
+    transform: translateY(11px) rotate(45deg);
+}
+.nav-toggle.active .line2 {
+    opacity: 0;
+}
+.nav-toggle.active .line3 {
+    transform: translateY(-11px) rotate(-45deg);
+}
+
+/* ============================
+   MOBILE SLIDE-UP MENU
+============================= */
 .mobile-menu {
     position: fixed;
     bottom: 0;
     left: 0;
     width: 100%;
     padding: 30px 20px;
-
     background: rgba(255, 255, 255, 0.90);
     backdrop-filter: blur(12px);
-
     border-radius: 30px 30px 0 0;
     box-shadow: 0 -10px 30px rgba(0,0,0,0.12);
 
@@ -140,18 +161,16 @@
     font-weight: 600;
 }
 
-/* Active mobile menu */
 .mobile-menu.active {
     transform: translateY(0);
 }
 
 /* ============================
    DESKTOP VIEW
-============================ */
-
+============================= */
 @media (min-width: 768px) {
 
-    /* Hide toggle */
+    /* Hide toggle button */
     .nav-toggle {
         display: none;
     }
@@ -168,7 +187,7 @@
         font-size: 15px;
         color: #555;
         font-weight: 500;
-        transition: 0.2s ease;
+        transition: 0.2s;
     }
 
     .nav-links a:hover {
@@ -182,19 +201,29 @@
         border-radius: 40px;
         font-size: 13px;
         font-weight: 600;
-        transition: 0.2s ease;
+        transition: 0.2s;
     }
 
     .apply-btn:hover {
         background: #333;
     }
 }
+
 </style>
 
 
-
+<!-- ============================
+     JAVASCRIPT
+============================= -->
 <script>
 function toggleMenu() {
-    document.getElementById("mobile-menu").classList.toggle("active");
+    const menu = document.getElementById("mobile-menu");
+    const toggle = document.querySelector(".nav-toggle");
+
+    // open/close mobile menu
+    menu.classList.toggle("active");
+
+    // animate hamburger -> X
+    toggle.classList.toggle("active");
 }
 </script>
