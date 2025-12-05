@@ -75,3 +75,50 @@
         pointer-events: none;
     }
 </style>
+
+<script>
+    // Function to toggle mobile menu visibility
+    function toggleMenu() {
+        const menu = document.getElementById('mobile-menu');
+        if (menu) {
+            menu.classList.toggle('translate-y-full');
+        }
+    }
+
+    // Close mobile menu when clicking outside
+    document.addEventListener('click', function(event) {
+        const menu = document.getElementById('mobile-menu');
+        const menuButton = event.target.closest('[onclick="toggleMenu()"]');
+        
+        if (menu && !menu.contains(event.target) && !menuButton) {
+            if (!menu.classList.contains('translate-y-full')) {
+                menu.classList.add('translate-y-full');
+            }
+        }
+    });
+
+    // Function for smooth scrolling on hash links
+    document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    e.preventDefault();
+                    targetElement.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    
+                    // Close mobile menu after clicking a link
+                    const menu = document.getElementById('mobile-menu');
+                    if (menu && !menu.classList.contains('translate-y-full')) {
+                        menu.classList.add('translate-y-full');
+                    }
+                }
+            });
+        });
+    });
+</script>
