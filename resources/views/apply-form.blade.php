@@ -185,13 +185,19 @@
                 }
             }
 
+            // Expose navigation functions immediately
+            window.nextStep = nextStep;
+            window.prevStep = prevStep;
+
             // --- Step Rendering Functions ---
 
             function getStep0HTML() {
                 console.log('Rendering Step 0 - JAMB Screening');
+                console.log('Screening state:', state.data.screening);
                 const screening = state.data.screening;
                 const canProceed = screening.hasTakenJamb === 'Yes' ||
                     (screening.hasTakenJamb === 'No' && screening.needsJambSupport !== '');
+                console.log('Can proceed:', canProceed);
 
                 return `
                 <div>
@@ -215,7 +221,7 @@
                                     name="hasTakenJamb"
                                     value="Yes"
                                     ${screening.hasTakenJamb === 'Yes' ? 'checked' : ''}
-                                    onchange="updateData('screening', 'hasTakenJamb', 'Yes'); renderStep();"
+                                    onchange="updateData('screening', 'hasTakenJamb', 'Yes');"
                                     class="h-5 w-5 text-primary focus:ring-primary"
                                 />
                                 <span class="ml-3 text-gray-900 font-medium">Yes, I have taken JAMB</span>
@@ -226,7 +232,7 @@
                                     name="hasTakenJamb"
                                     value="No"
                                     ${screening.hasTakenJamb === 'No' ? 'checked' : ''}
-                                    onchange="updateData('screening', 'hasTakenJamb', 'No'); updateData('screening', 'needsJambSupport', ''); renderStep();"
+                                    onchange="updateData('screening', 'hasTakenJamb', 'No'); updateData('screening', 'needsJambSupport', '');"
                                     class="h-5 w-5 text-primary focus:ring-primary"
                                 />
                                 <span class="ml-3 text-gray-900 font-medium">No, I have not taken JAMB</span>
@@ -235,37 +241,37 @@
                     </div>
 
                     ${screening.hasTakenJamb === 'No' ? `
-                                                                                        <div class="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-                                                                                            <label class="block text-lg font-semibold text-gray-800 mb-4">
-                                                                                                Do you need support to register and prepare for JAMB?
-                                                                                                <span class="text-red-500">*</span>
-                                                                                            </label>
-                                                                                            <div class="space-y-3">
-                                                                                                <label class="flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${screening.needsJambSupport === 'Yes' ? 'border-primary bg-blue-50' : 'border-gray-300 hover:border-gray-400'}">
-                                                                                                    <input
-                                                                                                        type="radio"
-                                                                                                        name="needsJambSupport"
-                                                                                                        value="Yes"
-                                                                                                        ${screening.needsJambSupport === 'Yes' ? 'checked' : ''}
-                                                                                                        onchange="updateData('screening', 'needsJambSupport', 'Yes'); renderStep();"
-                                                                                                        class="h-5 w-5 text-primary focus:ring-primary"
-                                                                                                    />
-                                                                                                    <span class="ml-3 text-gray-900 font-medium">Yes, I need JAMB registration and preparation support</span>
-                                                                                                </label>
-                                                                                                <label class="flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${screening.needsJambSupport === 'No' ? 'border-primary bg-blue-50' : 'border-gray-300 hover:border-gray-400'}">
-                                                                                                    <input
-                                                                                                        type="radio"
-                                                                                                        name="needsJambSupport"
-                                                                                                        value="No"
-                                                                                                        ${screening.needsJambSupport === 'No' ? 'checked' : ''}
-                                                                                                        onchange="updateData('screening', 'needsJambSupport', 'No'); renderStep();"
-                                                                                                        class="h-5 w-5 text-primary focus:ring-primary"
-                                                                                                    />
-                                                                                                    <span class="ml-3 text-gray-900 font-medium">No, I will handle JAMB registration myself</span>
-                                                                                                </label>
-                                                                                            </div>
-                                                                                        </div>
-                                                                                    ` : ''}
+                                                                                                                        <div class="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                                                                                                                            <label class="block text-lg font-semibold text-gray-800 mb-4">
+                                                                                                                                Do you need support to register and prepare for JAMB?
+                                                                                                                                <span class="text-red-500">*</span>
+                                                                                                                            </label>
+                                                                                                                            <div class="space-y-3">
+                                                                                                                                <label class="flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${screening.needsJambSupport === 'Yes' ? 'border-primary bg-blue-50' : 'border-gray-300 hover:border-gray-400'}">
+                                                                                                                                    <input
+                                                                                                                                        type="radio"
+                                                                                                                                        name="needsJambSupport"
+                                                                                                                                        value="Yes"
+                                                                                                                                        ${screening.needsJambSupport === 'Yes' ? 'checked' : ''}
+                                                                                                                                        onchange="updateData('screening', 'needsJambSupport', 'Yes');"
+                                                                                                                                        class="h-5 w-5 text-primary focus:ring-primary"
+                                                                                                                                    />
+                                                                                                                                    <span class="ml-3 text-gray-900 font-medium">Yes, I need JAMB registration and preparation support</span>
+                                                                                                                                </label>
+                                                                                                                                <label class="flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${screening.needsJambSupport === 'No' ? 'border-primary bg-blue-50' : 'border-gray-300 hover:border-gray-400'}">
+                                                                                                                                    <input
+                                                                                                                                        type="radio"
+                                                                                                                                        name="needsJambSupport"
+                                                                                                                                        value="No"
+                                                                                                                                        ${screening.needsJambSupport === 'No' ? 'checked' : ''}
+                                                                                                                                        onchange="updateData('screening', 'needsJambSupport', 'No');"
+                                                                                                                                        class="h-5 w-5 text-primary focus:ring-primary"
+                                                                                                                                    />
+                                                                                                                                    <span class="ml-3 text-gray-900 font-medium">No, I will handle JAMB registration myself</span>
+                                                                                                                                </label>
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    ` : ''}
 
                     <div class="flex justify-between mt-8">
                         <a href="{{ url('/') }}" class="border border-gray-400 text-gray-700 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300">
@@ -273,6 +279,7 @@
                         </a>
                         <button
                             type="button"
+                            id="continue-button"
                             onclick="nextStep()"
                             class="bg-primary text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-secondary transition duration-300 ${!canProceed ? 'opacity-50 cursor-not-allowed' : ''}"
                             ${!canProceed ? 'disabled' : ''}
@@ -398,21 +405,21 @@
                     <h2 class="text-2xl font-extrabold text-primary mb-6">2. Academic Information</h2>
 
                     ${hasTakenJamb ? `
-                                                                                        <div class="mb-6">
-                                                                                            <label for="jambRegNumber" class="block text-sm font-medium text-gray-700 mb-1">JAMB Registration Number <span class="text-red-500">*</span></label>
-                                                                                            <input type="text" id="jambRegNumber" value="${academic.jambRegNumber}" onchange="updateData('academic', 'jambRegNumber', event.target.value)" placeholder="12345678AB" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-150" />
-                                                                                        </div>
+                                                                                                                        <div class="mb-6">
+                                                                                                                            <label for="jambRegNumber" class="block text-sm font-medium text-gray-700 mb-1">JAMB Registration Number <span class="text-red-500">*</span></label>
+                                                                                                                            <input type="text" id="jambRegNumber" value="${academic.jambRegNumber}" onchange="updateData('academic', 'jambRegNumber', event.target.value)" placeholder="12345678AB" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-150" />
+                                                                                                                        </div>
 
-                                                                                        <div class="mb-6">
-                                                                                            <label for="jambScore" class="block text-sm font-medium text-gray-700 mb-1">JAMB Score (Minimum 180 required) <span class="text-red-500">*</span></label>
-                                                                                            <input type="number" id="jambScore" value="${academic.jambScore || ''}" onchange="updateData('academic', 'jambScore', parseInt(event.target.value) || 0); renderStep();" placeholder="280" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-150" min="0" />
-                                                                                        </div>
-                                                                                    ` : `
-                                                                                        <div class="p-4 rounded-lg font-medium mb-6 text-sm bg-blue-50 text-blue-700 border border-blue-300">
-                                                                                            <strong>Note:</strong> Since you have not taken JAMB, JAMB score and registration number are not required.
-                                                                                            ${screening.needsJambSupport === 'Yes' ? 'We will provide support for your JAMB registration and preparation.' : ''}
-                                                                                        </div>
-                                                                                    `}
+                                                                                                                        <div class="mb-6">
+                                                                                                                            <label for="jambScore" class="block text-sm font-medium text-gray-700 mb-1">JAMB Score (Minimum 180 required) <span class="text-red-500">*</span></label>
+                                                                                                                            <input type="number" id="jambScore" value="${academic.jambScore || ''}" onchange="updateData('academic', 'jambScore', parseInt(event.target.value) || 0); renderStep();" placeholder="280" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-150" min="0" />
+                                                                                                                        </div>
+                                                                                                                    ` : `
+                                                                                                                        <div class="p-4 rounded-lg font-medium mb-6 text-sm bg-blue-50 text-blue-700 border border-blue-300">
+                                                                                                                            <strong>Note:</strong> Since you have not taken JAMB, JAMB score and registration number are not required.
+                                                                                                                            ${screening.needsJambSupport === 'Yes' ? 'We will provide support for your JAMB registration and preparation.' : ''}
+                                                                                                                        </div>
+                                                                                                                    `}
 
                     <div class="mb-6">
                         <label for="waecGceYear" class="block text-sm font-medium text-gray-700 mb-1">WAEC/GCE Exam Year <span class="text-red-500">*</span></label>
@@ -528,10 +535,10 @@
                     </p>
 
                     ${!hasTakenJamb ? `
-                                                                                        <div class="p-4 rounded-lg font-medium mb-6 text-sm bg-blue-50 text-blue-700 border border-blue-300">
-                                                                                            <strong>Note:</strong> Since you have not taken JAMB, please upload your secondary school academic performance record or transcript instead of JAMB result.
-                                                                                        </div>
-                                                                                    ` : ''}
+                                                                                                                        <div class="p-4 rounded-lg font-medium mb-6 text-sm bg-blue-50 text-blue-700 border border-blue-300">
+                                                                                                                            <strong>Note:</strong> Since you have not taken JAMB, please upload your secondary school academic performance record or transcript instead of JAMB result.
+                                                                                                                        </div>
+                                                                                                                    ` : ''}
 
                     ${getFileUploadHTML('jambResult', jambResultLabel, docs.jambResult, 'jambResult')}
                     ${getFileUploadHTML('waecResult', 'WAEC/GCE Result Certificate', docs.waecResult, 'waecResult')}
@@ -732,12 +739,25 @@
 
             /** Main function to render the current step */
             function renderStep() {
+                console.log('=== renderStep called, current step:', state.step);
                 const container = document.getElementById('form-content-container');
                 updateProgress();
 
                 switch (state.step) {
                     case 0:
-                        container.innerHTML = getStep0HTML();
+                        const step0Html = getStep0HTML();
+                        console.log('Step 0 HTML generated, length:', step0Html.length);
+                        container.innerHTML = step0Html;
+                        console.log('Step 0 HTML inserted into DOM');
+                        // Check button state after rendering
+                        setTimeout(() => {
+                            const btn = document.getElementById('continue-button');
+                            console.log('Button found:', !!btn);
+                            if (btn) {
+                                console.log('Button disabled:', btn.disabled);
+                                console.log('Button classes:', btn.className);
+                            }
+                        }, 0);
                         break;
                     case 1:
                         container.innerHTML = getStep1HTML();
@@ -759,20 +779,29 @@
                 }
             }
 
+            // Expose renderStep immediately to global scope
+            window.renderStep = renderStep;
+
             // --- Data Handling & Validation ---
 
             // Expose to global scope for inline handlers
             window.updateData = (section, field, value) => {
+                console.log(`updateData called: ${section}.${field} = ${value}`);
                 if (section === 'academic' && field === 'jambScore') {
                     state.data.academic.jambScore = parseInt(value) || 0;
                 } else {
                     state.data[section][field] = value;
                 }
-                // Re-render to update validation state if needed (e.g., eligibility message)
+                console.log('Updated state:', state.data[section]);
+                // Re-render to update validation state whenever data changes
                 if (section === 'personal' && field === 'isIndigene') {
                     renderStep();
                 }
-                if (section === 'academic' && field === 'jambScore') {
+                if (section === 'academic') {
+                    // Re-render for ANY academic field change to update button state
+                    renderStep();
+                }
+                if (section === 'screening') {
                     renderStep();
                 }
             };
@@ -843,9 +872,7 @@
                 renderStep();
             }
 
-            // Expose to global scope
-            window.nextStep = nextStep;
-            window.prevStep = prevStep;
+            // Expose additional functions to global scope
             window.resetForm = resetForm;
             window.validateStep = validateStep;
 

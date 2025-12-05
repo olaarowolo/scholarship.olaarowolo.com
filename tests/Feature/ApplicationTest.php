@@ -31,16 +31,23 @@ class ApplicationTest extends TestCase
         $user = User::factory()->create();
 
         $data = [
-            'fullName' => $this->faker->name,
+            'hasTakenJamb' => 'Yes',
+            'needsJambSupport' => '',
+            'firstName' => 'John',
+            'lastName' => 'Doe',
+            'dateOfBirth' => '2000-01-01',
             'email' => $this->faker->safeEmail,
             'phone' => $this->faker->phoneNumber,
             'address' => $this->faker->address,
+            'lga' => 'Ojo',
+            'town' => 'Iba',
             'isIndigene' => 'Yes',
+            'jambRegNumber' => '12345678AB',
             'jambScore' => 250,
             'waecGceYear' => '2023',
             'institution' => $this->faker->company,
             'course' => $this->faker->jobTitle,
-            'admissionStatus' => 'Admitted',
+            'admissionStatus' => 'Awaiting',
             'jambResult' => UploadedFile::fake()->create('jamb.pdf', 1000),
             'waecResult' => UploadedFile::fake()->create('waec.pdf', 1000),
             'indigeneCert' => UploadedFile::fake()->create('indigene.pdf', 1000),
@@ -56,7 +63,7 @@ class ApplicationTest extends TestCase
 
         $this->assertDatabaseHas('applications', [
             'user_id' => $user->id,
-            'first_name' => $data['fullName'],
+            'first_name' => $data['firstName'],
             'phone' => $data['phone'],
             'address' => $data['address'],
             'jamb_score' => $data['jambScore'],
@@ -71,7 +78,7 @@ class ApplicationTest extends TestCase
         $user = User::factory()->create();
 
         $data = [
-            'fullName' => '',
+            'firstName' => '',
             'email' => 'invalid-email',
         ];
 
@@ -80,7 +87,25 @@ class ApplicationTest extends TestCase
             ->post('/apply-form', $data);
 
         $response->assertStatus(422);
-        $response->assertJsonValidationErrors(['fullName', 'email', 'phone', 'address', 'isIndigene', 'jambScore', 'waecGceYear', 'institution', 'course', 'admissionStatus', 'jambResult', 'waecResult', 'indigeneCert']);
+        $response->assertJsonValidationErrors([
+            'hasTakenJamb',
+            'firstName',
+            'lastName',
+            'dateOfBirth',
+            'email',
+            'phone',
+            'address',
+            'lga',
+            'town',
+            'isIndigene',
+            'waecGceYear',
+            'institution',
+            'course',
+            'admissionStatus',
+            'jambResult',
+            'waecResult',
+            'indigeneCert'
+        ]);
     }
 
     public function test_application_submission_validation_fails_with_invalid_jamb_score()
