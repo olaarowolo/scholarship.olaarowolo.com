@@ -3,19 +3,19 @@
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
             <!-- Contact Info -->
             <div class="flex items-start space-x-4 md:col-span-2">
-                <img class="h-24 w-auto"
-                     src="{{ asset('assets/img/favicon/olaarowolo.com_logo_black.png') }}"
-                     alt="OA Logo" style="filter: invert(1) grayscale(100%) brightness(200%);">
+                <img class="h-24 w-auto" src="{{ asset('assets/img/favicon/olaarowolo.com_logo_black.png') }}"
+                    alt="OA Logo" style="filter: invert(1) grayscale(100%) brightness(200%);">
                 <div class="text-left">
                     <p class="text-gray-400 text-sm">A commitment to educational equity for Iba indigenes.</p>
                     <div class="text-sm text-gray-400 space-y-1 pt-2">
                         <div class="flex items-center justify-start space-x-2">
-                             <i class="fa-solid fa-envelope"></i>
-                             <p>Email: <a href="mailto:scholarship@olaarowolo.com" class="hover:text-white">scholarship@olaarowolo.com</a></p>
+                            <i class="fa-solid fa-envelope"></i>
+                            <p>Email: <a href="mailto:scholarship@olaarowolo.com"
+                                    class="hover:text-white">scholarship@olaarowolo.com</a></p>
                         </div>
                         <div class="flex items-center justify-start space-x-2">
-                             <i class="fa-solid fa-location-dot"></i>
-                             <p>Location: Iba Town, Ojo, Lagos, Nigeria</p>
+                            <i class="fa-solid fa-location-dot"></i>
+                            <p>Location: Iba Town, Ojo, Lagos, Nigeria</p>
                         </div>
                     </div>
                 </div>
@@ -26,10 +26,14 @@
                     Quick Links
                 </h3>
                 <ul role="list" class="mt-4 space-y-3">
-                    <li><a href="{{ route('our-story') }}" class="text-base text-gray-300 hover:text-white">Our Story</a></li>
-                    <li><a href="{{ route('application-steps') }}" class="text-base text-gray-300 hover:text-white">Application Steps</a></li>
-                    <li><a href="{{ route('view-impact') }}" class="text-base text-gray-300 hover:text-white">View Impact</a></li>
-                    <li><a href="{{ route('how-it-works') }}" class="text-base text-gray-300 hover:text-white">How It Works</a></li>
+                    <li><a href="{{ route('our-story') }}" class="text-base text-gray-300 hover:text-white">Our
+                            Story</a></li>
+                    <li><a href="{{ route('application-steps') }}"
+                            class="text-base text-gray-300 hover:text-white">Application Steps</a></li>
+                    <li><a href="{{ route('view-impact') }}" class="text-base text-gray-300 hover:text-white">View
+                            Impact</a></li>
+                    <li><a href="{{ route('how-it-works') }}" class="text-base text-gray-300 hover:text-white">How It
+                            Works</a></li>
                 </ul>
             </div>
             <!-- Portal & Legal -->
@@ -38,12 +42,17 @@
                     Portal & Legal
                 </h3>
                 <ul role="list" class="mt-4 space-y-3">
-                    <li><a href="{{ route('scholar-login') }}" class="text-base text-gray-300 hover:text-white">Scholar Login</a></li>
-                    <li><a href="https://olaarowolo.com" class="text-base text-gray-300 hover:text-white">Sponsor</a></li>
+                    <li><a href="{{ route('scholar-login') }}" class="text-base text-gray-300 hover:text-white">Scholar
+                            Login</a></li>
+                    <li><a href="https://olaarowolo.com" class="text-base text-gray-300 hover:text-white">Sponsor</a>
+                    </li>
                     {{-- <li><a href="{{ route('sponsor-information') }}" class="text-base text-gray-300 hover:text-white">Sponsor Information</a></li> --}}
-                    <li><a href="{{ route('terms') }}" class="text-base text-gray-300 hover:text-white">Terms & Conditions</a></li>
-                    <li><a href="{{ route('contact') }}" class="text-base text-gray-300 hover:text-white">Contact Us</a></li>
-                    <li><a href="{{ route('resources') }}" class="text-base text-gray-300 hover:text-white">Resources</a></li>
+                    <li><a href="{{ route('terms') }}" class="text-base text-gray-300 hover:text-white">Terms &
+                            Conditions</a></li>
+                    <li><a href="{{ route('contact') }}" class="text-base text-gray-300 hover:text-white">Contact Us</a>
+                    </li>
+                    <li><a href="{{ route('resources') }}"
+                            class="text-base text-gray-300 hover:text-white">Resources</a></li>
                 </ul>
             </div>
         </div>
@@ -56,7 +65,8 @@
                 <p class="mt-4 text-lg text-white">
                     Subscribe to receive the latest updates about the OA Scholarship, application deadlines, and more.
                 </p>
-                <form action="{{ route('newsletter.subscribe') }}" method="POST" class="mt-6">
+                {{-- Newsletter form temporarily disabled --}}
+                {{-- <form action="{{ route('newsletter.subscribe') }}" method="POST" class="mt-6">
                     @csrf
                     <div class="flex flex-col sm:flex-row gap-4 justify-center">
                         <input type="email" name="email" placeholder="Enter your email address" required class="w-full sm:w-auto px-4 py-3 rounded-lg border border-gray-300 focus:ring-primary focus:border-primary">
@@ -64,7 +74,10 @@
                             Subscribe
                         </button>
                     </div>
-                </form>
+                </form> --}}
+                <div class="mt-6 text-center">
+                    <p class="text-gray-300 italic">Newsletter subscription coming soon!</p>
+                </div>
             </div>
         </div>
         <!-- Social Media and Copyright -->
