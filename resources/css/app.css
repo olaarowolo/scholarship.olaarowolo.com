@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @source '../../vendor/laravel/framework/src/Illuminate/Pagination/resources/views/*.blade.php';
 @source '../../storage/framework/views/*.php';
@@ -6,6 +6,38 @@
 @source '../**/*.js';
 
 @theme {
-    --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
-        'Segoe UI Symbol', 'Noto Color Emoji';
+    --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
+        "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+        "Noto Color Emoji";
+
+    /* Custom color variables */
+    --color-primary: #000000;
+    --color-secondary: #1f2937;
+}
+
+/* Custom utility classes */
+@layer utilities {
+    .bg-primary {
+        background-color: var(--color-primary);
+    }
+
+    .text-primary {
+        color: var(--color-primary);
+    }
+
+    .border-primary {
+        border-color: var(--color-primary);
+    }
+
+    .hover\:bg-secondary:hover {
+        background-color: var(--color-secondary);
+    }
+}
+
+/* Custom spinner for submission button */
+.spinner {
+    border-top-color: #ffffff;
+    border-left-color: #ffffff;
+    border-bottom-color: transparent;
+    border-right-color: transparent;
 }

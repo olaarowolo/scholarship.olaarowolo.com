@@ -6,56 +6,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>OA Scholarship Application</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Tailwind CSS via Vite -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     <!-- Google Fonts: Inter -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
-    <style>
-        /* Custom Theme Configuration */
-        :root {
-            --color-primary: #000000;
-            /* Primary action color - Black */
-            --color-secondary: #1f2937;
-            /* Dark Grey for hover/accents */
-        }
-
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-
-        /* Configure Tailwind to use our custom primary color */
-        .bg-primary {
-            background-color: var(--color-primary);
-        }
-
-        .text-primary {
-            color: var(--color-primary);
-        }
-
-        .border-primary {
-            border-color: var(--color-primary);
-        }
-
-        .focus\:ring-primary:focus {
-            --tw-ring-color: var(--color-primary);
-        }
-
-        .focus\:border-primary:focus {
-            border-color: var(--color-primary);
-        }
-
-        .hover\:bg-secondary:hover {
-            background-color: var(--color-secondary);
-        }
-
-        /* Custom spinner for submission button */
-        .spinner {
-            border-top-color: #ffffff;
-            border-left-color: #ffffff;
-            border-bottom-color: transparent;
-            border-right-color: transparent;
-        }
-    </style>
 </head>
 
 <body class="bg-gray-50 min-h-screen flex flex-col">
@@ -90,9 +44,9 @@
             </div>
 
             <!-- Step Progress Bar -->
-            <div class="mb-10">
+            <div class="mb-10" id="progress-container">
                 <div class="flex justify-between mb-2 text-sm font-medium text-gray-700">
-                    <span id="step-info">Step 1 of 3</span>
+                    <span id="step-info">Screening</span>
                     <span id="progress-percent">0% Complete</span>
                 </div>
                 <div class="w-full bg-gray-200 rounded-full h-2.5">
@@ -100,7 +54,8 @@
                         style="width: 0%;"></div>
                 </div>
                 <div class="flex justify-between mt-1 text-xs text-gray-500">
-                    <span id="step-label-1" class="font-semibold text-primary">Personal</span>
+                    <span id="step-label-0" class="font-semibold text-primary">Screening</span>
+                    <span id="step-label-1">Personal</span>
                     <span id="step-label-2">Academic</span>
                     <span id="step-label-3">Documents</span>
                     <span id="step-label-4">Review</span>
@@ -119,9 +74,9 @@
 
         <!-- Application Script -->
         <script type="module">
-            // Global State
+            // Global State - v2.0 (JAMB Screening Added)
             const state = {
-                step: 1,
+                step: 0, // Start at step 0 for JAMB screening
                 isAuthReady: false,
                 userId: null,
                 db: null,
@@ -129,6 +84,10 @@
                 submissionStatus: null,
                 isLoading: false,
                 data: {
+                    screening: {
+                        hasTakenJamb: '', // 'Yes' or 'No'
+                        needsJambSupport: '', // 'Yes' or 'No' (only if hasTakenJamb is 'No')
+                    },
                     personal: {
                         firstName: '',
                         lastName: '',
@@ -150,7 +109,7 @@
                     },
                     documents: {
                         jambResult: null, // Stores File object
-                        waecResult: null, // Stores File object
+                        waecResult: null, // Stores File object (or academic performance if no JAMB)
                         indigeneCert: null, // Stores File object
                     },
                 }
@@ -183,14 +142,25 @@
             /** Updates the progress bar and step labels */
             function updateProgress() {
                 const step = state.step;
-                const progress = step > 4 ? 100 : Math.min(100, (step - 1) * 25);
+                const progressContainer = document.getElementById('progress-container');
 
-                const stepText = step > 4 ? 'Complete' : `Step ${step} of 4`;
+                // Always show progress bar now that screening is step 0
+                progressContainer.style.display = 'block';
+
+                // Calculate progress based on 5 main steps (0-4) before success screen (5)
+                const totalSteps = 5; // Screening, Personal, Academic, Documents, Review
+                const progress = step >= 5 ? 100 : Math.min(100, (step / totalSteps) * 100);
+
+                // Step labels
+                const stepLabels = ['Screening', 'Personal Info', 'Academic Info', 'Documents', 'Review'];
+                const stepText = step >= 5 ? 'Complete' : stepLabels[step] || 'Step ' + step;
+
                 document.getElementById('step-info').textContent = stepText;
                 document.getElementById('progress-percent').textContent = `${progress.toFixed(0)}% Complete`;
                 document.getElementById('progress-bar').style.width = `${progress}%`;
 
-                for (let i = 1; i <= 5; i++) {
+                // Update step label styling (0-4)
+                for (let i = 0; i <= 4; i++) {
                     const label = document.getElementById(`step-label-${i}`);
                     if (label) {
                         label.classList.toggle('font-semibold', i <= step);
@@ -202,20 +172,117 @@
             // --- Navigation Functions ---
 
             function nextStep() {
-                if (state.step < 5) {
+                if (state.step < 6) { // Now goes up to 6 (0-6 instead of 1-5)
                     state.step++;
                     renderStep();
                 }
             }
 
             function prevStep() {
-                if (state.step > 1) {
+                if (state.step > 0) { // Can go back to step 0
                     state.step--;
                     renderStep();
                 }
             }
 
             // --- Step Rendering Functions ---
+
+            function getStep0HTML() {
+                console.log('Rendering Step 0 - JAMB Screening');
+                const screening = state.data.screening;
+                const canProceed = screening.hasTakenJamb === 'Yes' ||
+                    (screening.hasTakenJamb === 'No' && screening.needsJambSupport !== '');
+
+                return `
+                <div>
+                    <h2 class="text-2xl font-extrabold text-primary mb-6">JAMB Status Screening</h2>
+
+                    <div class="bg-blue-50 border-l-4 border-blue-400 p-4 mb-6">
+                        <p class="text-sm text-blue-700">
+                            <strong>Important:</strong> We need to understand your JAMB status to process your application appropriately.
+                        </p>
+                    </div>
+
+                    <div class="mb-6">
+                        <label class="block text-lg font-semibold text-gray-800 mb-4">
+                            Have you taken JAMB (Joint Admissions and Matriculation Board) examination before?
+                            <span class="text-red-500">*</span>
+                        </label>
+                        <div class="space-y-3">
+                            <label class="flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${screening.hasTakenJamb === 'Yes' ? 'border-primary bg-blue-50' : 'border-gray-300 hover:border-gray-400'}">
+                                <input
+                                    type="radio"
+                                    name="hasTakenJamb"
+                                    value="Yes"
+                                    ${screening.hasTakenJamb === 'Yes' ? 'checked' : ''}
+                                    onchange="updateData('screening', 'hasTakenJamb', 'Yes'); renderStep();"
+                                    class="h-5 w-5 text-primary focus:ring-primary"
+                                />
+                                <span class="ml-3 text-gray-900 font-medium">Yes, I have taken JAMB</span>
+                            </label>
+                            <label class="flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${screening.hasTakenJamb === 'No' ? 'border-primary bg-blue-50' : 'border-gray-300 hover:border-gray-400'}">
+                                <input
+                                    type="radio"
+                                    name="hasTakenJamb"
+                                    value="No"
+                                    ${screening.hasTakenJamb === 'No' ? 'checked' : ''}
+                                    onchange="updateData('screening', 'hasTakenJamb', 'No'); updateData('screening', 'needsJambSupport', ''); renderStep();"
+                                    class="h-5 w-5 text-primary focus:ring-primary"
+                                />
+                                <span class="ml-3 text-gray-900 font-medium">No, I have not taken JAMB</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    ${screening.hasTakenJamb === 'No' ? `
+                                                                                        <div class="mb-6 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
+                                                                                            <label class="block text-lg font-semibold text-gray-800 mb-4">
+                                                                                                Do you need support to register and prepare for JAMB?
+                                                                                                <span class="text-red-500">*</span>
+                                                                                            </label>
+                                                                                            <div class="space-y-3">
+                                                                                                <label class="flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${screening.needsJambSupport === 'Yes' ? 'border-primary bg-blue-50' : 'border-gray-300 hover:border-gray-400'}">
+                                                                                                    <input
+                                                                                                        type="radio"
+                                                                                                        name="needsJambSupport"
+                                                                                                        value="Yes"
+                                                                                                        ${screening.needsJambSupport === 'Yes' ? 'checked' : ''}
+                                                                                                        onchange="updateData('screening', 'needsJambSupport', 'Yes'); renderStep();"
+                                                                                                        class="h-5 w-5 text-primary focus:ring-primary"
+                                                                                                    />
+                                                                                                    <span class="ml-3 text-gray-900 font-medium">Yes, I need JAMB registration and preparation support</span>
+                                                                                                </label>
+                                                                                                <label class="flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all ${screening.needsJambSupport === 'No' ? 'border-primary bg-blue-50' : 'border-gray-300 hover:border-gray-400'}">
+                                                                                                    <input
+                                                                                                        type="radio"
+                                                                                                        name="needsJambSupport"
+                                                                                                        value="No"
+                                                                                                        ${screening.needsJambSupport === 'No' ? 'checked' : ''}
+                                                                                                        onchange="updateData('screening', 'needsJambSupport', 'No'); renderStep();"
+                                                                                                        class="h-5 w-5 text-primary focus:ring-primary"
+                                                                                                    />
+                                                                                                    <span class="ml-3 text-gray-900 font-medium">No, I will handle JAMB registration myself</span>
+                                                                                                </label>
+                                                                                            </div>
+                                                                                        </div>
+                                                                                    ` : ''}
+
+                    <div class="flex justify-between mt-8">
+                        <a href="{{ url('/') }}" class="border border-gray-400 text-gray-700 px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition duration-300">
+                            &larr; Cancel
+                        </a>
+                        <button
+                            type="button"
+                            onclick="nextStep()"
+                            class="bg-primary text-white px-8 py-3 rounded-full font-semibold shadow-lg hover:bg-secondary transition duration-300 ${!canProceed ? 'opacity-50 cursor-not-allowed' : ''}"
+                            ${!canProceed ? 'disabled' : ''}
+                        >
+                            Continue to Application &rarr;
+                        </button>
+                    </div>
+                </div>
+            `;
+            }
 
             function getStep1HTML() {
                 const personal = state.data.personal;
@@ -304,13 +371,23 @@
 
             function getStep2HTML() {
                 const academic = state.data.academic;
-                const isScoreValid = academic.jambScore >= 180;
-                const isFormValid = academic.jambRegNumber && academic.jambScore > 100 &&
-                    academic.waecGceYear && academic.institution &&
-                    academic.course && isScoreValid;
+                const screening = state.data.screening;
+                const hasTakenJamb = screening.hasTakenJamb === 'Yes';
+
+                // Validation logic changes based on JAMB status
+                let isFormValid;
+                if (hasTakenJamb) {
+                    const isScoreValid = academic.jambScore >= 180;
+                    isFormValid = academic.jambRegNumber && academic.jambScore > 100 &&
+                        academic.waecGceYear && academic.institution &&
+                        academic.course && isScoreValid;
+                } else {
+                    // No JAMB: only need waec year, institution, and course
+                    isFormValid = academic.waecGceYear && academic.institution && academic.course;
+                }
 
                 let statusHtml = '';
-                if (academic.jambScore > 0 && academic.jambScore < 180) {
+                if (hasTakenJamb && academic.jambScore > 0 && academic.jambScore < 180) {
                     statusHtml = `<div class="p-4 rounded-lg font-medium mb-4 text-sm bg-red-50 text-red-700 border border-red-300">
                     Your JAMB score must be 180 or above to proceed with the application.
                 </div>`;
@@ -320,15 +397,22 @@
                 <form id="step2-form">
                     <h2 class="text-2xl font-extrabold text-primary mb-6">2. Academic Information</h2>
 
-                    <div class="mb-6">
-                        <label for="jambRegNumber" class="block text-sm font-medium text-gray-700 mb-1">JAMB Registration Number <span class="text-red-500">*</span></label>
-                        <input type="text" id="jambRegNumber" value="${academic.jambRegNumber}" onchange="updateData('academic', 'jambRegNumber', event.target.value)" placeholder="12345678AB" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-150" />
-                    </div>
+                    ${hasTakenJamb ? `
+                                                                                        <div class="mb-6">
+                                                                                            <label for="jambRegNumber" class="block text-sm font-medium text-gray-700 mb-1">JAMB Registration Number <span class="text-red-500">*</span></label>
+                                                                                            <input type="text" id="jambRegNumber" value="${academic.jambRegNumber}" onchange="updateData('academic', 'jambRegNumber', event.target.value)" placeholder="12345678AB" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-150" />
+                                                                                        </div>
 
-                    <div class="mb-6">
-                        <label for="jambScore" class="block text-sm font-medium text-gray-700 mb-1">JAMB Score (Minimum 180 required) <span class="text-red-500">*</span></label>
-                        <input type="number" id="jambScore" value="${academic.jambScore || ''}" onchange="updateData('academic', 'jambScore', parseInt(event.target.value) || 0); renderStep();" placeholder="280" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-150" min="0" />
-                    </div>
+                                                                                        <div class="mb-6">
+                                                                                            <label for="jambScore" class="block text-sm font-medium text-gray-700 mb-1">JAMB Score (Minimum 180 required) <span class="text-red-500">*</span></label>
+                                                                                            <input type="number" id="jambScore" value="${academic.jambScore || ''}" onchange="updateData('academic', 'jambScore', parseInt(event.target.value) || 0); renderStep();" placeholder="280" required class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-primary focus:border-primary transition duration-150" min="0" />
+                                                                                        </div>
+                                                                                    ` : `
+                                                                                        <div class="p-4 rounded-lg font-medium mb-6 text-sm bg-blue-50 text-blue-700 border border-blue-300">
+                                                                                            <strong>Note:</strong> Since you have not taken JAMB, JAMB score and registration number are not required.
+                                                                                            ${screening.needsJambSupport === 'Yes' ? 'We will provide support for your JAMB registration and preparation.' : ''}
+                                                                                        </div>
+                                                                                    `}
 
                     <div class="mb-6">
                         <label for="waecGceYear" class="block text-sm font-medium text-gray-700 mb-1">WAEC/GCE Exam Year <span class="text-red-500">*</span></label>
@@ -378,7 +462,12 @@
 
             function getStep3HTML() {
                 const docs = state.data.documents;
+                const screening = state.data.screening;
+                const hasTakenJamb = screening.hasTakenJamb === 'Yes';
                 const isFormValid = docs.jambResult && docs.waecResult && docs.indigeneCert;
+
+                // Update label based on JAMB status
+                const jambResultLabel = hasTakenJamb ? 'JAMB Result Slip' : 'Academic Performance Record/Transcript';
 
                 const getFileUploadHTML = (id, label, file, field) => {
                     if (file) {
@@ -438,7 +527,13 @@
                         Please upload clear copies of the following documents. Max file size: 5MB per file. Accepted formats: PDF, JPG, PNG.
                     </p>
 
-                    ${getFileUploadHTML('jambResult', 'JAMB Result Slip', docs.jambResult, 'jambResult')}
+                    ${!hasTakenJamb ? `
+                                                                                        <div class="p-4 rounded-lg font-medium mb-6 text-sm bg-blue-50 text-blue-700 border border-blue-300">
+                                                                                            <strong>Note:</strong> Since you have not taken JAMB, please upload your secondary school academic performance record or transcript instead of JAMB result.
+                                                                                        </div>
+                                                                                    ` : ''}
+
+                    ${getFileUploadHTML('jambResult', jambResultLabel, docs.jambResult, 'jambResult')}
                     ${getFileUploadHTML('waecResult', 'WAEC/GCE Result Certificate', docs.waecResult, 'waecResult')}
                     ${getFileUploadHTML('indigeneCert', 'Indigeneship/Local Government Identification Letter', docs.indigeneCert, 'indigeneCert')}
 
@@ -641,6 +736,9 @@
                 updateProgress();
 
                 switch (state.step) {
+                    case 0:
+                        container.innerHTML = getStep0HTML();
+                        break;
                     case 1:
                         container.innerHTML = getStep1HTML();
                         break;
@@ -695,15 +793,27 @@
                         isEligible;
                 } else if (step === 2) {
                     const a = data.academic;
-                    return a.jambRegNumber && a.jambScore >= 180 && a.waecGceYear && a.institution && a.course;
+                    const screening = data.screening;
+                    const hasTakenJamb = screening.hasTakenJamb === 'Yes';
+
+                    if (hasTakenJamb) {
+                        return a.jambRegNumber && a.jambScore >= 180 && a.waecGceYear && a.institution && a.course;
+                    } else {
+                        // No JAMB required
+                        return a.waecGceYear && a.institution && a.course;
+                    }
                 }
                 // Step 3 validation is handled by the form's 'disabled' state and required checkbox
                 return true;
             }
 
             function resetForm() {
-                state.step = 1;
+                state.step = 0;
                 state.data = {
+                    screening: {
+                        hasTakenJamb: '',
+                        needsJambSupport: '',
+                    },
                     personal: {
                         firstName: '',
                         lastName: '',
@@ -754,6 +864,12 @@
                 try {
                     // Prepare FormData for submission
                     const formData = new FormData();
+
+                    // Screening data
+                    formData.append('hasTakenJamb', state.data.screening.hasTakenJamb);
+                    formData.append('needsJambSupport', state.data.screening.needsJambSupport || '');
+
+                    // Personal data
                     formData.append('firstName', state.data.personal.firstName);
                     formData.append('lastName', state.data.personal.lastName);
                     formData.append('dateOfBirth', state.data.personal.dateOfBirth);
@@ -763,12 +879,16 @@
                     formData.append('lga', state.data.personal.lga);
                     formData.append('town', state.data.personal.town);
                     formData.append('isIndigene', state.data.personal.isIndigene);
-                    formData.append('jambRegNumber', state.data.academic.jambRegNumber);
-                    formData.append('jambScore', state.data.academic.jambScore);
+
+                    // Academic data (JAMB fields may be empty)
+                    formData.append('jambRegNumber', state.data.academic.jambRegNumber || '');
+                    formData.append('jambScore', state.data.academic.jambScore || '');
                     formData.append('waecGceYear', state.data.academic.waecGceYear);
                     formData.append('institution', state.data.academic.institution);
                     formData.append('course', state.data.academic.course);
                     formData.append('admissionStatus', state.data.academic.admissionStatus);
+
+                    // Documents
                     formData.append('jambResult', state.data.documents.jambResult);
                     formData.append('waecResult', state.data.documents.waecResult);
                     formData.append('indigeneCert', state.data.documents.indigeneCert);
@@ -831,6 +951,16 @@
 
             // --- Application Start ---
             window.onload = () => {
+                console.log('=== APPLICATION LOADED v2.0 ===');
+                console.log('Starting at step:', state.step);
+                console.log('Screening data:', state.data.screening);
+
+                // Force clear any cached state
+                if (state.step !== 0) {
+                    console.warn('Step was not 0, resetting to 0');
+                    state.step = 0;
+                }
+
                 renderStep();
             };
         </script>

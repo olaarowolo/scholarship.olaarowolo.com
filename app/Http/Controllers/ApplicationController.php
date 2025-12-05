@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Application;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -81,6 +83,8 @@ class ApplicationController extends Controller
     {
         try {
             $validatedData = $request->validate([
+                'hasTakenJamb' => 'required|in:Yes,No',
+                'needsJambSupport' => 'nullable|in:Yes,No',
                 'firstName' => 'required|string|max:255',
                 'lastName' => 'required|string|max:255',
                 'dateOfBirth' => 'required|date|before:today',
@@ -90,13 +94,13 @@ class ApplicationController extends Controller
                 'lga' => 'required|string|max:255',
                 'town' => 'required|string|max:255',
                 'isIndigene' => 'required|in:Yes,Pending,No',
-                'jambRegNumber' => 'required|string|max:255',
-                'jambScore' => 'required|numeric|min:200|max:400',
+                'jambRegNumber' => 'nullable|string|max:255', // Now optional
+                'jambScore' => 'nullable|numeric|min:180|max:400', // Now optional
                 'waecGceYear' => 'required|string|max:4',
                 'institution' => 'required|string|max:255',
                 'course' => 'required|string|max:255',
                 'admissionStatus' => 'required|string',
-                'jambResult' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
+                'jambResult' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120', // Can be academic record
                 'waecResult' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
                 'indigeneCert' => 'required|file|mimes:pdf,jpg,jpeg,png|max:5120',
             ]);
@@ -117,10 +121,48 @@ class ApplicationController extends Controller
             // Generate unique application ID
             $applicationId = 'OA-' . date('Y') . '-' . strtoupper(Str::random(8));
 
+            // Check if user is already logged in
+            $userId = Auth::check() ? Auth::id() : null;
+
+            // If not logged in, automatically create an account for the applicant
+            if (!$userId) {
+                // Check if user with this email already exists
+                $existingUser = User::where('email', $request->email)->first();
+
+                if ($existingUser) {
+                    // User exists, use their ID
+                    $userId = $existingUser->id;
+                } else {
+                    // Create new user account
+                    $password = Str::random(12); // Generate random password
+                    $user = User::create([
+                        'name' => $request->firstName . ' ' . $request->lastName,
+                        'email' => $request->email,
+                        'password' => Hash::make($password),
+                        'role' => 'applicant',
+                        'terms_accepted' => true,
+                    ]);
+                    $userId = $user->id;
+
+                    // TODO: Send email with login credentials
+                    Log::info("New applicant account created: Email: {$request->email}, Password: {$password}, Application ID: {$applicationId}");
+                }
+            }
+
+            // Prepare notes with JAMB status and admission status
+            $notesArray = [
+                'admission_status' => $request->admissionStatus,
+                'has_taken_jamb' => $request->hasTakenJamb,
+            ];
+            if ($request->hasTakenJamb === 'No') {
+                $notesArray['needs_jamb_support'] = $request->needsJambSupport;
+            }
+            $notes = json_encode($notesArray);
+
             // Create application
             $application = Application::create([
                 'application_id' => $applicationId,
-                'user_id' => Auth::check() ? Auth::id() : null,
+                'user_id' => $userId,
                 'first_name' => $request->firstName,
                 'last_name' => $request->lastName,
                 'date_of_birth' => $request->dateOfBirth,
@@ -136,7 +178,7 @@ class ApplicationController extends Controller
                 'id_card' => $waecResultPath,
                 'jamb_result' => $jambResultPath,
                 'status' => 'submitted',
-                'notes' => $request->admissionStatus,
+                'notes' => $notes,
             ]);
 
             return response()->json([
