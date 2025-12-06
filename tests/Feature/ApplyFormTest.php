@@ -21,7 +21,9 @@ class ApplyFormTest extends TestCase
 
     public function test_apply_form_page_loads_successfully()
     {
-        $response = $this->get('/apply-form');
+        $user = User::factory()->create();
+
+        $response = $this->actingAs($user)->get('/apply-form');
 
         $response->assertStatus(200);
         $response->assertViewIs('apply-form');
@@ -114,9 +116,13 @@ class ApplyFormTest extends TestCase
             'indigeneCert' => UploadedFile::fake()->image('cert.jpg'),
         ];
 
-        $response = $this->post('/apply-form', $formData);
+        $user = User::factory()->create([
+            'email' => 'jane@example.com',
+        ]);
 
-        // Application is submitted successfully even without authentication
+        $response = $this->actingAs($user)->post('/apply-form', $formData);
+
+        // Application is submitted successfully with authentication
         $response->assertStatus(200);
         $response->assertJson(['success' => true]);
     }

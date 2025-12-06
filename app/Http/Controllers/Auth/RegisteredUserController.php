@@ -9,6 +9,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Schema;
 use Illuminate\Validation\Rules;
 use Illuminate\View\View;
 
@@ -29,22 +30,35 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $request->validate([
+        $validationRules = [
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'is_iba_indigene' => ['required', 'accepted'],
-        ], [
-            'is_iba_indigene.required' => 'You must confirm that you are an indigene of Iba Kingdom to register.',
-            'is_iba_indigene.accepted' => 'You must confirm that you are an indigene of Iba Kingdom to register.',
-        ]);
+        ];
 
-        $user = User::create([
+        $validationMessages = [];
+
+        // Only validate is_iba_indigene if the column exists in the database
+        if (Schema::hasColumn('users', 'is_iba_indigene')) {
+            $validationRules['is_iba_indigene'] = ['required', 'accepted'];
+            $validationMessages['is_iba_indigene.required'] = 'You must confirm that you are an indigene of Iba Kingdom to register.';
+            $validationMessages['is_iba_indigene.accepted'] = 'You must confirm that you are an indigene of Iba Kingdom to register.';
+        }
+
+        $request->validate($validationRules, $validationMessages);
+
+        $userData = [
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
-            'is_iba_indigene' => true,
-        ]);
+        ];
+
+        // Only include is_iba_indigene if the column exists
+        if (Schema::hasColumn('users', 'is_iba_indigene')) {
+            $userData['is_iba_indigene'] = true;
+        }
+
+        $user = User::create($userData);
 
         event(new Registered($user));
 

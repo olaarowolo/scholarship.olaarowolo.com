@@ -66,13 +66,13 @@ Route::post('/terms-acceptance', [TermsController::class, 'acceptTerms'])->name(
 
 Route::get('/apply-form', function () {
     return view('apply-form');
-})->middleware('auth')->name('apply-form');
+})->middleware(['auth', 'role:applicant,user'])->name('apply-form');
 
 Route::get('/apply-utme-jamb-form', function () {
     return view('apply-utme-jamb-form');
-})->middleware('auth')->name('apply-utme-jamb-form');
+})->middleware(['auth', 'role:applicant,user'])->name('apply-utme-jamb-form');
 
-Route::post('/apply-form', [ApplicationController::class, 'submit'])->middleware('auth')->name('apply-form.submit');
+Route::post('/apply-form', [ApplicationController::class, 'submit'])->middleware(['auth', 'role:applicant,user'])->name('apply-form.submit');
 
 // Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
 
@@ -99,7 +99,7 @@ Route::get('/testimonials', function () {
 require __DIR__.'/auth.php';
 
 // Admin Routes
-Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth', 'role:admin'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [App\Http\Controllers\AdminController::class, 'dashboard'])->name('dashboard');
     Route::get('/applications', [App\Http\Controllers\AdminController::class, 'applications'])->name('applications');
     Route::get('/applications/{id}', [App\Http\Controllers\AdminController::class, 'showApplication'])->name('applications.show');
@@ -121,7 +121,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
 });
 
 // Scholar Routes
-Route::middleware(['auth'])->prefix('scholar')->name('scholar.')->group(function () {
+Route::middleware(['auth', 'role:scholar'])->prefix('scholar')->name('scholar.')->group(function () {
     Route::get('/requests/create', [App\Http\Controllers\ScholarController::class, 'createRequest'])->name('requests.create');
     Route::get('/academic-standing', [App\Http\Controllers\ScholarController::class, 'academicStanding'])->name('academic-standing');
     Route::get('/challenges', [App\Http\Controllers\ScholarController::class, 'challenges'])->name('challenges');

@@ -133,7 +133,9 @@ class RouteTest extends TestCase
 
     public function test_apply_form_page_can_be_rendered()
     {
-        $response = $this->get('/apply-form');
+        $user = \App\Models\User::factory()->create();
+
+        $response = $this->actingAs($user)->get('/apply-form');
 
         $response->assertStatus(200);
         $response->assertViewIs('apply-form');
@@ -141,7 +143,9 @@ class RouteTest extends TestCase
 
     public function test_apply_utme_jamb_form_page_can_be_rendered()
     {
-        $response = $this->get('/apply-utme-jamb-form');
+        $user = \App\Models\User::factory()->create();
+
+        $response = $this->actingAs($user)->get('/apply-utme-jamb-form');
 
         $response->assertStatus(200);
         $response->assertViewIs('apply-utme-jamb-form');
