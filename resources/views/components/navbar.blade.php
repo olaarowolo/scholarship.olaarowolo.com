@@ -56,7 +56,50 @@
                     </div>
                 </div>
             @else
-                <a href="{{ route('apply') }}" class="apply-btn">Apply Now</a>
+                <a href="{{ route('apply') }}" class="get-started-link"><strong>Get Started</strong></a>
+                <div class="relative inline-block">
+                    <button onclick="toggleLoginDropdown()" class="apply-btn flex items-center space-x-2">
+                        <span>Login</span>
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </button>
+                    <div id="loginDropdown"
+                        class="hidden absolute right-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50">
+                        <a href="{{ route('login') }}"
+                            class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-full bg-black flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-900">Login as Applicant</div>
+                                    <div class="text-xs text-gray-500">Apply for scholarship</div>
+                                </div>
+                            </div>
+                        </a>
+                        <a href="{{ route('scholar-login') }}"
+                            class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                            <div class="flex items-center space-x-3">
+                                <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center">
+                                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                    </svg>
+                                </div>
+                                <div>
+                                    <div class="font-semibold text-gray-900">Login as Scholar</div>
+                                    <div class="text-xs text-gray-500">Access scholar portal</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
             @endif
         </div>
 
@@ -108,7 +151,50 @@
             </div>
         </div>
     @else
-        <a href="{{ route('apply') }}" class="mobile-apply">Apply Now</a>
+        <div class="px-4 py-3 border-t border-gray-200 mt-2">
+            <a href="{{ route('apply') }}" class="mobile-get-started mb-2 block text-center"
+                onclick="toggleMenu()"><strong>Get Started</strong></a>
+            <button onclick="toggleMobileLoginDropdown()"
+                class="mobile-apply mb-2 flex items-center justify-center w-full">
+                <span>Login</span>
+                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+            </button>
+            <div id="mobileLoginDropdown" class="hidden space-y-2">
+                <a href="{{ route('login') }}" class="block px-4 py-3 bg-gray-50 rounded-lg" onclick="toggleMenu()">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-full bg-black flex items-center justify-center">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-gray-900 text-sm">Login as Applicant</div>
+                            <div class="text-xs text-gray-500">Apply for scholarship</div>
+                        </div>
+                    </div>
+                </a>
+                <a href="{{ route('scholar-login') }}" class="block px-4 py-3 bg-gray-50 rounded-lg"
+                    onclick="toggleMenu()">
+                    <div class="flex items-center space-x-3">
+                        <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center">
+                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                            </svg>
+                        </div>
+                        <div>
+                            <div class="font-semibold text-gray-900 text-sm">Login as Scholar</div>
+                            <div class="text-xs text-gray-500">Access scholar portal</div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
     @endif
 </div>
 
@@ -240,6 +326,25 @@
         border-radius: 50px;
         font-size: 17px;
         font-weight: 600;
+        text-decoration: none;
+        display: block;
+        text-align: center;
+    }
+
+    .mobile-get-started {
+        margin-top: 10px;
+        padding: 15px;
+        color: #000 !important;
+        font-size: 19px;
+        font-weight: 800;
+        text-decoration: none;
+        text-align: center;
+        letter-spacing: 0.5px;
+        transition: color 0.2s ease;
+    }
+
+    .mobile-get-started:active {
+        color: #10b981 !important;
     }
 
     .mobile-menu.active {
@@ -296,6 +401,20 @@
             background: #333;
         }
 
+        .get-started-link {
+            text-decoration: none;
+            font-size: 16px;
+            color: #000;
+            font-weight: 800;
+            transition: all 0.2s ease;
+            letter-spacing: 0.3px;
+        }
+
+        .get-started-link:hover {
+            color: #10b981;
+            transform: translateX(2px);
+        }
+
         .admin-badge {
             padding: 8px 18px;
             background: #000;
@@ -343,4 +462,27 @@
         // animate hamburger -> X
         toggle.classList.toggle("active");
     }
+
+    // Toggle desktop login dropdown
+    function toggleLoginDropdown() {
+        const dropdown = document.getElementById("loginDropdown");
+        dropdown.classList.toggle("hidden");
+    }
+
+    // Toggle mobile login dropdown
+    function toggleMobileLoginDropdown() {
+        const dropdown = document.getElementById("mobileLoginDropdown");
+        dropdown.classList.toggle("hidden");
+    }
+
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(event) {
+        const loginDropdown = document.getElementById("loginDropdown");
+        const mobileLoginDropdown = document.getElementById("mobileLoginDropdown");
+
+        // Check if click is outside the dropdown
+        if (loginDropdown && !event.target.closest('.relative.inline-block')) {
+            loginDropdown.classList.add("hidden");
+        }
+    });
 </script>
