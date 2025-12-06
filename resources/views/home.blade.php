@@ -90,6 +90,46 @@
     <!-- Navigation Bar -->
     @include('components.navbar', ['user' => Auth::user()])
 
+    <!-- Error Message (for closed forms) -->
+    @if (session('error'))
+        <div class="fixed top-20 left-1/2 transform -translate-x-1/2 z-50 max-w-md w-full mx-4">
+            <div class="bg-red-50 border-l-4 border-red-500 rounded-lg shadow-lg p-4 animate-pulse">
+                <div class="flex items-start">
+                    <div class="flex-shrink-0">
+                        <svg class="h-5 w-5 text-red-500" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div class="ml-3 flex-1">
+                        <p class="text-sm font-semibold text-red-800">
+                            {{ session('error') }}
+                        </p>
+                    </div>
+                    <button onclick="this.parentElement.parentElement.parentElement.remove()"
+                        class="ml-3 flex-shrink-0 text-red-500 hover:text-red-700">
+                        <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd"
+                                d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <script>
+            // Auto-hide error message after 5 seconds
+            setTimeout(function() {
+                const errorMsg = document.querySelector('.fixed.top-20');
+                if (errorMsg) {
+                    errorMsg.style.transition = 'opacity 0.5s';
+                    errorMsg.style.opacity = '0';
+                    setTimeout(() => errorMsg.remove(), 500);
+                }
+            }, 5000);
+        </script>
+    @endif
 
     <!-- 1. Hero Section -->
     @include('components.header')

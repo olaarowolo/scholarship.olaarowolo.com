@@ -80,12 +80,39 @@
 
 <script>
     // Countdown Timer and Button Control
-    function updateCountdown() {
-        // Target dates
-        const openDate = new Date('2025-12-08T00:00:00').getTime();
-        const closeDate = new Date('2026-01-16T23:59:59').getTime();
-        const now = new Date().getTime();
+    let formSettings = null;
 
+    // Fetch form settings from API
+    async function fetchFormSettings() {
+        try {
+            const response = await fetch('/api/form-settings/application_form');
+            const data = await response.json();
+            formSettings = data;
+            updateCountdown();
+        } catch (error) {
+            console.error('Error fetching form settings:', error);
+            // Fallback to default behavior if API fails
+            updateCountdown();
+        }
+    }
+
+    function updateCountdown() {
+        // Use API data if available, otherwise use fallback dates
+        let openDate, closeDate;
+
+        if (formSettings && formSettings.opens_at) {
+            openDate = new Date(formSettings.opens_at).getTime();
+        } else {
+            openDate = new Date('2025-12-08T00:00:00').getTime();
+        }
+
+        if (formSettings && formSettings.closes_at) {
+            closeDate = new Date(formSettings.closes_at).getTime();
+        } else {
+            closeDate = new Date('2026-01-16T23:59:59').getTime();
+        }
+
+        const now = new Date().getTime();
         const distanceToOpen = openDate - now;
         const distanceToClose = closeDate - now;
 
@@ -97,6 +124,53 @@
         const applyBtnGuest = document.getElementById('apply-btn-guest');
         const applyBtnTextAuth = document.getElementById('apply-btn-text-auth');
         const applyBtnTextGuest = document.getElementById('apply-btn-text-guest');
+
+        // Check if form is manually disabled via admin
+        const isFormOpen = formSettings ? formSettings.is_open : true;
+        const isCurrentlyOpen = formSettings ? formSettings.is_currently_open : true;
+
+        // If form is manually closed by admin but has a future opening date
+        if ((!isFormOpen || !isCurrentlyOpen) && distanceToOpen > 0) {
+            // Show countdown to opening date with closed message
+            const days = Math.floor(distanceToOpen / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distanceToOpen % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distanceToOpen % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distanceToOpen % (1000 * 60)) / 1000);
+
+            const closedMessage = formSettings?.closed_message || 'Application Period Has Ended';
+            label.innerHTML = `<span class="text-red-600">⚠️ ${closedMessage}</span><br><span class="text-sm text-gray-600 mt-2">Opens in:</span>`;
+            
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+            // Hide application button
+            if (applyBtnAuth) applyBtnAuth.style.display = 'none';
+            if (applyBtnGuest) applyBtnGuest.style.display = 'none';
+            return;
+        }
+
+        // If form is closed and no future opening date
+        if (!isFormOpen || !isCurrentlyOpen) {
+            const closedMessage = formSettings?.closed_message || 'Application Period Has Ended';
+            countdownEl.innerHTML =
+                `<div class="col-span-4 text-center"><p class="text-xl font-bold text-red-600">❌ ${closedMessage}</p></div>`;
+            label.innerHTML = '';
+
+            // Show but disable application button
+            if (applyBtnAuth) {
+                applyBtnAuth.style.display = 'inline-flex';
+                applyBtnAuth.classList.add('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
+                applyBtnTextAuth.innerHTML = 'Applications Closed';
+            }
+            if (applyBtnGuest) {
+                applyBtnGuest.style.display = 'inline-flex';
+                applyBtnGuest.classList.add('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
+                applyBtnTextGuest.innerHTML = 'Applications Closed';
+            }
+            return;
+        }
 
         // Before opening date - HIDE BUTTON
         if (distanceToOpen > 0) {
@@ -164,7 +238,8 @@
         }
     }
 
+    // Initialize: Fetch form settings and start countdown
+    fetchFormSettings();
     // Update countdown every second
-    updateCountdown();
     setInterval(updateCountdown, 1000);
 </script>

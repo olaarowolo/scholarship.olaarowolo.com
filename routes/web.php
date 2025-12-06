@@ -65,15 +65,18 @@ Route::get('/terms', function () {
 Route::get('/terms-acceptance', [TermsController::class, 'showAcceptancePage'])->name('terms.acceptance');
 Route::post('/terms-acceptance', [TermsController::class, 'acceptTerms'])->name('terms.accept');
 
+// API endpoint for form settings
+Route::get('/api/form-settings/{formName}', [ApplicationController::class, 'getFormSettings'])->name('api.form-settings');
+
 Route::get('/apply-form', function () {
     return view('apply-form');
-})->middleware(['auth', 'two-factor', 'role:applicant,user'])->name('apply-form');
+})->middleware(['auth', 'two-factor', 'role:applicant,user', 'form.open:application_form'])->name('apply-form');
 
 Route::get('/apply-utme-jamb-form', function () {
     return view('apply-utme-jamb-form');
-})->middleware(['auth', 'two-factor', 'role:applicant,user'])->name('apply-utme-jamb-form');
+})->middleware(['auth', 'two-factor', 'role:applicant,user', 'form.open:application_form'])->name('apply-utme-jamb-form');
 
-Route::post('/apply-form', [ApplicationController::class, 'submit'])->middleware(['auth', 'two-factor', 'role:applicant,user'])->name('apply-form.submit');
+Route::post('/apply-form', [ApplicationController::class, 'submit'])->middleware(['auth', 'two-factor', 'role:applicant,user', 'form.open:application_form'])->name('apply-form.submit');
 
 // Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])->name('newsletter.subscribe');
 

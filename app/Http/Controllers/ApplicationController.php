@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\User;
+use App\Models\FormSetting;
 use App\Mail\ApplicationSubmitted;
 use App\Mail\ApplicationSubmittedAdmin;
 use App\Mail\WelcomeCredentials;
@@ -212,5 +213,22 @@ class ApplicationController extends Controller
     public function applyForm()
     {
         return view('apply-form', ['applyButtonDisabled' => false]);
+    }
+
+    /**
+     * Get form settings for API consumption
+     */
+    public function getFormSettings($formName)
+    {
+        $formSetting = FormSetting::getByName($formName);
+
+        return response()->json([
+            'form_name' => $formSetting->form_name,
+            'is_open' => $formSetting->is_open,
+            'is_currently_open' => $formSetting->isCurrentlyOpen(),
+            'opens_at' => $formSetting->opens_at ? $formSetting->opens_at->toIso8601String() : null,
+            'closes_at' => $formSetting->closes_at ? $formSetting->closes_at->toIso8601String() : null,
+            'closed_message' => $formSetting->closed_message,
+        ]);
     }
 }
