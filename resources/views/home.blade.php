@@ -88,7 +88,7 @@
     </script>
 
     <!-- Navigation Bar -->
-    @include('components.navbar')
+    @include('components.navbar', ['user' => Auth::user()])
 
 
     <!-- 1. Hero Section -->
@@ -260,7 +260,4 @@
             </div>
         </div>
     </section>
-
-    <!-- 5. Footer/Contact Section -->
-    @include('partials.footer')
 @endsection

@@ -84,17 +84,17 @@
         <div class="mt-12 border-t border-gray-700 pt-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="flex space-x-6 mb-4 md:mb-0">
-                    <a href="#" class="text-gray-400 hover:text-white">
-                        <i class="fab fa-facebook-f"></i>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">
+                        <i class="fab fa-facebook-f text-xl"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white">
-                        <i class="fab fa-twitter"></i>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">
+                        <i class="fab fa-twitter text-xl"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white">
-                        <i class="fab fa-instagram"></i>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">
+                        <i class="fab fa-instagram text-xl"></i>
                     </a>
-                    <a href="#" class="text-gray-400 hover:text-white">
-                        <i class="fab fa-linkedin-in"></i>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors duration-200">
+                        <i class="fab fa-linkedin-in text-xl"></i>
                     </a>
                 </div>
                 <p class="text-base text-gray-400 text-center md:text-right">

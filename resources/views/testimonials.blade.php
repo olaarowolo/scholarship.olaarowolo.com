@@ -1,9 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ola Arowolo Foundation - Testimonials</title>
+@extends('layouts.app')
+
+@section('content')
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Load Lucide Icons -->
@@ -13,31 +10,32 @@
         :root {
             --color-primary: #000000;
             --color-secondary: #333333;
-            --color-accent: #F59E0B; /* Gold */
+            --color-accent: #F59E0B;
+            /* Gold */
         }
-        .bg-brand-secondary { background-color: var(--color-secondary); }
-        .text-brand-primary { color: var(--color-primary); }
-        .border-brand-primary { border-color: var(--color-primary); }
-        .text-accent-gold { color: var(--color-accent); }
-    </style>
-</head>
-<body class="bg-gray-50 font-sans">
 
-    <!-- Navbar -->
-    <nav class="bg-brand-secondary text-white py-4 shadow-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center">
-            <a href="/" class="text-xl font-bold text-accent-gold">Ola Arowolo Foundation</a>
-            <ul class="flex space-x-6">
-                <li><a href="/about" class="hover:text-accent-gold">About</a></li>
-                <li><a href="/programs" class="hover:text-accent-gold">Programs</a></li>
-                <li><a href="/testimonials" class="hover:text-accent-gold">Testimonials</a></li>
-                <li><a href="/contact" class="hover:text-accent-gold">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
+        .bg-brand-secondary {
+            background-color: var(--color-secondary);
+        }
+
+        .text-brand-primary {
+            color: var(--color-primary);
+        }
+
+        .border-brand-primary {
+            border-color: var(--color-primary);
+        }
+
+        .text-accent-gold {
+            color: var(--color-accent);
+        }
+    </style>
+
+    <!-- Navigation Bar -->
+    @include('components.navbar', ['user' => Auth::user()])
 
     <!-- Header Section -->
-    <header class="py-20 sm:py-24 text-white shadow-2xl bg-brand-secondary">
+    <header class="py-20 sm:py-24 text-white shadow-2xl bg-brand-secondary mt-20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <p class="uppercase tracking-widest text-sm font-semibold mb-3 text-accent-gold">
                 Impact in Numbers
@@ -55,21 +53,26 @@
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
 
         <!-- Statistics Bar -->
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 text-center bg-white p-6 rounded-xl shadow-lg border border-gray-100">
+        <div
+            class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-12 text-center bg-white p-6 rounded-xl shadow-lg border border-gray-100">
             <div class="p-3 border-r md:border-r-0 lg:border-r border-gray-200">
-                <p class="text-3xl font-extrabold text-brand-primary">250+</p>
+                <p class="text-3xl font-extrabold text-brand-primary">25+</p>
+                <p class="text-sm text-gray-500">UTME Beneficiaries</p>
+            </div>
+            <div class="p-3 border-r md:border-r-0 lg:border-r border-gray-200">
+                <p class="text-3xl font-extrabold text-brand-primary">3+</p>
                 <p class="text-sm text-gray-500">Scholarships Awarded</p>
             </div>
-            <div class="p-3 border-r border-gray-200">
+            {{-- <div class="p-3 border-r border-gray-200">
                 <p class="text-3xl font-extrabold text-brand-primary">95%</p>
-                <p class="text-sm text-gray-500">Program Completion</p>
-            </div>
+                <p class="text-sm text-gray-500">Programme Completion</p>
+            </div> --}}
             <div class="p-3 border-r md:border-r-0 border-gray-200">
-                <p class="text-3xl font-extrabold text-brand-primary">12</p>
+                <p class="text-3xl font-extrabold text-brand-primary">2</p>
                 <p class="text-sm text-gray-500">Universities Covered</p>
             </div>
             <div class="p-3">
-                <p class="text-3xl font-extrabold text-brand-primary">50+</p>
+                <p class="text-3xl font-extrabold text-brand-primary">0</p>
                 <p class="text-sm text-gray-500">Graduates</p>
             </div>
         </div>
@@ -78,9 +81,13 @@
         <div id="testimonials-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-8">
             <!-- Loading Indicator -->
             <div id="loading-indicator" class="col-span-full flex justify-center items-center h-64">
-                <svg class="animate-spin h-8 w-8 text-brand-primary" style="color: var(--color-primary);" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                  <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                <svg class="animate-spin h-8 w-8 text-brand-primary" style="color: var(--color-primary);"
+                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4">
+                    </circle>
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
                 </svg>
                 <p class="ml-3 text-lg text-gray-600">Loading inspiring stories...</p>
             </div>
@@ -92,11 +99,9 @@
             <p class="text-lg text-gray-600 mt-3 mb-6">
                 Join the hundreds of students who have benefited from our scholarship programs.
             </p>
-            <a
-                href="/apply"
+            <a href="/apply"
                 class="inline-flex items-center text-brand-primary px-8 py-3 rounded-full font-bold text-lg shadow-lg hover:bg-yellow-400 transition duration-300"
-                style="background-color: var(--color-accent); color: var(--color-secondary);"
-            >
+                style="background-color: var(--color-accent); color: var(--color-secondary);">
                 Apply for Scholarship Today
                 <!-- Lucide ArrowRight Icon -->
                 <i data-lucide="arrow-right" class="w-5 h-5 ml-2"></i>
@@ -107,7 +112,7 @@
     <!-- Footer -->
     <footer class="bg-gray-200 text-gray-600 py-6 mt-12">
         <div class="max-w-7xl mx-auto px-4 text-center text-sm">
-          &copy; 2024 Ola Arowolo Foundation | Empowering Education.
+            &copy; 2024 Ola Arowolo Foundation | Empowering Education.
         </div>
     </footer>
 
@@ -121,8 +126,7 @@
             const ACCENT_GOLD = '#F59E0B';
 
             // --- Mock Data ---
-            const MOCK_TESTIMONIALS = [
-                {
+            const MOCK_TESTIMONIALS = [{
                     id: 1,
                     quote: "The Ola Arowolo Foundation scholarship was a game-changer. It lifted the financial burden completely, allowing me to focus on my medicine degree without distraction. Their support goes beyond money; they truly mentor you.",
                     name: "Dr. Kemi Adebayo",
@@ -217,5 +221,7 @@
             setTimeout(renderTestimonials, 1000);
         });
     </script>
-</body>
-</html>
+
+    <!-- Footer -->
+    @include('partials.footer')
+@endsection

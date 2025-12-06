@@ -33,18 +33,25 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'is_iba_indigene' => ['required', 'accepted'],
+        ], [
+            'is_iba_indigene.required' => 'You must confirm that you are an indigene of Iba Kingdom to register.',
+            'is_iba_indigene.accepted' => 'You must confirm that you are an indigene of Iba Kingdom to register.',
         ]);
 
         $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'is_iba_indigene' => true,
         ]);
 
         event(new Registered($user));
 
         Auth::login($user);
 
-        return redirect(route('dashboard', absolute: false));
+        // Redirect to apply form if user came from Start Application button
+        // Otherwise redirect to dashboard
+        return redirect()->intended(route('apply-form', absolute: false));
     }
 }

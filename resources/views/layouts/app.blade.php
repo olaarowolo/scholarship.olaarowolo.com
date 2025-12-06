@@ -18,13 +18,16 @@
     <link rel="manifest" href="{{ asset('assets/favicon_io/site.webmanifest') }}">
 
     <!-- Optimized Meta Tags for SEO and WhatsApp -->
-    <meta name="description" content="Apply for the OA Scholarship to achieve your educational dreams. Check eligibility, required documents, and the application process.">
-    <meta name="keywords" content="Scholarship, OA Scholarship, Financial Aid, Education Support, University Scholarship, Academic Excellence">
+    <meta name="description"
+        content="Apply for the OA Scholarship to achieve your educational dreams. Check eligibility, required documents, and the application process.">
+    <meta name="keywords"
+        content="Scholarship, OA Scholarship, Financial Aid, Education Support, University Scholarship, Academic Excellence">
     <meta name="author" content="OA Scholarship Foundation">
 
     <!-- Open Graph Meta Tags (Optimized for WhatsApp Sharing) -->
     <meta property="og:title" content="Apply for the OA Scholarship">
-    <meta property="og:description" content="Achieve your educational dreams with the OA Scholarship. Learn about eligibility, required documents, and the application process.">
+    <meta property="og:description"
+        content="Achieve your educational dreams with the OA Scholarship. Learn about eligibility, required documents, and the application process.">
     <meta property="og:image" content="{{ asset('assets/favicon_io/og-image.jpg') }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
@@ -34,7 +37,8 @@
     <meta property="twitter:domain" content="olaarowolo.com">
     <meta property="twitter:url" content="https://www.olaarowolo.com/">
     <meta name="twitter:title" content="Apply for the OA Scholarship">
-    <meta name="twitter:description" content="Achieve your educational dreams with the OA Scholarship. Learn about eligibility, required documents, and the application process.">
+    <meta name="twitter:description"
+        content="Achieve your educational dreams with the OA Scholarship. Learn about eligibility, required documents, and the application process.">
     <meta name="twitter:image" content="{{ asset('assets/favicon_io/og-image.jpg') }}">
 
     <!-- WhatsApp Optimization -->
@@ -45,7 +49,10 @@
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-2367QRTG56"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-        function gtag() { dataLayer.push(arguments); }
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
         gtag('js', new Date());
         gtag('config', 'G-2367QRTG56');
     </script>
@@ -55,6 +62,9 @@
 
 <body class="text-gray-900">
     @yield('content')
+
+    <!-- Footer -->
+    @include('partials.footer')
 
     @vite('resources/js/app.js')
 </body>

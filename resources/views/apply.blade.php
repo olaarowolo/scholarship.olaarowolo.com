@@ -83,10 +83,35 @@
                         class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Impact</a>
                     <a href="{{ route('contact') }}"
                         class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Contact</a>
-                    <!-- CTA Button -->
-                    <a href="{{ route('apply') }}" class="btn-primary text-sm font-semibold px-6 py-2.5 rounded-full ml-4">
-                        Apply Now
-                    </a>
+
+                    @auth
+                        <!-- User Initial Badge -->
+                        <div class="flex items-center space-x-3 ml-4">
+                            <div class="flex items-center">
+                                <div
+                                    class="w-8 h-8 rounded-full bg-black text-white flex items-center justify-center font-bold text-sm">
+                                    {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                                </div>
+                                @if (auth()->user()->role === 'admin')
+                                    <span
+                                        class="ml-2 px-2 py-1 bg-yellow-400 text-black text-xs font-bold rounded">Administrator</span>
+                                @endif
+                            </div>
+                            <!-- Logout Button -->
+                            <form method="POST" action="{{ route('logout') }}" class="inline">
+                                @csrf
+                                <button type="submit"
+                                    class="text-sm font-semibold px-4 py-2 rounded-full bg-gray-100 text-gray-700 hover:bg-gray-200 transition duration-200">
+                                    Sign Out
+                                </button>
+                            </form>
+                        </div>
+                    @else
+                        <!-- CTA Button -->
+                        <a href="{{ route('apply') }}" class="btn-primary text-sm font-semibold px-6 py-2.5 rounded-full ml-4">
+                            Apply Now
+                        </a>
+                    @endauth
                 </div>
 
                 <!-- Mobile Menu Button -->
@@ -116,9 +141,35 @@
                     class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Impact</a>
                 <a href="{{ route('contact') }}"
                     class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
-                <a href="{{ route('apply') }}"
-                    class="btn-primary block w-full text-center mt-4 px-3 py-2 rounded-full text-base font-medium">Apply
-                    Now</a>
+
+                @auth
+                    <!-- User Info -->
+                    <div class="px-3 py-2 border-t border-gray-200 mt-2">
+                        <div class="flex items-center space-x-3 mb-3">
+                            <div
+                                class="w-10 h-10 rounded-full bg-black text-white flex items-center justify-center font-bold text-base">
+                                {{ strtoupper(substr(auth()->user()->name, 0, 1)) }}
+                            </div>
+                            <div>
+                                <p class="text-sm font-semibold text-gray-900">{{ auth()->user()->name }}</p>
+                                @if (auth()->user()->role === 'admin')
+                                    <span class="text-xs px-2 py-0.5 bg-yellow-400 text-black font-bold rounded">Admin</span>
+                                @endif
+                            </div>
+                        </div>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <button type="submit"
+                                class="w-full text-center bg-gray-100 text-gray-700 hover:bg-gray-200 px-3 py-2 rounded-full text-base font-medium transition duration-200">
+                                Sign Out
+                            </button>
+                        </form>
+                    </div>
+                @else
+                    <a href="{{ route('apply') }}"
+                        class="btn-primary block w-full text-center mt-4 px-3 py-2 rounded-full text-base font-medium">Apply
+                        Now</a>
+                @endauth
             </div>
         </div>
     </nav>
@@ -214,10 +265,17 @@
                         class="btn-primary text-lg font-bold px-8 py-3 rounded-full shadow-lg inline-flex items-center justify-center">
                         View Application Process
                     </a>
-                    <a href="{{ route('apply-form') }}"
-                        class="bg-white text-primary border-2 border-primary hover:bg-gray-50 text-lg font-bold px-8 py-3 rounded-full shadow-lg inline-flex items-center justify-center transition duration-300">
-                        Start Application
-                    </a>
+                    @auth
+                        <a href="{{ route('apply-form') }}"
+                            class="bg-white text-primary border-2 border-primary hover:bg-gray-50 text-lg font-bold px-8 py-3 rounded-full shadow-lg inline-flex items-center justify-center transition duration-300">
+                            Start Application
+                        </a>
+                    @else
+                        <a href="{{ route('register') }}"
+                            class="bg-white text-primary border-2 border-primary hover:bg-gray-50 text-lg font-bold px-8 py-3 rounded-full shadow-lg inline-flex items-center justify-center transition duration-300">
+                            Start Application
+                        </a>
+                    @endauth
                 </div>
             </div>
         </div>

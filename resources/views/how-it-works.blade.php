@@ -352,8 +352,6 @@
         </div>
     </section>
 
-    <!-- Footer/Contact Section -->
-    @include('partials.footer')
 
 
     <script>
