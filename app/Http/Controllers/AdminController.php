@@ -113,7 +113,7 @@ class AdminController extends Controller
         }
 
         $users = $query->paginate(20);
-        
+
         // Get user counts by role
         $userStats = [
             'total' => User::count(),
