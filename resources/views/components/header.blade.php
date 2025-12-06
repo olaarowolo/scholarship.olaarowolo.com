@@ -138,8 +138,9 @@
             const seconds = Math.floor((distanceToOpen % (1000 * 60)) / 1000);
 
             const closedMessage = formSettings?.closed_message || 'Application Period Has Ended';
-            label.innerHTML = `<span class="text-red-600">⚠️ ${closedMessage}</span><br><span class="text-sm text-gray-600 mt-2">Opens in:</span>`;
-            
+            label.innerHTML =
+                `<span class="text-red-600">⚠️ ${closedMessage}</span><br><span class="text-sm text-gray-600 mt-2">Opens in:</span>`;
+
             document.getElementById('days').textContent = String(days).padStart(2, '0');
             document.getElementById('hours').textContent = String(hours).padStart(2, '0');
             document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');

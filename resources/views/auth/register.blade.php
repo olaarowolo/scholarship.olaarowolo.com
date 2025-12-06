@@ -1,4 +1,16 @@
-<x-guest-layout>
+@extends('layouts.app')
+
+@section('content')
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    @php
+        $user = Auth::user();
+    @endphp
+
+    @include('components.navbar', ['user' => $user])
+
+    <div class="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+        <div class="sm:mx-auto sm:w-full sm:max-w-2xl">
     <!-- Register Card -->
     <div class="bg-white rounded-2xl shadow-2xl overflow-hidden">
         <!-- Header Section -->
@@ -153,4 +165,6 @@
             Your information is secure and protected
         </p>
     </div>
-</x-guest-layout>
+    </div>
+    </div>
+@endsection
