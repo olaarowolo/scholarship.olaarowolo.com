@@ -98,6 +98,11 @@ class AdminController extends Controller
     {
         $query = User::latest();
 
+        // Filter by role
+        if ($request->has('role') && $request->role != 'all') {
+            $query->where('role', $request->role);
+        }
+
         // Search functionality
         if ($request->has('search') && $request->search) {
             $search = $request->search;
@@ -108,8 +113,17 @@ class AdminController extends Controller
         }
 
         $users = $query->paginate(20);
+        
+        // Get user counts by role
+        $userStats = [
+            'total' => User::count(),
+            'admin' => User::where('role', 'admin')->count(),
+            'applicant' => User::where('role', 'applicant')->count(),
+            'scholar' => User::where('role', 'scholar')->count(),
+            'review_team' => User::where('role', 'review_team')->count(),
+        ];
 
-        return view('admin.users', compact('users'));
+        return view('admin.users', compact('users', 'userStats'));
     }
 
     /**
