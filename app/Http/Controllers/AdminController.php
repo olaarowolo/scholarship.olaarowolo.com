@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\User;
+use App\Models\FormSetting;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -421,5 +422,56 @@ class AdminController extends Controller
         };
 
         return response()->stream($callback, 200, $headers);
+    }
+
+    /**
+     * Display form settings page
+     */
+    public function formSettings()
+    {
+        $forms = FormSetting::all();
+
+        // Ensure default forms exist
+        $defaultForms = [
+            'application_form' => 'Scholarship Application Form',
+            'scholar_requests' => 'Scholar Request Form',
+            'academic_standing' => 'Academic Standing Report',
+            'challenges' => 'Challenge Documentation Form',
+            'mentorship' => 'Mentorship Booking',
+            'advice' => 'Academic Advice Request',
+        ];
+
+        foreach ($defaultForms as $formName => $formLabel) {
+            if (!$forms->where('form_name', $formName)->first()) {
+                FormSetting::create([
+                    'form_name' => $formName,
+                    'is_open' => false,
+                    'closed_message' => "The {$formLabel} is currently closed.",
+                ]);
+            }
+        }
+
+        $forms = FormSetting::all();
+
+        return view('admin.form-settings', compact('forms'));
+    }
+
+    /**
+     * Update form setting
+     */
+    public function updateFormSetting(Request $request, $id)
+    {
+        $request->validate([
+            'is_open' => 'required|boolean',
+            'opens_at' => 'nullable|date',
+            'closes_at' => 'nullable|date|after:opens_at',
+            'closed_message' => 'nullable|string',
+        ]);
+
+        $formSetting = FormSetting::findOrFail($id);
+        $formSetting->update($request->all());
+
+        return redirect()->route('admin.form-settings')
+            ->with('success', 'Form setting updated successfully!');
     }
 }

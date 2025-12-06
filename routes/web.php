@@ -114,6 +114,10 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::post('/export/applications', [App\Http\Controllers\AdminController::class, 'exportApplications'])->name('export.applications');
     Route::post('/export/users', [App\Http\Controllers\AdminController::class, 'exportUsers'])->name('export.users');
     Route::get('/export/summary', [App\Http\Controllers\AdminController::class, 'exportSummaryReport'])->name('export.summary');
+
+    // Form Settings Routes
+    Route::get('/form-settings', [App\Http\Controllers\AdminController::class, 'formSettings'])->name('form-settings');
+    Route::put('/form-settings/{id}', [App\Http\Controllers\AdminController::class, 'updateFormSetting'])->name('form-settings.update');
 });
 
 // Scholar Routes

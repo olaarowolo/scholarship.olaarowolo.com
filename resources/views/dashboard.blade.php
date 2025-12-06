@@ -395,6 +395,9 @@
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">Quick Links</h3>
                     <div class="space-y-3">
                         @if ($isAdmin)
+                            <a href="{{ route('admin.form-settings') }}"
+                                class="block text-base text-gray-600 hover:text-black transition duration-200">→ Form
+                                Settings</a>
                             <a href="{{ route('admin.export') }}"
                                 class="block text-base text-gray-600 hover:text-black transition duration-200">→ Export
                                 Data & Reports</a>
