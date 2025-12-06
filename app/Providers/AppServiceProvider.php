@@ -32,7 +32,7 @@ class AppServiceProvider extends ServiceProvider
             try {
                 $pdo = DB::connection()->getPdo();
                 $pdo->exec('PRAGMA legacy_alter_table = ON');
-                
+
                 // Check SQLite version and disable problematic features if needed
                 $version = $pdo->query('SELECT sqlite_version()')->fetchColumn();
                 if (version_compare($version, '3.26.0', '<')) {
