@@ -14,7 +14,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        // Register custom SQLite connection resolver for compatibility with older SQLite versions
+        Connection::resolverFor('sqlite', function ($connection, $database, $prefix, $config) {
+            return new SQLiteConnection($connection, $database, $prefix, $config);
+        });
     }
 
     /**
@@ -22,11 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Register custom SQLite connection resolver for compatibility with older SQLite versions
-        Connection::resolverFor('sqlite', function ($connection, $database, $prefix, $config) {
-            return new SQLiteConnection($connection, $database, $prefix, $config);
-        });
-
         // Fix for SQLite pragma_table_xinfo compatibility issues with older SQLite versions
         if (config('database.default') === 'sqlite') {
             try {

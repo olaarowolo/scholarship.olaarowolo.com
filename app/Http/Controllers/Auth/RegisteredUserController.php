@@ -34,16 +34,13 @@ class RegisteredUserController extends Controller
             'name' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'lowercase', 'email', 'max:255', 'unique:'.User::class],
             'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'is_iba_indigene' => ['required', 'accepted'],
         ];
 
-        $validationMessages = [];
-
-        // Only validate is_iba_indigene if the column exists in the database
-        if (Schema::hasColumn('users', 'is_iba_indigene')) {
-            $validationRules['is_iba_indigene'] = ['required', 'accepted'];
-            $validationMessages['is_iba_indigene.required'] = 'You must confirm that you are an indigene of Iba Kingdom to register.';
-            $validationMessages['is_iba_indigene.accepted'] = 'You must confirm that you are an indigene of Iba Kingdom to register.';
-        }
+        $validationMessages = [
+            'is_iba_indigene.required' => 'You must confirm that you are an indigene of Iba Kingdom to register.',
+            'is_iba_indigene.accepted' => 'You must confirm that you are an indigene of Iba Kingdom to register.',
+        ];
 
         $request->validate($validationRules, $validationMessages);
 
@@ -51,12 +48,8 @@ class RegisteredUserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'is_iba_indigene' => true,
         ];
-
-        // Only include is_iba_indigene if the column exists
-        if (Schema::hasColumn('users', 'is_iba_indigene')) {
-            $userData['is_iba_indigene'] = true;
-        }
 
         $user = User::create($userData);
 
