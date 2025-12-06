@@ -19,15 +19,15 @@
 
     <!-- Optimized Meta Tags for SEO and WhatsApp -->
     <meta name="description"
-        content="Apply for the OA Scholarship to achieve your educational dreams. Check eligibility, required documents, and the application process.">
+        content="Apply for the OA Foundation & Scholarship to achieve your educational dreams. Check eligibility, required documents, and the application process.">
     <meta name="keywords"
-        content="Scholarship, OA Scholarship, Financial Aid, Education Support, University Scholarship, Academic Excellence">
-    <meta name="author" content="OA Scholarship Foundation">
+        content="Scholarship, OA Foundation & Scholarship, Financial Aid, Education Support, University Scholarship, Academic Excellence">
+    <meta name="author" content="OA Foundation & Scholarship Foundation">
 
     <!-- Open Graph Meta Tags (Optimized for WhatsApp Sharing) -->
-    <meta property="og:title" content="Apply for the OA Scholarship">
+    <meta property="og:title" content="Apply for the OA Foundation & Scholarship">
     <meta property="og:description"
-        content="Achieve your educational dreams with the OA Scholarship. Learn about eligibility, required documents, and the application process.">
+        content="Achieve your educational dreams with the OA Foundation & Scholarship. Learn about eligibility, required documents, and the application process.">
     <meta property="og:image" content="{{ asset('assets/favicon_io/og-image.jpg') }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
@@ -36,13 +36,13 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta property="twitter:domain" content="olaarowolo.com">
     <meta property="twitter:url" content="https://www.olaarowolo.com/">
-    <meta name="twitter:title" content="Apply for the OA Scholarship">
+    <meta name="twitter:title" content="Apply for the OA Foundation & Scholarship">
     <meta name="twitter:description"
-        content="Achieve your educational dreams with the OA Scholarship. Learn about eligibility, required documents, and the application process.">
+        content="Achieve your educational dreams with the OA Foundation & Scholarship. Learn about eligibility, required documents, and the application process.">
     <meta name="twitter:image" content="{{ asset('assets/favicon_io/og-image.jpg') }}">
 
     <!-- WhatsApp Optimization -->
-    <meta property="og:site_name" content="OA Scholarship">
+    <meta property="og:site_name" content="OA Foundation & Scholarship">
     <meta property="og:locale" content="en_US">
 
     <!-- Google tag (gtag.js) -->

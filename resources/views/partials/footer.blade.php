@@ -63,7 +63,8 @@
                     Stay Updated with Our Newsletter
                 </h2>
                 <p class="mt-4 text-lg text-white">
-                    Subscribe to receive the latest updates about the OA Scholarship, application deadlines, and more.
+                    Subscribe to receive the latest updates about the OA Foundation & Scholarship, application
+                    deadlines, and more.
                 </p>
                 {{-- Newsletter form temporarily disabled --}}
                 {{-- <form action="{{ route('newsletter.subscribe') }}" method="POST" class="mt-6">
@@ -98,7 +99,7 @@
                     </a>
                 </div>
                 <p class="text-base text-gray-400 text-center md:text-right">
-                    &copy; 2024 OA Scholarship. All rights reserved.
+                    &copy; 2024 OA Foundation & Scholarship. All rights reserved.
                 </p>
             </div>
             <div class="mt-4 text-sm text-gray-500">

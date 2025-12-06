@@ -30,7 +30,7 @@ class ContactTest extends TestCase
         $response->assertSessionHas('success', 'Your message has been sent successfully!');
 
         Mail::assertSent(\App\Mail\ContactMail::class, function ($mail) use ($data) {
-            return $mail->hasTo(config('mail.to.address')) &&
+            return $mail->hasTo(config('mail.admin.address')) &&
                    $mail->data['name'] === $data['name'] &&
                    $mail->data['email'] === $data['email'] &&
                    $mail->data['message'] === $data['message'];

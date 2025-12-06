@@ -7,7 +7,8 @@
         <!-- Logo -->
         <div class="nav-logo">
             <a href="{{ route('home') }}">
-                <img src="{{ asset('assets/img/favicon/olaarowolo.com_logo_black.png') }}" alt="OA Scholarship Logo">
+                <img src="{{ asset('assets/img/favicon/olaarowolo.com_logo_black.png') }}"
+                    alt="OA Foundation & Scholarship Logo">
             </a>
         </div>
 

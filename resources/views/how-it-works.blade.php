@@ -67,7 +67,7 @@
                 <div class="flex-shrink-0 flex items-center">
                     <a href="{{ route('home') }}">
                         <img class="h-10 w-auto" src="{{ asset('assets/img/favicon/olaarowolo.com_logo_black.png') }}"
-                            alt="OA Scholarship Logo">
+                            alt="OA Foundation & Scholarship Logo">
                     </a>
                 </div>
 

@@ -115,9 +115,14 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
-    'to' => [
-        'address' => env('MAIL_TO_ADDRESS', 'scholarship@olaarowolo.com'),
-        'name' => env('MAIL_TO_NAME', 'Scholarship'),
+    'reply_to' => [
+        'address' => env('MAIL_REPLY_TO_ADDRESS', 'scholarship@olaarowolo.com'),
+        'name' => env('MAIL_REPLY_TO_NAME', 'Iba Kingdom Scholarship'),
+    ],
+
+    'admin' => [
+        'address' => env('MAIL_ADMIN_ADDRESS', 'oatutors@gmail.com'),
+        'name' => 'Scholarship Admin',
     ],
 
 ];

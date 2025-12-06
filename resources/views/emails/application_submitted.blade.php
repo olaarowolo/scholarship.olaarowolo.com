@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,33 +13,39 @@
             margin: 0;
             padding: 0;
         }
+
         .container {
             max-width: 600px;
             margin: 20px auto;
             background: #ffffff;
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
+
         .header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             padding: 30px 20px;
             text-align: center;
         }
+
         .header h1 {
             margin: 0;
             font-size: 24px;
         }
+
         .content {
             padding: 30px 20px;
         }
+
         .success-icon {
             text-align: center;
             font-size: 60px;
             color: #10b981;
             margin: 20px 0;
         }
+
         .info-box {
             background: #f0f9ff;
             border-left: 4px solid #3b82f6;
@@ -46,9 +53,11 @@
             margin: 20px 0;
             border-radius: 4px;
         }
+
         .info-box strong {
             color: #1e40af;
         }
+
         .button {
             display: inline-block;
             padding: 12px 30px;
@@ -59,6 +68,7 @@
             margin: 20px 0;
             text-align: center;
         }
+
         .footer {
             background: #f9fafb;
             padding: 20px;
@@ -67,32 +77,38 @@
             color: #6b7280;
             border-top: 1px solid #e5e7eb;
         }
+
         .details-table {
             width: 100%;
             margin: 20px 0;
             border-collapse: collapse;
         }
+
         .details-table td {
             padding: 10px;
             border-bottom: 1px solid #e5e7eb;
         }
+
         .details-table td:first-child {
             font-weight: bold;
             color: #4b5563;
             width: 40%;
         }
+
         ul {
             padding-left: 20px;
         }
+
         ul li {
             margin: 8px 0;
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
-            <h1>🎓 OA Scholarship Program</h1>
+            <h1>🎓 OA Foundation & Scholarship Program</h1>
         </div>
 
         <div class="content">
@@ -102,7 +118,9 @@
 
             <p>Dear {{ $application->first_name }} {{ $application->last_name }},</p>
 
-            <p>Thank you for submitting your scholarship application to the OA Scholarship Program. We have successfully received your application and it is now under review.</p>
+            <p>Thank you for submitting your scholarship application to the OA Foundation & Scholarship Program. We have
+                successfully
+                received your application and it is now under review.</p>
 
             <div class="info-box">
                 <strong>Your Application ID:</strong> {{ $application->application_id }}<br>
@@ -123,11 +141,11 @@
                     <td>Course of Study:</td>
                     <td>{{ $application->course }}</td>
                 </tr>
-                @if($application->jamb_score)
-                <tr>
-                    <td>JAMB Score:</td>
-                    <td>{{ $application->jamb_score }}</td>
-                </tr>
+                @if ($application->jamb_score)
+                    <tr>
+                        <td>JAMB Score:</td>
+                        <td>{{ $application->jamb_score }}</td>
+                    </tr>
                 @endif
                 <tr>
                     <td>Status:</td>
@@ -138,7 +156,9 @@
             <h3 style="color: #4b5563;">What Happens Next?</h3>
             <ul>
                 <li>Our team will review your application and supporting documents</li>
-                <li>You will receive updates via email at <strong>{{ $application->user->email ?? 'your registered email' }}</strong></li>
+                <li>You will receive updates via email at
+                    <strong>{{ $application->user->email ?? 'your registered email' }}</strong>
+                </li>
                 <li>The review process typically takes 2-4 weeks</li>
                 <li>You can track your application status on your dashboard</li>
             </ul>
@@ -148,19 +168,23 @@
             </div>
 
             <div class="info-box" style="background: #fef3c7; border-left-color: #f59e0b;">
-                <strong>Important:</strong> Please keep this email for your records. You will need your Application ID for future reference.
+                <strong>Important:</strong> Please keep this email for your records. You will need your Application ID
+                for future reference.
             </div>
 
-            <p style="margin-top: 30px;">If you have any questions, please don't hesitate to contact us at <a href="mailto:info@olaarowolo.com">info@olaarowolo.com</a>.</p>
+            <p style="margin-top: 30px;">If you have any questions, please don't hesitate to contact us at <a
+                    href="mailto:info@olaarowolo.com">info@olaarowolo.com</a>.</p>
 
             <p>Best wishes,<br>
-            <strong>The OA Scholarship Team</strong></p>
+                <strong>The OA Foundation & Scholarship Team</strong>
+            </p>
         </div>
 
         <div class="footer">
-            <p>&copy; {{ date('Y') }} OA Scholarship Program. All rights reserved.</p>
+            <p>&copy; {{ date('Y') }} OA Foundation & Scholarship Program. All rights reserved.</p>
             <p>This is an automated message. Please do not reply directly to this email.</p>
         </div>
     </div>
 </body>
+
 </html>
