@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class UserModelTest extends TestCase
+class UserTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -18,9 +18,12 @@ class UserModelTest extends TestCase
             'password',
             'role',
             'terms_accepted',
+            'terms_accepted_at',
+            'marketing_accepted',
             'device',
             'location',
             'credentials',
+            'is_iba_indigene',
         ];
 
         $user = new User();
@@ -46,6 +49,9 @@ class UserModelTest extends TestCase
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
             'terms_accepted' => 'boolean',
+            'marketing_accepted' => 'boolean',
+            'is_iba_indigene' => 'boolean',
+            'id' => 'int',
         ];
 
         $user = new User();

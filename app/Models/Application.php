@@ -31,9 +31,14 @@ class Application extends Model
         'notes',
     ];
 
+    protected $attributes = [
+        'status' => 'draft',
+    ];
+
     protected $casts = [
         'date_of_birth' => 'date',
         'jamb_score' => 'decimal:2',
+        'id' => 'int',
     ];
 
     public function user()

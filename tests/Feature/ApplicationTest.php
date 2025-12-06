@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Tests\TestCase;
 
@@ -16,7 +17,7 @@ class ApplicationTest extends TestCase
 
     public function test_apply_form_page_can_be_rendered()
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create(['role' => 'applicant']);
 
         $response = $this->actingAs($user)->get('/apply-form');
 
@@ -27,8 +28,9 @@ class ApplicationTest extends TestCase
     public function test_application_can_be_submitted_successfully()
     {
         Storage::fake('public');
+        Mail::fake();
 
-        $user = User::factory()->create();
+        $user = User::factory()->create(['role' => 'applicant']);
 
         $data = [
             'hasTakenJamb' => 'Yes',
@@ -75,7 +77,7 @@ class ApplicationTest extends TestCase
 
     public function test_application_submission_validation_fails_with_missing_fields()
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create(['role' => 'applicant']);
 
         $data = [
             'firstName' => '',
@@ -110,7 +112,7 @@ class ApplicationTest extends TestCase
 
     public function test_application_submission_validation_fails_with_invalid_jamb_score()
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create(['role' => 'applicant']);
 
         $data = [
             'fullName' => $this->faker->name,
@@ -138,7 +140,7 @@ class ApplicationTest extends TestCase
 
     public function test_application_submission_validation_fails_with_invalid_file_types()
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create(['role' => 'applicant']);
 
         $data = [
             'fullName' => $this->faker->name,
@@ -166,7 +168,7 @@ class ApplicationTest extends TestCase
 
     public function test_application_submission_validation_fails_with_large_files()
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create(['role' => 'applicant']);
 
         $data = [
             'fullName' => $this->faker->name,

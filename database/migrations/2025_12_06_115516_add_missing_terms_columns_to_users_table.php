@@ -12,7 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->enum('role', ['admin', 'review_team', 'applicant', 'verified_beneficiary', 'user'])->default('applicant');
+            if (!Schema::hasColumn('users', 'terms_accepted_at')) {
+                $table->timestamp('terms_accepted_at')->nullable()->after('terms_accepted');
+            }
+            if (!Schema::hasColumn('users', 'marketing_accepted')) {
+                $table->boolean('marketing_accepted')->default(false)->after('terms_accepted_at');
+            }
         });
     }
 
@@ -22,7 +27,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->dropColumn('role');
+            $table->dropColumn(['terms_accepted_at', 'marketing_accepted']);
         });
     }
 };

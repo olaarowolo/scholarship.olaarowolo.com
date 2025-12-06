@@ -4,10 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Models\Application;
 use App\Models\User;
+use App\Mail\ApplicationSubmitted;
+use App\Mail\ApplicationSubmittedAdmin;
+use App\Mail\WelcomeCredentials;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -144,7 +148,8 @@ class ApplicationController extends Controller
                     ]);
                     $userId = $user->id;
 
-                    // TODO: Send email with login credentials
+                    // Send welcome email with login credentials
+                    Mail::to($user->email)->send(new WelcomeCredentials($user, $password, $applicationId));
                     Log::info("New applicant account created: Email: {$request->email}, Password: {$password}, Application ID: {$applicationId}");
                 }
             }
@@ -180,6 +185,15 @@ class ApplicationController extends Controller
                 'status' => 'submitted',
                 'notes' => $notes,
             ]);
+
+            // Send confirmation email to applicant
+            $applicantUser = User::find($application->user_id);
+            if ($applicantUser) {
+                Mail::to($applicantUser->email)->send(new ApplicationSubmitted($application));
+            }
+
+            // Send notification email to admin
+            Mail::to(config('mail.admin.address'))->send(new ApplicationSubmittedAdmin($application, $applicantUser));
 
             return response()->json([
                 'success' => true,

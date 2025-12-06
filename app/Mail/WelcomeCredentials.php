@@ -9,20 +9,22 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class ApplicationSubmittedAdmin extends Mailable
+class WelcomeCredentials extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $application;
     public $user;
+    public $password;
+    public $applicationId;
 
     /**
      * Create a new message instance.
      */
-    public function __construct($application, $user)
+    public function __construct($user, $password, $applicationId)
     {
-        $this->application = $application;
         $this->user = $user;
+        $this->password = $password;
+        $this->applicationId = $applicationId;
     }
 
     /**
@@ -31,10 +33,7 @@ class ApplicationSubmittedAdmin extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'New Scholarship Application - ' . $this->user->name,
-            replyTo: [
-                $this->user->email,
-            ],
+            subject: 'Your Scholarship Portal Account - Login Credentials',
         );
     }
 
@@ -44,7 +43,7 @@ class ApplicationSubmittedAdmin extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'emails.application_submitted_admin',
+            view: 'emails.welcome_credentials',
         );
     }
 

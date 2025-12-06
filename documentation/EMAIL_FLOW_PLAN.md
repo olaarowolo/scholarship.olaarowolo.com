@@ -3,13 +3,15 @@
 ## Email Configuration
 
 ### Current Setup
-- **SMTP Server:** Gmail (smtp.gmail.com:587)
-- **Sender Account:** oatutors@gmail.com (technical sender)
-- **From Address:** oatutors@gmail.com
-- **Reply-To Address:** scholarship@olaarowolo.com (public-facing address)
-- **Admin Address:** oatutors@gmail.com
+
+-   **SMTP Server:** Gmail (smtp.gmail.com:587)
+-   **Sender Account:** oatutors@gmail.com (technical sender)
+-   **From Address:** oatutors@gmail.com
+-   **Reply-To Address:** scholarship@olaarowolo.com (public-facing address)
+-   **Admin Address:** oatutors@gmail.com
 
 ### Why This Configuration?
+
 1. **oatutors@gmail.com** sends emails (technical/system account)
 2. **scholarship@olaarowolo.com** receives replies (professional/public address)
 3. Users see "From: Iba Kingdom Scholarship" but replies go to scholarship@olaarowolo.com
@@ -24,6 +26,7 @@
 **Trigger:** User submits contact form
 
 **Flow:**
+
 ```
 User submits form
     ↓
@@ -44,6 +47,7 @@ Content: Name, email, message from user
 **Trigger:** User successfully submits scholarship application
 
 **Flow:**
+
 ```
 Application submitted
     ↓
@@ -61,6 +65,7 @@ Content:
 ```
 
 **Implementation:**
+
 ```php
 // In ApplicationController::submit() after saving application
 Mail::to($user->email)->send(new ApplicationSubmitted($application));
@@ -75,6 +80,7 @@ Mail::to($user->email)->send(new ApplicationSubmitted($application));
 **Trigger:** New application submitted
 
 **Flow:**
+
 ```
 Application submitted
     ↓
@@ -91,6 +97,7 @@ Content:
 ```
 
 **Implementation:**
+
 ```php
 // In ApplicationController::submit() after saving application
 Mail::to(config('mail.admin.address'))->send(new ApplicationSubmittedAdmin($application));
@@ -105,6 +112,7 @@ Mail::to(config('mail.admin.address'))->send(new ApplicationSubmittedAdmin($appl
 **Trigger:** Guest submits application, account auto-created
 
 **Flow:**
+
 ```
 Account auto-created for guest applicant
     ↓
@@ -122,6 +130,7 @@ Content:
 ```
 
 **Implementation:**
+
 ```php
 // In ApplicationController::submit() after creating user
 Mail::to($user->email)->send(new WelcomeCredentials($user, $password, $applicationId));
@@ -137,6 +146,7 @@ Mail::to($user->email)->send(new WelcomeCredentials($user, $password, $applicati
 **Trigger:** Admin approves application
 
 **Flow:**
+
 ```
 Admin approves application
     ↓
@@ -154,6 +164,7 @@ Content:
 ```
 
 **Implementation:**
+
 ```php
 // In AdminController::updateApplicationStatus() when status = 'approved'
 Mail::to($application->user->email)->send(new ApplicationApproved($application));
@@ -168,6 +179,7 @@ Mail::to($application->user->email)->send(new ApplicationApproved($application))
 **Trigger:** Admin rejects application
 
 **Flow:**
+
 ```
 Admin rejects application
     ↓
@@ -185,6 +197,7 @@ Content:
 ```
 
 **Implementation:**
+
 ```php
 // In AdminController::updateApplicationStatus() when status = 'rejected'
 Mail::to($application->user->email)->send(new ApplicationRejected($application));
@@ -199,6 +212,7 @@ Mail::to($application->user->email)->send(new ApplicationRejected($application))
 **Trigger:** Scholar submits academic standing report
 
 **Flow:**
+
 ```
 Scholar submits academic report
     ↓
@@ -215,6 +229,7 @@ Content:
 ```
 
 **Confirmation to Scholar:**
+
 ```
 Send to: scholar's email
 From: oatutors@gmail.com
@@ -235,6 +250,7 @@ Content:
 **Trigger:** Scholar submits request for support
 
 **Flow:**
+
 ```
 Scholar creates support request
     ↓
@@ -250,6 +266,7 @@ Content:
 ```
 
 **Confirmation to Scholar:**
+
 ```
 Send to: scholar's email
 From: oatutors@gmail.com
@@ -271,6 +288,7 @@ Content:
 **Trigger:** User requests password reset
 
 **Flow:**
+
 ```
 User clicks "Forgot Password"
     ↓
@@ -295,6 +313,7 @@ Content:
 **Trigger:** New user registration (if enabled)
 
 **Flow:**
+
 ```
 User registers account
     ↓
@@ -316,6 +335,7 @@ Content:
 ## Email Templates to Create
 
 ### High Priority
+
 1. ✅ `ApplicationSubmitted.php` - EXISTS, needs triggering
 2. ❌ `ApplicationSubmittedAdmin.php` - EXISTS but incomplete
 3. ❌ `WelcomeCredentials.php` - Create new
@@ -323,12 +343,14 @@ Content:
 5. ❌ `ApplicationRejected.php` - Create new
 
 ### Medium Priority
+
 6. ❌ `ScholarReportSubmitted.php` - Create new
 7. ❌ `ScholarReportConfirmation.php` - Create new
 8. ❌ `ScholarSupportRequest.php` - Create new
 9. ❌ `ScholarSupportConfirmation.php` - Create new
 
 ### Optional/Future
+
 10. ❌ `ApplicationInReview.php` - Status update
 11. ❌ `DocumentsRequested.php` - Request additional docs
 12. ❌ `ScholarshipReminder.php` - Deadline reminders
@@ -339,17 +361,20 @@ Content:
 ## Implementation Priority
 
 ### Phase 1: Critical (Do First) 🔴
+
 1. **Fix ApplicationSubmittedAdmin** - Complete the template
 2. **Trigger ApplicationSubmitted** - Send confirmation to applicant
 3. **Trigger ApplicationSubmittedAdmin** - Notify admin of new applications
 4. **Create & Trigger WelcomeCredentials** - Send login info to new users
 
 ### Phase 2: Important (Do Next) 🟡
+
 5. **Create ApplicationApproved** - Notify approved applicants
 6. **Create ApplicationRejected** - Notify rejected applicants
 7. **Create Scholar notification emails** - For academic reports and support requests
 
 ### Phase 3: Enhancement (Do Later) 🟢
+
 8. **Reminder emails** - Application deadlines, document submissions
 9. **Bulk notifications** - Announcements to all scholars/applicants
 10. **Email preferences** - Allow users to customize notifications
@@ -359,11 +384,13 @@ Content:
 ## Email Queue Strategy
 
 ### Current: Synchronous (Blocking)
-- Emails sent immediately during request
-- User waits for email to send
-- Can slow down response time
+
+-   Emails sent immediately during request
+-   User waits for email to send
+-   Can slow down response time
 
 ### Recommended: Queue-Based (Async)
+
 ```php
 // In Mailable class
 class ApplicationSubmitted extends Mailable implements ShouldQueue
@@ -374,12 +401,14 @@ class ApplicationSubmitted extends Mailable implements ShouldQueue
 ```
 
 **Benefits:**
-- Faster user experience
-- Retry failed emails automatically
-- Better error handling
-- Scale better under load
+
+-   Faster user experience
+-   Retry failed emails automatically
+-   Better error handling
+-   Scale better under load
 
 **Setup:**
+
 ```bash
 php artisan queue:table
 php artisan migrate
@@ -393,22 +422,28 @@ php artisan queue:work
 ## Testing Strategy
 
 ### Local Development
+
 ```env
 MAIL_MAILER=log
 ```
+
 Emails saved to `storage/logs/laravel.log`
 
 ### Staging/Testing
+
 ```env
 MAIL_MAILER=smtp
 ```
+
 Use test Gmail account or Mailtrap.io
 
 ### Production
+
 ```env
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.gmail.com
 ```
+
 Use actual Gmail account with App Password
 
 ---
@@ -416,6 +451,7 @@ Use actual Gmail account with App Password
 ## Monitoring & Analytics
 
 ### Track These Metrics
+
 1. Email delivery rate
 2. Bounce rate
 3. Open rate (if tracking pixels added)
@@ -424,10 +460,11 @@ Use actual Gmail account with App Password
 6. Queue backlog
 
 ### Tools to Consider
-- Laravel Horizon (for queue monitoring)
-- Mail logs (storage/logs)
-- Gmail sent folder audit
-- Third-party service (SendGrid, Mailgun) for better analytics
+
+-   Laravel Horizon (for queue monitoring)
+-   Mail logs (storage/logs)
+-   Gmail sent folder audit
+-   Third-party service (SendGrid, Mailgun) for better analytics
 
 ---
 
@@ -446,26 +483,31 @@ Use actual Gmail account with App Password
 ## Cost Considerations
 
 ### Gmail Free Tier Limits
-- 500 emails/day (per account)
-- 2,000 emails/day (Google Workspace)
+
+-   500 emails/day (per account)
+-   2,000 emails/day (Google Workspace)
 
 ### If Volume Exceeds Gmail Limits
+
 Consider these alternatives:
+
 1. **SendGrid** - 100 emails/day free, then $19.95/month for 50k
 2. **Mailgun** - 5,000 emails/month free, then pay-as-you-go
 3. **Amazon SES** - $0.10 per 1,000 emails
 4. **Postmark** - $15/month for 10k emails
 
 **Current Volume Estimate:**
-- Average 5-10 applications/day = 20-40 emails/day
-- Well within Gmail limits
-- Monitor and upgrade if needed
+
+-   Average 5-10 applications/day = 20-40 emails/day
+-   Well within Gmail limits
+-   Monitor and upgrade if needed
 
 ---
 
 ## Next Steps
 
 ### Immediate Actions
+
 1. ✅ Update .env with reply-to configuration
 2. ✅ Update mail config with reply_to and admin settings
 3. ✅ Update ContactMail with reply-to header
@@ -475,6 +517,7 @@ Consider these alternatives:
 7. ❌ Test all email flows
 
 ### Commands to Run
+
 ```bash
 # Test contact form email
 php artisan tinker
@@ -492,6 +535,7 @@ php artisan queue:work --once
 ## Configuration Summary
 
 ### Environment Variables Required
+
 ```env
 MAIL_MAILER=smtp
 MAIL_HOST=smtp.gmail.com
@@ -507,6 +551,7 @@ MAIL_ADMIN_ADDRESS=oatutors@gmail.com
 ```
 
 ### Config Access Patterns
+
 ```php
 // Send to admin
 Mail::to(config('mail.admin.address'))

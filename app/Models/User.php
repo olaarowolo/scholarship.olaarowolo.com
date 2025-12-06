@@ -22,6 +22,8 @@ class User extends Authenticatable
         'password',
         'role',
         'terms_accepted',
+        'terms_accepted_at',
+        'marketing_accepted',
         'device',
         'location',
         'credentials',
@@ -49,6 +51,7 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password'          => 'hashed',
             'terms_accepted'    => 'boolean',
+            'marketing_accepted'=> 'boolean',
             'is_iba_indigene'   => 'boolean',
         ];
     }
@@ -127,5 +130,15 @@ class User extends Authenticatable
     public function isVerifiedBeneficiary(): bool
     {
         return $this->role === 'verified_beneficiary';
+    }
+
+    /**
+     * Get all applications for the user
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function applications()
+    {
+        return $this->hasMany(Application::class);
     }
 }

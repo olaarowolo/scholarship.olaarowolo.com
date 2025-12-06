@@ -32,7 +32,7 @@ class ApplicationFactory extends Factory
             'passport_photo' => 'applications/passport_photos/test.jpg',
             'id_card' => 'applications/id_cards/test.jpg',
             'jamb_result' => 'applications/jamb_results/test.jpg',
-            'status' => 'submitted',
+            'status' => 'draft',
             'notes' => $this->faker->sentence,
             'application_id' => 'APP-' . strtoupper($this->faker->bothify('########')),
         ];

@@ -7,7 +7,7 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ApplicationModelTest extends TestCase
+class ApplicationTest extends TestCase
 {
     use RefreshDatabase;
 
@@ -44,6 +44,7 @@ class ApplicationModelTest extends TestCase
         $casts = [
             'date_of_birth' => 'date',
             'jamb_score' => 'decimal:2',
+            'id' => 'int',
         ];
 
         $application = new Application();
@@ -77,8 +78,8 @@ class ApplicationModelTest extends TestCase
     public function test_application_has_correct_status_default()
     {
         $user = User::factory()->create();
-        $application = Application::factory()->create(['user_id' => $user->id, 'status' => null]);
+        $application = Application::factory()->create(['user_id' => $user->id]);
 
-        $this->assertNull($application->status); // Since we didn't set it, it should be null
+        $this->assertEquals('draft', $application->status); // Default status should be 'draft'
     }
 }

@@ -133,7 +133,10 @@ class RouteTest extends TestCase
 
     public function test_apply_form_page_can_be_rendered()
     {
-        $user = \App\Models\User::factory()->create();
+        $user = \App\Models\User::factory()->create([
+            'terms_accepted' => true,
+            'terms_accepted_at' => now(),
+        ]);
 
         $response = $this->actingAs($user)->get('/apply-form');
 
@@ -143,7 +146,10 @@ class RouteTest extends TestCase
 
     public function test_apply_utme_jamb_form_page_can_be_rendered()
     {
-        $user = \App\Models\User::factory()->create();
+        $user = \App\Models\User::factory()->create([
+            'terms_accepted' => true,
+            'terms_accepted_at' => now(),
+        ]);
 
         $response = $this->actingAs($user)->get('/apply-utme-jamb-form');
 

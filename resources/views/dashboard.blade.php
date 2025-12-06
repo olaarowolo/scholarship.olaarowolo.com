@@ -76,7 +76,7 @@
             <div class="mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-center">
                 <div>
                     <h1 class="text-5xl font-extrabold text-gray-900 tracking-tight">Dashboard</h1>
-                    <p class="mt-2 text-lg text-gray-600">Welcome back, **{{ $user->name }}**!</p>
+                    <p class="mt-2 text-lg text-gray-600">Welcome back, **{{ $user->name }}!</p>
                 </div>
                 <span
                     class="mt-4 sm:mt-0 inline-flex items-center px-4 py-2 rounded-full text-sm font-medium {{ $isAdmin ? 'bg-black text-white' : 'bg-gray-200 text-gray-800' }}">

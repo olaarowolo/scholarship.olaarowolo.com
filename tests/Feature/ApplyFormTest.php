@@ -21,7 +21,10 @@ class ApplyFormTest extends TestCase
 
     public function test_apply_form_page_loads_successfully()
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'terms_accepted' => true,
+            'terms_accepted_at' => now(),
+        ]);
 
         $response = $this->actingAs($user)->get('/apply-form');
 
@@ -33,6 +36,8 @@ class ApplyFormTest extends TestCase
     {
         $user = User::factory()->create([
             'email' => 'john.doe@example.com',
+            'terms_accepted' => true,
+            'terms_accepted_at' => now(),
         ]);
 
         // Create fake file uploads
@@ -118,6 +123,8 @@ class ApplyFormTest extends TestCase
 
         $user = User::factory()->create([
             'email' => 'jane@example.com',
+            'terms_accepted' => true,
+            'terms_accepted_at' => now(),
         ]);
 
         $response = $this->actingAs($user)->post('/apply-form', $formData);
@@ -129,7 +136,10 @@ class ApplyFormTest extends TestCase
 
     public function test_application_validates_required_fields()
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'terms_accepted' => true,
+            'terms_accepted_at' => now(),
+        ]);
 
         $response = $this->actingAs($user)
             ->withHeaders(['Accept' => 'application/json'])
@@ -161,7 +171,10 @@ class ApplyFormTest extends TestCase
 
     public function test_application_validates_jamb_score_range()
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'terms_accepted' => true,
+            'terms_accepted_at' => now(),
+        ]);
 
         // Test score below minimum (180)
         $response = $this->actingAs($user)
@@ -224,7 +237,10 @@ class ApplyFormTest extends TestCase
 
     public function test_application_validates_indigene_status()
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'terms_accepted' => true,
+            'terms_accepted_at' => now(),
+        ]);
 
         // Test that 'No' is accepted by validation (frontend will handle eligibility)
         $response = $this->actingAs($user)
@@ -258,7 +274,10 @@ class ApplyFormTest extends TestCase
 
     public function test_application_validates_file_types()
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'terms_accepted' => true,
+            'terms_accepted_at' => now(),
+        ]);
 
         // Test with invalid file type (txt file)
         $response = $this->actingAs($user)
@@ -292,8 +311,16 @@ class ApplyFormTest extends TestCase
 
     public function test_multiple_users_can_submit_applications()
     {
-        $user1 = User::factory()->create(['email' => 'user1@example.com']);
-        $user2 = User::factory()->create(['email' => 'user2@example.com']);
+        $user1 = User::factory()->create([
+            'email' => 'user1@example.com',
+            'terms_accepted' => true,
+            'terms_accepted_at' => now(),
+        ]);
+        $user2 = User::factory()->create([
+            'email' => 'user2@example.com',
+            'terms_accepted' => true,
+            'terms_accepted_at' => now(),
+        ]);
 
         $formData1 = [
             'hasTakenJamb' => 'Yes',
@@ -351,7 +378,10 @@ class ApplyFormTest extends TestCase
 
     public function test_application_generates_unique_application_id()
     {
-        $user = User::factory()->create();
+        $user = User::factory()->create([
+            'terms_accepted' => true,
+            'terms_accepted_at' => now(),
+        ]);
 
         $formData = [
             'hasTakenJamb' => 'Yes',
