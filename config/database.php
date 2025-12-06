@@ -41,6 +41,9 @@ return [
             'journal_mode' => null,
             'synchronous' => null,
             'transaction_mode' => 'DEFERRED',
+            'options' => [
+                PDO::ATTR_TIMEOUT => 5,
+            ],
         ],
 
         'mysql' => [
