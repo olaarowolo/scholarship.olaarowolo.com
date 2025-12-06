@@ -28,6 +28,9 @@ class User extends Authenticatable
         'location',
         'credentials',
         'is_iba_indigene',
+        'two_factor_enabled',
+        'two_factor_code',
+        'two_factor_expires_at',
     ];
 
     /**
@@ -53,6 +56,8 @@ class User extends Authenticatable
             'terms_accepted'    => 'boolean',
             'marketing_accepted'=> 'boolean',
             'is_iba_indigene'   => 'boolean',
+            'two_factor_enabled'=> 'boolean',
+            'two_factor_expires_at' => 'datetime',
         ];
     }
 
@@ -140,5 +145,50 @@ class User extends Authenticatable
     public function applications()
     {
         return $this->hasMany(Application::class);
+    }
+
+    /**
+     * Generate a two-factor authentication code
+     *
+     * @return string
+     */
+    public function generateTwoFactorCode(): string
+    {
+        $code = str_pad(random_int(0, 999999), 6, '0', STR_PAD_LEFT);
+
+        $this->two_factor_code = $code;
+        $this->two_factor_expires_at = now()->addMinutes(10);
+        $this->save();
+
+        return $code;
+    }
+
+    /**
+     * Verify the two-factor authentication code
+     *
+     * @param string $code
+     * @return bool
+     */
+    public function verifyTwoFactorCode(string $code): bool
+    {
+        if (!$this->two_factor_code || !$this->two_factor_expires_at) {
+            return false;
+        }
+
+        if (now()->isAfter($this->two_factor_expires_at)) {
+            return false;
+        }
+
+        return $code === $this->two_factor_code;
+    }
+
+    /**
+     * Reset the two-factor authentication code
+     */
+    public function resetTwoFactorCode(): void
+    {
+        $this->two_factor_code = null;
+        $this->two_factor_expires_at = null;
+        $this->save();
     }
 }

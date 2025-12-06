@@ -24,6 +24,9 @@ class UserTest extends TestCase
             'location',
             'credentials',
             'is_iba_indigene',
+            'two_factor_enabled',
+            'two_factor_code',
+            'two_factor_expires_at',
         ];
 
         $user = new User();
@@ -51,6 +54,8 @@ class UserTest extends TestCase
             'terms_accepted' => 'boolean',
             'marketing_accepted' => 'boolean',
             'is_iba_indigene' => 'boolean',
+            'two_factor_enabled' => 'boolean',
+            'two_factor_expires_at' => 'datetime',
             'id' => 'int',
         ];
 

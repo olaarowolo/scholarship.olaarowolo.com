@@ -14,16 +14,48 @@
                     Providing financial and mentorship support to emerging leaders to access and excel in quality
                     university education.
                 </p>
+
+                <!-- Countdown Timer -->
+                <div class="mt-8 max-w-xl mx-auto lg:mx-0">
+                    <div
+                        class="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-6 backdrop-blur-sm border border-primary/20">
+                        <p id="countdown-label"
+                            class="text-sm font-semibold text-gray-700 text-center lg:text-left mb-3">
+                            🎓 Next Application Opens In:
+                        </p>
+                        <div id="countdown" class="grid grid-cols-4 gap-3 text-center">
+                            <div class="bg-white rounded-lg p-3 shadow-md">
+                                <div id="days" class="text-3xl font-bold text-primary">00</div>
+                                <div class="text-xs text-gray-600 font-medium mt-1">Days</div>
+                            </div>
+                            <div class="bg-white rounded-lg p-3 shadow-md">
+                                <div id="hours" class="text-3xl font-bold text-primary">00</div>
+                                <div class="text-xs text-gray-600 font-medium mt-1">Hours</div>
+                            </div>
+                            <div class="bg-white rounded-lg p-3 shadow-md">
+                                <div id="minutes" class="text-3xl font-bold text-primary">00</div>
+                                <div class="text-xs text-gray-600 font-medium mt-1">Minutes</div>
+                            </div>
+                            <div class="bg-white rounded-lg p-3 shadow-md">
+                                <div id="seconds" class="text-3xl font-bold text-primary">00</div>
+                                <div class="text-xs text-gray-600 font-medium mt-1">Seconds</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="mt-10 flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4">
                     @auth
-                        <a href="{{ route('apply-form') }}"
-                            class="btn-primary text-lg font-bold px-10 py-4 rounded-full shadow-lg inline-flex items-center justify-center">
-                            Start Application &rarr;
+                        <a id="apply-btn-auth" href="{{ route('apply-form') }}"
+                            class="btn-primary text-lg font-bold px-10 py-4 rounded-full shadow-lg inline-flex items-center justify-center transition-all duration-300"
+                            style="display: none;">
+                            <span id="apply-btn-text-auth">Start Application &rarr;</span>
                         </a>
                     @else
-                        <a href="{{ route('register') }}"
-                            class="btn-primary text-lg font-bold px-10 py-4 rounded-full shadow-lg inline-flex items-center justify-center">
-                            Start Application &rarr;
+                        <a id="apply-btn-guest" href="{{ route('register') }}"
+                            class="btn-primary text-lg font-bold px-10 py-4 rounded-full shadow-lg inline-flex items-center justify-center transition-all duration-300"
+                            style="display: none;">
+                            <span id="apply-btn-text-guest">Start Application &rarr;</span>
                         </a>
                     @endauth
                     <a href="#process"
@@ -31,9 +63,6 @@
                         View Process
                     </a>
                 </div>
-                <p class="mt-4 text-sm text-gray-500 sm:text-center lg:text-left">
-                    Next Application Window: Dec. 8, 2025 - Jan. 16, 2026
-                </p>
             </div>
 
             <!-- Mockup Image/Illustration Placeholder -->
@@ -48,3 +77,94 @@
         </div>
     </div>
 </header>
+
+<script>
+    // Countdown Timer and Button Control
+    function updateCountdown() {
+        // Target dates
+        const openDate = new Date('2025-12-08T00:00:00').getTime();
+        const closeDate = new Date('2026-01-16T23:59:59').getTime();
+        const now = new Date().getTime();
+
+        const distanceToOpen = openDate - now;
+        const distanceToClose = closeDate - now;
+
+        const label = document.getElementById('countdown-label');
+        const countdownEl = document.getElementById('countdown');
+
+        // Get button elements
+        const applyBtnAuth = document.getElementById('apply-btn-auth');
+        const applyBtnGuest = document.getElementById('apply-btn-guest');
+        const applyBtnTextAuth = document.getElementById('apply-btn-text-auth');
+        const applyBtnTextGuest = document.getElementById('apply-btn-text-guest');
+
+        // Before opening date - HIDE BUTTON
+        if (distanceToOpen > 0) {
+            // Calculate time until opening
+            const days = Math.floor(distanceToOpen / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distanceToOpen % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distanceToOpen % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distanceToOpen % (1000 * 60)) / 1000);
+
+            label.innerHTML = '🎓 Next Application Opens In:';
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+            // Hide application button
+            if (applyBtnAuth) applyBtnAuth.style.display = 'none';
+            if (applyBtnGuest) applyBtnGuest.style.display = 'none';
+        }
+        // After opening, before closing - SHOW BUTTON WITH "NOW"
+        else if (distanceToClose > 0) {
+            // Calculate time until closing
+            const days = Math.floor(distanceToClose / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distanceToClose % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distanceToClose % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distanceToClose % (1000 * 60)) / 1000);
+
+            label.innerHTML = '⏰ Application Closes In:';
+            label.classList.remove('text-gray-700');
+            label.classList.add('text-orange-700');
+            document.getElementById('days').textContent = String(days).padStart(2, '0');
+            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+
+            // Show and enable application button with "NOW"
+            if (applyBtnAuth) {
+                applyBtnAuth.style.display = 'inline-flex';
+                applyBtnAuth.classList.remove('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
+                applyBtnTextAuth.innerHTML = 'Start Application NOW &rarr;';
+            }
+            if (applyBtnGuest) {
+                applyBtnGuest.style.display = 'inline-flex';
+                applyBtnGuest.classList.remove('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
+                applyBtnTextGuest.innerHTML = 'Start Application NOW &rarr;';
+            }
+        }
+        // After closing date - SHOW DISABLED BUTTON
+        else {
+            countdownEl.innerHTML =
+                '<div class="col-span-4 text-center"><p class="text-xl font-bold text-red-600">❌ Application Period Has Ended</p></div>';
+            label.innerHTML = '';
+
+            // Show but disable application button
+            if (applyBtnAuth) {
+                applyBtnAuth.style.display = 'inline-flex';
+                applyBtnAuth.classList.add('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
+                applyBtnTextAuth.innerHTML = 'Applications Closed';
+            }
+            if (applyBtnGuest) {
+                applyBtnGuest.style.display = 'inline-flex';
+                applyBtnGuest.classList.add('opacity-50', 'cursor-not-allowed', 'pointer-events-none');
+                applyBtnTextGuest.innerHTML = 'Applications Closed';
+            }
+        }
+    }
+
+    // Update countdown every second
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+</script>
