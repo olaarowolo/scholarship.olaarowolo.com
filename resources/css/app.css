@@ -13,6 +13,18 @@
     /* Custom color variables */
     --color-primary: #000000;
     --color-secondary: #1f2937;
+
+    /* Base font size - reduced from default 16px to 14px */
+    --font-size-base: 0.875rem;
+}
+
+/* Apply reduced base font size */
+html {
+    font-size: 75%; /* 14px base instead of 16px */
+}
+
+body {
+    font-size: var(--font-size-base);
 }
 
 /* Custom utility classes */

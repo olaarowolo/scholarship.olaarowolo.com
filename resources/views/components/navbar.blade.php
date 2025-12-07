@@ -138,16 +138,17 @@
     <!-- Mobile Impact Submenu -->
     <div>
         <button onclick="toggleMobileImpactDropdown()"
-            class="w-full text-left font-medium text-gray-700 flex items-center justify-between py-2">
+            class="w-full text-center font-medium text-gray-700 flex items-center justify-center py-2">
             <span>Impact</span>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
             </svg>
         </button>
-        <div id="mobileImpactDropdown" class="hidden pl-4 space-y-2">
-            <a href="{{ route('home') }}#impact" class="block py-2 text-gray-600" onclick="toggleMenu()">Our
+        <div id="mobileImpactDropdown" class="hidden space-y-2">
+            <a href="{{ route('home') }}#impact" class="block py-2 text-gray-600 text-center"
+                onclick="toggleMenu()">Our
                 Impact</a>
-            <a href="{{ route('testimonials') }}" class="block py-2 text-gray-600"
+            <a href="{{ route('testimonials') }}" class="block py-2 text-gray-600 text-center"
                 onclick="toggleMenu()">Testimonials</a>
         </div>
     </div>
@@ -191,44 +192,44 @@
         </div>
     @else
         <div class="px-4 py-3 border-t border-gray-200 mt-2">
-            <a href="{{ route('apply') }}" class="mobile-get-started mb-2 block text-center"
+            <a href="{{ route('apply') }}" class="mobile-get-started mb-3 block text-center"
                 onclick="toggleMenu()"><strong>Get Started</strong></a>
             <button onclick="toggleMobileLoginDropdown()"
-                class="mobile-apply mb-2 flex items-center justify-center w-full">
+                class="mobile-apply mb-3 flex items-center justify-center w-full transition-all duration-200">
                 <span>Login</span>
-                <svg class="w-4 h-4 ml-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                </svg>
             </button>
-            <div id="mobileLoginDropdown" class="hidden space-y-2">
-                <a href="{{ route('login') }}" class="block px-4 py-3 bg-gray-50 rounded-lg" onclick="toggleMenu()">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 rounded-full bg-black flex items-center justify-center">
-                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"
+            <div id="mobileLoginDropdown" class="hidden space-y-2.5 mt-2 text-center">
+                <a href="{{ route('login') }}"
+                    class="block px-3.5 py-3 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl hover:shadow-md transition-all duration-200"
+                    onclick="toggleMenu()">
+                    <div class="flex items-center space-x-2.5">
+                        <div class="w-9 h-9 rounded-full bg-black flex items-center justify-center shadow-md">
+                            <svg class="w-4.5 h-4.5 text-white" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                             </svg>
                         </div>
-                        <div>
+                        <div class="text-left">
                             <div class="font-semibold text-gray-900 text-sm">Login as Applicant</div>
-                            <div class="text-xs text-gray-500">Apply for scholarship</div>
+                            <div class="text-xs text-gray-600 mt-0.5">Apply for scholarship</div>
                         </div>
                     </div>
                 </a>
-                <a href="{{ route('scholar-login') }}" class="block px-4 py-3 bg-gray-50 rounded-lg"
+                <a href="{{ route('scholar-login') }}"
+                    class="block px-3.5 py-3 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl hover:shadow-md transition-all duration-200"
                     onclick="toggleMenu()">
-                    <div class="flex items-center space-x-3">
-                        <div class="w-8 h-8 rounded-full bg-gray-800 flex items-center justify-center">
-                            <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor"
+                    <div class="flex items-center space-x-2.5">
+                        <div class="w-9 h-9 rounded-full bg-gray-800 flex items-center justify-center shadow-md">
+                            <svg class="w-4.5 h-4.5 text-white" fill="none" stroke="currentColor"
                                 viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                     d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
                             </svg>
                         </div>
-                        <div>
+                        <div class="text-left">
                             <div class="font-semibold text-gray-900 text-sm">Login as Scholar</div>
-                            <div class="text-xs text-gray-500">Access scholar portal</div>
+                            <div class="text-xs text-gray-600 mt-0.5">Access scholar portal</div>
                         </div>
                     </div>
                 </a>
@@ -350,32 +351,35 @@
         z-index: 999;
     }
 
-    .mobile-menu a {
+    .mobile-menu a,
+    .mobile-menu>div>button {
         text-decoration: none;
         text-align: center;
-        font-size: 18px;
+        font-size: 15px;
         font-weight: 500;
         color: #444;
     }
 
     .mobile-apply {
         margin-top: 10px;
-        padding: 15px;
-        background: #000;
+        padding: 12px 20px;
+        background: linear-gradient(135deg, #000 0%, #2d2d2d 100%);
         color: #fff !important;
-        border-radius: 50px;
-        font-size: 17px;
+        border-radius: 12px;
+        font-size: 15px;
         font-weight: 600;
         text-decoration: none;
         display: block;
         text-align: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
     .mobile-get-started {
         margin-top: 10px;
         padding: 15px;
         color: #000 !important;
-        font-size: 19px;
+        font-size: 16px;
         font-weight: 800;
         text-decoration: none;
         text-align: center;
@@ -413,15 +417,17 @@
             gap: 28px;
         }
 
-        .nav-links a {
+        .nav-links a,
+        .nav-links button {
             text-decoration: none;
-            font-size: 15px;
+            font-size: 13px;
             color: #555;
             font-weight: 500;
             transition: 0.2s;
         }
 
-        .nav-links a:hover {
+        .nav-links a:hover,
+        .nav-links button:hover {
             color: #000;
         }
 
@@ -430,7 +436,7 @@
             color: #fff !important;
             padding: 8px 18px;
             border-radius: 40px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
             transition: 0.2s;
             border: none;
@@ -443,7 +449,7 @@
 
         .get-started-link {
             text-decoration: none;
-            font-size: 16px;
+            font-size: 14px;
             color: #000;
             font-weight: 800;
             transition: all 0.2s ease;
@@ -460,7 +466,7 @@
             background: #000;
             color: #fff;
             border-radius: 40px;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
         }
     }
@@ -471,7 +477,7 @@
         background: #000;
         color: #fff !important;
         border-radius: 50px;
-        font-size: 17px;
+        font-size: 15px;
         font-weight: 600;
         text-align: center;
         display: block;

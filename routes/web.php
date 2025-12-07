@@ -19,6 +19,11 @@ Route::get('/test-consent', function () {
     return view('test-consent');
 })->name('test.consent');
 
+// Debug consent popup
+Route::get('/popup-debug', function () {
+    return view('popup-debug');
+})->name('popup.debug');
+
 Route::middleware(['track.visitors'])->group(function () {
     Route::get('/', function () {
         return view('home');
