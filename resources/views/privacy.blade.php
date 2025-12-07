@@ -1,14 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Privacy Policy - Ola Arowolo Scholarship</title>
-    <!-- Load Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+@extends('layouts.app')
 
+@section('content')
     <style>
         /* Define the black and white theme based on the logo */
         :root {
@@ -23,51 +15,52 @@
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--background);
-            padding-top: 64px;
+            padding-top: 60px;
         }
 
+        /* Mobile-first typography */
         .privacy-container h1 {
-            font-size: 2.5rem;
+            font-size: 1.5rem;
             font-weight: 800;
             color: var(--primary);
             margin-bottom: 0.5rem;
-            line-height: 1.1;
+            line-height: 1.2;
         }
         .privacy-container h2 {
-            font-size: 2.25rem;
+            font-size: 1.35rem;
             font-weight: 800;
             color: var(--primary);
-            margin-top: 2.5rem;
+            margin-top: 2rem;
             margin-bottom: 0.75rem;
             padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--accent);
         }
         .privacy-container h3 {
-            font-size: 1.5rem;
+            font-size: 1.15rem;
             font-weight: 700;
-            color: var(--secondary);
-            margin-top: 1.5rem;
-            margin-bottom: 0.5rem;
-        }
-        .privacy-container h4 {
-            font-size: 1.25rem;
-            font-weight: 600;
             color: var(--secondary);
             margin-top: 1.25rem;
             margin-bottom: 0.5rem;
         }
+        .privacy-container h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--secondary);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
         .privacy-container p, .privacy-container li {
             color: #4b5563;
-            line-height: 1.75;
-            margin-bottom: 1rem;
-            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 0.875rem;
+            font-size: 0.875rem;
         }
         .privacy-container ul, .privacy-container ol {
             list-style-type: disc;
-            margin-left: 2rem;
+            margin-left: 1.25rem;
             padding-left: 0.5rem;
-            margin-top: 1rem;
-            margin-bottom: 1.5rem;
+            margin-top: 0.75rem;
+            margin-bottom: 1rem;
         }
         .privacy-container ol {
             list-style-type: decimal;
@@ -80,99 +73,170 @@
             border: 0;
             height: 1px;
             background: var(--accent);
-            margin: 2rem 0;
+            margin: 1.5rem 0;
         }
         .privacy-container .effective-date {
-            font-size: 1.125rem;
+            font-size: 0.875rem;
             color: #6b7280;
             font-style: italic;
         }
         .privacy-container .highlight-box {
             background: #fef3c7;
-            border-left: 4px solid #f59e0b;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
+            border-left: 3px solid #f59e0b;
+            padding: 1rem;
+            margin: 1rem 0;
             border-radius: 0.5rem;
         }
         .privacy-container .info-box {
             background: #dbeafe;
-            border-left: 4px solid #3b82f6;
-            padding: 1.5rem;
-            margin: 1.5rem 0;
+            border-left: 3px solid #3b82f6;
+            padding: 1rem;
+            margin: 1rem 0;
             border-radius: 0.5rem;
         }
         .privacy-container .data-table {
             width: 100%;
             border-collapse: collapse;
-            margin: 1.5rem 0;
+            margin: 1rem 0;
+            font-size: 0.8rem;
+            display: block;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
         .privacy-container .data-table th {
             background: var(--primary);
             color: var(--text-light);
-            padding: 1rem;
+            padding: 0.75rem 0.5rem;
             text-align: left;
             font-weight: 600;
+            font-size: 0.75rem;
         }
         .privacy-container .data-table td {
-            padding: 1rem;
+            padding: 0.75rem 0.5rem;
             border-bottom: 1px solid var(--accent);
+            font-size: 0.75rem;
         }
         .privacy-container .data-table tr:hover {
             background: #f9fafb;
+        }
+        .privacy-container .data-table ul {
+            margin-left: 0.75rem;
+            font-size: 0.7rem;
         }
         .btn-back {
             color: var(--primary);
             font-weight: 600;
             transition: color 0.2s;
+            font-size: 0.875rem;
         }
         .btn-back:hover {
             color: var(--secondary);
         }
-    </style>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'primary': '#000000',
-                        'secondary': '#333333',
-                        'accent': '#e5e7eb',
-                    },
-                }
+
+        /* Tablet and up */
+        @media (min-width: 640px) {
+            body {
+                padding-top: 64px;
+            }
+            .privacy-container h1 {
+                font-size: 2rem;
+            }
+            .privacy-container h2 {
+                font-size: 1.75rem;
+                margin-top: 2.25rem;
+            }
+            .privacy-container h3 {
+                font-size: 1.35rem;
+            }
+            .privacy-container h4 {
+                font-size: 1.15rem;
+            }
+            .privacy-container p, .privacy-container li {
+                font-size: 0.9375rem;
+                line-height: 1.65;
+            }
+            .privacy-container .effective-date {
+                font-size: 1rem;
+            }
+            .privacy-container .data-table {
+                font-size: 0.875rem;
+            }
+            .privacy-container .data-table th,
+            .privacy-container .data-table td {
+                padding: 0.875rem 0.75rem;
+                font-size: 0.875rem;
+            }
+            .privacy-container .data-table ul {
+                font-size: 0.8125rem;
+            }
+            .btn-back {
+                font-size: 0.9375rem;
             }
         }
-    </script>
-</head>
-<body>
 
-    <!-- Navigation Bar -->
-    <nav class="bg-white shadow-md fixed top-0 left-0 right-0 z-50 border-b border-accent">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16 items-center">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('home') }}">
-                        <img class="h-10 w-auto" src="{{ asset('assets/img/favicon/olaarowolo.com_logo_black.png') }}" alt="OA Foundation & Scholarship Logo">
-                    </a>
-                </div>
-                <!-- Title -->
-                <div class="text-center flex-1 px-4">
-                    <h1 class="text-xl sm:text-2xl font-bold text-gray-900">Privacy Policy</h1>
-                </div>
-                <!-- Back to Home Button -->
-                <div class="flex-shrink-0">
-                    <a href="{{ route('home') }}" class="btn-back inline-flex items-center text-sm">
-                        <i class="fas fa-arrow-left mr-2"></i>
-                        <span class="hidden sm:inline">Back to Home</span>
-                    </a>
-                </div>
-            </div>
-        </div>
-    </nav>
+        /* Desktop */
+        @media (min-width: 1024px) {
+            .privacy-container h1 {
+                font-size: 2.5rem;
+            }
+            .privacy-container h2 {
+                font-size: 2.25rem;
+                margin-top: 2.5rem;
+            }
+            .privacy-container h3 {
+                font-size: 1.5rem;
+                margin-top: 1.5rem;
+            }
+            .privacy-container h4 {
+                font-size: 1.25rem;
+                margin-top: 1.25rem;
+            }
+            .privacy-container p, .privacy-container li {
+                font-size: 1rem;
+                line-height: 1.75;
+                margin-bottom: 1rem;
+            }
+            .privacy-container ul, .privacy-container ol {
+                margin-left: 2rem;
+                margin-top: 1rem;
+                margin-bottom: 1.5rem;
+            }
+            .privacy-container .effective-date {
+                font-size: 1.125rem;
+            }
+            .privacy-container .highlight-box,
+            .privacy-container .info-box {
+                padding: 1.5rem;
+                margin: 1.5rem 0;
+            }
+            .privacy-container .data-table {
+                margin: 1.5rem 0;
+                font-size: 0.9375rem;
+            }
+            .privacy-container .data-table th,
+            .privacy-container .data-table td {
+                padding: 1rem;
+                font-size: 0.9375rem;
+            }
+            .privacy-container .data-table ul {
+                font-size: 0.875rem;
+                margin-left: 1rem;
+            }
+            .privacy-container hr {
+                margin: 2rem 0;
+            }
+            .btn-back {
+                font-size: 1rem;
+            }
+        }
+    </style>
+
+    <!-- Include Navbar -->
+    <x-navbar :user="auth()->user() ?? null" />
 
     <!-- Privacy Policy Content -->
-    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12 mb-16">
-        <div class="privacy-container bg-white rounded-xl shadow-lg p-8 border border-accent">
+    <main class="max-w-4xl mx-auto px-3 sm:px-6 lg:px-8 py-6 sm:py-12 mb-8 sm:mb-16" style="padding-top: 100px;">
+        <div class="privacy-container bg-white rounded-lg sm:rounded-xl shadow-lg p-4 sm:p-6 lg:p-8 border border-accent">
 
             <p class="effective-date">Effective Date: December 7, 2025</p>
             <p class="effective-date mb-6">Last Updated: December 7, 2025</p>
@@ -182,8 +246,8 @@
             </p>
 
             <div class="highlight-box">
-                <p class="font-semibold text-lg mb-2"><i class="fas fa-shield-alt mr-2"></i>Our Commitment to You</p>
-                <p class="mb-0">We collect only the data necessary to operate the scholarship program effectively. Your information is never sold to third parties, and we implement strong security measures to protect your data.</p>
+                <p class="font-semibold text-base sm:text-lg mb-2"><i class="fas fa-shield-alt mr-2"></i>Our Commitment to You</p>
+                <p class="mb-0 text-sm sm:text-base">We collect only the data necessary to operate the scholarship program effectively. Your information is never sold to third parties, and we implement strong security measures to protect your data.</p>
             </div>
 
             <h2>1. Information We Collect</h2>
@@ -258,8 +322,8 @@
             <p>We automatically collect certain information when you visit our website:</p>
 
             <div class="info-box">
-                <p class="font-semibold mb-2"><i class="fas fa-info-circle mr-2"></i>Visitor Tracking Data</p>
-                <p>Our website uses visitor tracking to improve user experience and understand our audience. Here's exactly what we collect:</p>
+                <p class="font-semibold mb-2 text-sm sm:text-base"><i class="fas fa-info-circle mr-2"></i>Visitor Tracking Data</p>
+                <p class="text-sm sm:text-base">Our website uses visitor tracking to improve user experience and understand our audience. Here's exactly what we collect:</p>
             </div>
 
             <table class="data-table">
@@ -660,11 +724,11 @@
             <p>If you have questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
 
             <div class="info-box">
-                <p class="font-semibold mb-3"><i class="fas fa-envelope mr-2"></i>Privacy Inquiries</p>
-                <p><strong>Email:</strong> <a href="mailto:olasunkanmiarowolo@gmail.com" class="text-primary font-semibold">olasunkanmiarowolo@gmail.com</a></p>
-                <p><strong>Subject Line:</strong> "Privacy Policy Inquiry"</p>
-                <p><strong>Response Time:</strong> We aim to respond within 5 business days</p>
-                <p class="mb-0"><strong>Address:</strong> Ola Arowolo Scholarship Program, Iba Town, Lagos State, Nigeria</p>
+                <p class="font-semibold mb-3 text-sm sm:text-base"><i class="fas fa-envelope mr-2"></i>Privacy Inquiries</p>
+                <p class="text-sm sm:text-base"><strong>Email:</strong> <a href="mailto:olasunkanmiarowolo@gmail.com" class="text-primary font-semibold">olasunkanmiarowolo@gmail.com</a></p>
+                <p class="text-sm sm:text-base"><strong>Subject Line:</strong> "Privacy Policy Inquiry"</p>
+                <p class="text-sm sm:text-base"><strong>Response Time:</strong> We aim to respond within 5 business days</p>
+                <p class="mb-0 text-sm sm:text-base"><strong>Address:</strong> Ola Arowolo Scholarship Program, Iba Town, Lagos State, Nigeria</p>
             </div>
 
             <h2>13. Consent</h2>
@@ -681,9 +745,9 @@
 
             <hr>
 
-            <div class="text-center mt-8">
-                <p class="text-sm text-gray-500 mb-4">This Privacy Policy is effective as of December 7, 2025</p>
-                <a href="{{ route('home') }}" class="btn-back inline-flex items-center text-base">
+            <div class="text-center mt-6 sm:mt-8">
+                <p class="text-xs sm:text-sm text-gray-500 mb-3 sm:mb-4">This Privacy Policy is effective as of December 7, 2025</p>
+                <a href="{{ route('home') }}" class="btn-back inline-flex items-center text-sm sm:text-base">
                     <i class="fas fa-arrow-left mr-2"></i>
                     Return to Home
                 </a>
@@ -691,22 +755,4 @@
 
         </div>
     </main>
-
-    <!-- Footer -->
-    <footer class="bg-gray-900 text-white py-8 mt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center">
-                <p class="text-sm">&copy; 2025 Ola Arowolo Scholarship. All rights reserved.</p>
-                <div class="mt-4 space-x-4">
-                    <a href="{{ route('terms') }}" class="text-gray-400 hover:text-white text-sm">Terms & Conditions</a>
-                    <span class="text-gray-600">|</span>
-                    <a href="{{ route('privacy') }}" class="text-white text-sm font-semibold">Privacy Policy</a>
-                    <span class="text-gray-600">|</span>
-                    <a href="{{ route('contact') }}" class="text-gray-400 hover:text-white text-sm">Contact</a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-</body>
-</html>
+@endsection
