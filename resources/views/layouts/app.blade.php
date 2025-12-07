@@ -32,8 +32,8 @@
     @php
         $isApplyPage = request()->is('apply') || request()->is('apply-form') || request()->is('apply-utme-jamb-form');
         $socialImage = $isApplyPage
-            ? asset('assets/img/2026_UTME_Scholarship_Application_for_Iba_Indigenes -  Web Open.jpg')
-            : asset('assets/img/favicon/olaarowolo.com_logo_black.png');
+            ? url('assets/img/2026_UTME_Scholarship_Application_for_Iba_Indigenes -  Web Open.jpg')
+            : url('assets/img/favicon/olaarowolo.com_logo_black.png');
         $imageType = $isApplyPage ? 'image/jpeg' : 'image/png';
         $imageWidth = $isApplyPage ? '1200' : '512';
         $imageHeight = $isApplyPage ? '630' : '512';
