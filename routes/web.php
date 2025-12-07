@@ -14,6 +14,11 @@ use App\Http\Controllers\ConsentController;
 Route::post('/consent', [ConsentController::class, 'store'])->name('consent.store');
 Route::get('/consent/check', [ConsentController::class, 'check'])->name('consent.check');
 
+// Test consent popup (remove in production)
+Route::get('/test-consent', function () {
+    return view('test-consent');
+})->name('test.consent');
+
 Route::middleware(['track.visitors'])->group(function () {
     Route::get('/', function () {
         return view('home');

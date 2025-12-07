@@ -183,14 +183,23 @@
 
 <script>
     (function() {
+        console.log('Consent popup script loaded');
+        
         // Check if consent has already been given
         const consentGiven = localStorage.getItem('consent_given') === 'true';
+        console.log('Consent status:', consentGiven ? 'Already given' : 'Not given - showing popup');
 
         if (!consentGiven) {
             // Show popup after a short delay
             setTimeout(() => {
+                console.log('Showing consent popup...');
                 const popup = document.getElementById('consent-popup');
                 const body = document.body;
+
+                if (!popup) {
+                    console.error('Consent popup element not found!');
+                    return;
+                }
 
                 popup.classList.add('show');
                 body.classList.add('consent-popup-open');
@@ -198,107 +207,124 @@
                 // Slide up animation
                 setTimeout(() => {
                     popup.classList.add('slide-up');
+                    console.log('Popup animation completed');
                 }, 100);
             }, 1000);
         }
 
-        // Handle checkbox changes
-        const termsCheckbox = document.getElementById('accept-terms');
-        const privacyCheckbox = document.getElementById('accept-privacy');
-        const acceptButton = document.getElementById('accept-consent-btn');
-        const errorMessage = document.getElementById('consent-error');
+        // Wait for DOM to be ready
+        document.addEventListener('DOMContentLoaded', function() {
+            // Handle checkbox changes
+            const termsCheckbox = document.getElementById('accept-terms');
+            const privacyCheckbox = document.getElementById('accept-privacy');
+            const acceptButton = document.getElementById('accept-consent-btn');
+            const errorMessage = document.getElementById('consent-error');
 
-        function updateButtonState() {
-            const bothChecked = termsCheckbox.checked && privacyCheckbox.checked;
-            acceptButton.disabled = !bothChecked;
-
-            if (errorMessage && !errorMessage.classList.contains('hidden')) {
-                errorMessage.classList.add('hidden');
-            }
-        }
-
-        termsCheckbox.addEventListener('change', updateButtonState);
-        privacyCheckbox.addEventListener('change', updateButtonState);
-
-        // Handle accept button click
-        acceptButton.addEventListener('click', async function() {
-            if (!termsCheckbox.checked || !privacyCheckbox.checked) {
-                errorMessage.classList.remove('hidden');
-
-                // Add pulse effect to unchecked boxes
-                if (!termsCheckbox.checked) {
-                    termsCheckbox.classList.add('checkbox-required');
-                    setTimeout(() => termsCheckbox.classList.remove('checkbox-required'), 2000);
-                }
-                if (!privacyCheckbox.checked) {
-                    privacyCheckbox.classList.add('checkbox-required');
-                    setTimeout(() => privacyCheckbox.classList.remove('checkbox-required'), 2000);
-                }
+            if (!termsCheckbox || !privacyCheckbox || !acceptButton) {
+                console.error('Consent popup elements not found');
                 return;
             }
 
-            // Show loading state
-            acceptButton.disabled = true;
-            acceptButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Processing...';
+            function updateButtonState() {
+                const bothChecked = termsCheckbox.checked && privacyCheckbox.checked;
+                acceptButton.disabled = !bothChecked;
 
-            try {
-                // Send consent to backend
-                const response = await fetch('{{ route('consent.store') }}', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
-                            ?.content || '{{ csrf_token() }}'
-                    },
-                    body: JSON.stringify({
-                        terms_accepted: true,
-                        privacy_accepted: true
-                    })
-                });
-
-                const data = await response.json();
-
-                if (data.success) {
-                    // Store consent in localStorage
-                    localStorage.setItem('consent_given', 'true');
-                    localStorage.setItem('consent_timestamp', new Date().toISOString());
-
-                    // Success feedback
-                    acceptButton.innerHTML = '<i class="fas fa-check mr-2"></i>Thank you!';
-                    acceptButton.classList.add('bg-green-600', 'hover:bg-green-700');
-                    acceptButton.classList.remove('bg-black', 'hover:bg-gray-800');
-
-                    // Hide popup
-                    setTimeout(() => {
-                        const popup = document.getElementById('consent-popup');
-                        popup.classList.remove('slide-up');
-                        document.body.classList.remove('consent-popup-open');
-
-                        setTimeout(() => {
-                            popup.classList.remove('show');
-                        }, 500);
-                    }, 1000);
-                } else {
-                    throw new Error('Failed to record consent');
+                if (errorMessage && !errorMessage.classList.contains('hidden')) {
+                    errorMessage.classList.add('hidden');
                 }
-            } catch (error) {
-                console.error('Error recording consent:', error);
-                acceptButton.disabled = false;
-                acceptButton.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Accept & Continue';
-
-                errorMessage.querySelector('p').textContent = 'An error occurred. Please try again.';
-                errorMessage.classList.remove('hidden');
             }
+
+            termsCheckbox.addEventListener('change', updateButtonState);
+            privacyCheckbox.addEventListener('change', updateButtonState);
+
+            // Handle accept button click
+            acceptButton.addEventListener('click', async function() {
+                if (!termsCheckbox.checked || !privacyCheckbox.checked) {
+                    errorMessage.classList.remove('hidden');
+
+                    // Add pulse effect to unchecked boxes
+                    if (!termsCheckbox.checked) {
+                        termsCheckbox.classList.add('checkbox-required');
+                        setTimeout(() => termsCheckbox.classList.remove('checkbox-required'), 2000);
+                    }
+                    if (!privacyCheckbox.checked) {
+                        privacyCheckbox.classList.add('checkbox-required');
+                        setTimeout(() => privacyCheckbox.classList.remove('checkbox-required'), 2000);
+                    }
+                    return;
+                }
+
+                // Show loading state
+                acceptButton.disabled = true;
+                acceptButton.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i>Processing...';
+
+                try {
+                    // Send consent to backend
+                    const response = await fetch('{{ route('consent.store') }}', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')
+                                ?.content || '{{ csrf_token() }}'
+                        },
+                        body: JSON.stringify({
+                            terms_accepted: true,
+                            privacy_accepted: true
+                        })
+                    });
+
+                    const data = await response.json();
+
+                    if (data.success) {
+                        // Store consent in localStorage
+                        localStorage.setItem('consent_given', 'true');
+                        localStorage.setItem('consent_timestamp', new Date().toISOString());
+                        console.log('Consent recorded successfully');
+
+                        // Success feedback
+                        acceptButton.innerHTML = '<i class="fas fa-check mr-2"></i>Thank you!';
+                        acceptButton.classList.add('bg-green-600', 'hover:bg-green-700');
+                        acceptButton.classList.remove('bg-black', 'hover:bg-gray-800');
+
+                        // Hide popup
+                        setTimeout(() => {
+                            const popup = document.getElementById('consent-popup');
+                            popup.classList.remove('slide-up');
+                            document.body.classList.remove('consent-popup-open');
+
+                            setTimeout(() => {
+                                popup.classList.remove('show');
+                            }, 500);
+                        }, 1000);
+                    } else {
+                        throw new Error('Failed to record consent');
+                    }
+                } catch (error) {
+                    console.error('Error recording consent:', error);
+                    acceptButton.disabled = false;
+                    acceptButton.innerHTML = '<i class="fas fa-check-circle mr-2"></i>Accept & Continue';
+
+                    errorMessage.querySelector('p').textContent = 'An error occurred. Please try again.';
+                    errorMessage.classList.remove('hidden');
+                }
+            });
+
+            // Prevent closing popup by clicking overlay
+            document.getElementById('consent-overlay')?.addEventListener('click', function(e) {
+                e.preventDefault();
+                // Optional: Add a shake animation to indicate it can't be closed
+                const popup = document.getElementById('consent-popup').querySelector('.bg-white');
+                if (popup) {
+                    popup.classList.add('animate-shake');
+                    setTimeout(() => popup.classList.remove('animate-shake'), 500);
+                }
+            });
         });
 
-        // Prevent closing popup by clicking overlay
-        document.getElementById('consent-overlay')?.addEventListener('click', function(e) {
-            e.preventDefault();
-            // Optional: Add a shake animation to indicate it can't be closed
-            const popup = document.getElementById('consent-popup').querySelector('.bg-white');
-            popup.classList.add('animate-shake');
-            setTimeout(() => popup.classList.remove('animate-shake'), 500);
-        });
+        // Debug helper: Add to browser console to reset consent
+        // localStorage.removeItem('consent_given');
+        // localStorage.removeItem('consent_timestamp');
+        // then refresh page
     })();
 </script>
 
