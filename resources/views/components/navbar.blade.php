@@ -342,8 +342,8 @@
         width: 100%;
         height: 100%;
         background: rgba(59, 130, 246, 0.15);
-        backdrop-filter: blur(8px);
-        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(2px);
+        -webkit-backdrop-filter: blur(1px);
         opacity: 0;
         visibility: hidden;
         transition: opacity 0.3s ease, visibility 0.3s ease;

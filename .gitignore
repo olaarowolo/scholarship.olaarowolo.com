@@ -25,3 +25,4 @@ Thumbs.db
 database/*.sqlite
 database/*.sqlite-journal
 database/database.sqlite
+database.sqlite
