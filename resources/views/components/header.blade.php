@@ -87,12 +87,12 @@
                 <div class="mt-4 flex flex-col items-center gap-3">
                     <!-- Main Share Button -->
                     <button onclick="shareApplyPage()"
-                        class="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-semibold rounded-full shadow-lg hover:from-blue-700 hover:to-blue-800 hover:scale-105 transition-all duration-300 hover:shadow-xl">
+                        class="inline-flex items-center gap-2 px-6 py-3 bg-white border-2 border-gray-300 text-gray-700 font-semibold rounded-full shadow-lg hover:bg-gray-50 hover:border-gray-400 hover:scale-105 transition-all duration-300 hover:shadow-xl">
                         <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M15 8a3 3 0 10-2.977-2.63l-4.94 2.47a3 3 0 100 4.319l4.94 2.47a3 3 0 10.895-1.789l-4.94-2.47a3.027 3.027 0 000-.74l4.94-2.47C13.456 7.68 14.19 8 15 8z" />
                         </svg>
-                        <span class="text-xs text-gray-600 font-medium">Share Opportunity</span>
+                        <span class="text-xs font-medium">Share Opportunity</span>
                     </button>
 
                     <!-- Quick Share Icons -->
