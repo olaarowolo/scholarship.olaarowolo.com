@@ -3,8 +3,13 @@
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="lg:grid lg:grid-cols-12 lg:gap-12 items-center">
             <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-7 lg:text-left">
-                <div class="text-sm font-semibold uppercase tracking-widest text-primary">
-                    Empowering Local Excellence
+                <div
+                    class="text-sm font-semibold uppercase tracking-widest text-primary flex items-center gap-2 justify-center lg:justify-start">
+                    <span>Empowering Local Excellence</span>
+                    <span
+                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-black text-white shadow-md">
+                        Since 2022
+                    </span>
                 </div>
                 <h1
                     class="mt-4 text-5xl tracking-tight font-extrabold text-gray-900 sm:text-6xl lg:text-5xl xl:text-7xl">

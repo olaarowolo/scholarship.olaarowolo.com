@@ -60,76 +60,15 @@
     </script>
 
     <!-- Navigation Bar -->
-    <nav class="bg-white shadow-md sticky top-0 z-50 transition-shadow duration-300 border-b border-accent">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('home') }}">
-                        <img class="h-10 w-auto" src="{{ asset('assets/img/favicon/olaarowolo.com_logo_black.png') }}"
-                            alt="OA Foundation & Scholarship Logo">
-                    </a>
-                </div>
-
-                <!-- Desktop Links -->
-                <div class="hidden sm:ml-6 sm:flex sm:space-x-8 items-center">
-                    <a href="{{ route('home') }}#mission"
-                        class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Our
-                        Mission</a>
-                    <a href="{{ route('how-it-works') }}"
-                        class="text-primary px-3 py-2 text-base font-medium transition duration-200">How to Apply</a>
-                    <a href="{{ route('home') }}#impact"
-                        class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Impact</a>
-                    <a href="{{ route('contact') }}"
-                        class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Contact</a>
-                    <!-- CTA Button -->
-                    <a href="{{ route('apply') }}"
-                        class="bg-primary text-white hover:bg-secondary text-sm font-semibold px-6 py-2.5 rounded-full ml-4 transition duration-200">
-                        Apply Now
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="flex items-center sm:hidden">
-                    <button type="button"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
-                        aria-expanded="false" onclick="toggleMenu()">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.worg/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Menu (Hidden by default) -->
-        <div class="sm:hidden hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="{{ route('home') }}#mission"
-                    class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Our Mission</a>
-                <a href="{{ route('how-it-works') }}"
-                    class="text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">How to Apply</a>
-                <a href="{{ route('home') }}#impact"
-                    class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Impact</a>
-                <a href="{{ route('contact') }}"
-                    class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
-                <a href="{{ route('apply') }}"
-                    class="bg-primary text-white hover:bg-secondary block w-full text-center mt-4 px-3 py-2 rounded-full text-base font-medium transition duration-200">Apply
-                    Now</a>
-            </div>
-        </div>
-    </nav>
+    @include('components.navbar', ['user' => Auth::user()])
 
     <!-- Header Section -->
-    <header class="hero-bg relative overflow-hidden pt-20 pb-16">
+    <header class="hero-bg relative overflow-hidden pt-32 pb-20 sm:pt-40 lg:pt-48">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl lg:text-6xl">
+            <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl lg:text-6xl animate-fade-in-down">
                 How It <span class="text-primary">Works</span>
             </h1>
-            <p class="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
+            <p class="mt-6 text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
                 Your step-by-step guide to applying for the OA Local Scholarship and securing your path to higher education.
             </p>
         </div>
@@ -138,7 +77,7 @@
     <!-- Application Process Section -->
     <section class="py-24 bg-white">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 animate-fade-in-up">
                 <h2 class="text-base text-primary font-semibold tracking-wide uppercase">
                     The Application Journey
                 </h2>
@@ -152,7 +91,7 @@
                 <div class="hidden md:block absolute h-full w-0.5 bg-accent left-1/2 transform -translate-x-1/2"></div>
 
                 <!-- Step 1 -->
-                <div class="flex flex-col md:flex-row mb-12 items-center">
+                <div class="flex flex-col md:flex-row mb-12 items-center animate-slide-in-left animation-delay-200">
                     <div class="md:w-1/2 md:pr-10 text-center md:text-right">
                         <h3 class="text-2xl font-bold text-primary mb-1">Initial Screening</h3>
                         <p class="text-gray-600 text-sm md:text-base">Submit your online application, providing details of
@@ -163,14 +102,15 @@
                     </div>
                     <div class="relative my-4 md:my-0">
                         <div
-                            class="h-10 w-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg ring-4 ring-white shadow-lg">
+                            class="h-10 w-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg ring-4 ring-white shadow-lg hover:scale-110 transition-transform duration-300">
                             1</div>
                     </div>
                     <div class="md:w-1/2 md:pl-10"></div>
                 </div>
 
                 <!-- Step 2 -->
-                <div class="flex flex-col md:flex-row mb-12 items-center md:flex-row-reverse">
+                <div
+                    class="flex flex-col md:flex-row mb-12 items-center md:flex-row-reverse animate-slide-in-right animation-delay-400">
                     <div class="md:w-1/2 md:pl-10 text-center md:text-left">
                         <h3 class="text-2xl font-bold text-primary mb-1"> Local Verification</h3>
                         <p class="text-gray-600 text-sm md:text-base">Successful candidates are contacted for physical
@@ -181,14 +121,14 @@
                     </div>
                     <div class="relative my-4 md:my-0">
                         <div
-                            class="h-10 w-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg ring-4 ring-gray-50 shadow-lg">
+                            class="h-10 w-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg ring-4 ring-gray-50 shadow-lg hover:scale-110 transition-transform duration-300">
                             2</div>
                     </div>
                     <div class="md:w-1/2 md:pr-10"></div>
                 </div>
 
                 <!-- Step 3 -->
-                <div class="flex flex-col md:flex-row mb-12 items-center">
+                <div class="flex flex-col md:flex-row mb-12 items-center animate-slide-in-left animation-delay-600">
                     <div class="md:w-1/2 md:pr-10 text-center md:text-right">
                         <h3 class="text-2xl font-bold text-primary mb-1">Admission Confirmation</h3>
                         <p class="text-gray-600 text-sm md:text-base">Upon securing provisional admission, beneficiaries
@@ -199,14 +139,15 @@
                     </div>
                     <div class="relative my-4 md:my-0">
                         <div
-                            class="h-10 w-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg ring-4 ring-white shadow-lg">
+                            class="h-10 w-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg ring-4 ring-white shadow-lg hover:scale-110 transition-transform duration-300">
                             3</div>
                     </div>
                     <div class="md:w-1/2 md:pl-10"></div>
                 </div>
 
                 <!-- Step 4 -->
-                <div class="flex flex-col md:flex-row items-center md:flex-row-reverse">
+                <div
+                    class="flex flex-col md:flex-row items-center md:flex-row-reverse animate-slide-in-right animation-delay-800">
                     <div class="md:w-1/2 md:pl-10 text-center md:text-left">
                         <h3 class="text-2xl font-bold text-primary mb-1">Performance Tracking</h3>
                         <p class="text-gray-600 text-sm md:text-base">Scholars submit semester results for review. Funds for
@@ -217,16 +158,16 @@
                     </div>
                     <div class="relative my-4 md:my-0">
                         <div
-                            class="h-10 w-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg ring-4 ring-gray-50 shadow-lg">
+                            class="h-10 w-10 bg-primary text-white rounded-full flex items-center justify-center font-bold text-lg ring-4 ring-gray-50 shadow-lg hover:scale-110 transition-transform duration-300">
                             4</div>
                     </div>
                     <div class="md:w-1/2 md:pr-10"></div>
                 </div>
             </div>
 
-            <div class="mt-16 text-center">
+            <div class="mt-16 text-center animate-fade-in-up animation-delay-1000">
                 <a href="{{ route('apply') }}"
-                    class="btn-primary text-lg font-bold px-10 py-4 rounded-full shadow-lg inline-flex items-center justify-center">
+                    class="btn-primary text-lg font-bold px-10 py-4 rounded-full shadow-lg inline-flex items-center justify-center hover:scale-105 transition-all duration-300">
                     Check Eligibility & Apply Now
                 </a>
             </div>
@@ -236,7 +177,7 @@
     <!-- Eligibility Section -->
     <section class="py-24 bg-gray-50">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 animate-fade-in-up">
                 <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
                     Eligibility Criteria
                 </h2>
@@ -247,7 +188,8 @@
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Criterion 1 -->
-                <div class="card bg-white p-6 rounded-xl shadow-lg">
+                <div
+                    class="card bg-white p-6 rounded-xl shadow-lg hover:scale-105 transition-all duration-300 animate-scale-in animation-delay-200">
                     <div class="flex items-center mb-4">
                         <i class="fa-solid fa-house-chimney text-2xl text-primary mr-3"></i>
                         <h3 class="text-xl font-bold text-gray-900">Indigene Status</h3>
@@ -258,7 +200,8 @@
                 </div>
 
                 <!-- Criterion 2 -->
-                <div class="card bg-white p-6 rounded-xl shadow-lg">
+                <div
+                    class="card bg-white p-6 rounded-xl shadow-lg hover:scale-105 transition-all duration-300 animate-scale-in animation-delay-300">
                     <div class="flex items-center mb-4">
                         <i class="fa-solid fa-graduation-cap text-2xl text-primary mr-3"></i>
                         <h3 class="text-xl font-bold text-gray-900">Academic Excellence</h3>
@@ -269,7 +212,8 @@
                 </div>
 
                 <!-- Criterion 3 -->
-                <div class="card bg-white p-6 rounded-xl shadow-lg">
+                <div
+                    class="card bg-white p-6 rounded-xl shadow-lg hover:scale-105 transition-all duration-300 animate-scale-in animation-delay-400">
                     <div class="flex items-center mb-4">
                         <i class="fa-solid fa-university text-2xl text-primary mr-3"></i>
                         <h3 class="text-xl font-bold text-gray-900">University Admission</h3>
@@ -280,7 +224,8 @@
                 </div>
 
                 <!-- Criterion 4 -->
-                <div class="card bg-white p-6 rounded-xl shadow-lg">
+                <div
+                    class="card bg-white p-6 rounded-xl shadow-lg hover:scale-105 transition-all duration-300 animate-scale-in animation-delay-500">
                     <div class="flex items-center mb-4">
                         <i class="fa-solid fa-hand-holding-heart text-2xl text-primary mr-3"></i>
                         <h3 class="text-xl font-bold text-gray-900">Financial Need</h3>
@@ -291,7 +236,8 @@
                 </div>
 
                 <!-- Criterion 5 -->
-                <div class="card bg-white p-6 rounded-xl shadow-lg">
+                <div
+                    class="card bg-white p-6 rounded-xl shadow-lg hover:scale-105 transition-all duration-300 animate-scale-in animation-delay-600">
                     <div class="flex items-center mb-4">
                         <i class="fa-solid fa-users text-2xl text-primary mr-3"></i>
                         <h3 class="text-xl font-bold text-gray-900">Community Involvement</h3>
@@ -302,7 +248,8 @@
                 </div>
 
                 <!-- Criterion 6 -->
-                <div class="card bg-white p-6 rounded-xl shadow-lg">
+                <div
+                    class="card bg-white p-6 rounded-xl shadow-lg hover:scale-105 transition-all duration-300 animate-scale-in animation-delay-700">
                     <div class="flex items-center mb-4">
                         <i class="fa-solid fa-file-contract text-2xl text-primary mr-3"></i>
                         <h3 class="text-xl font-bold text-gray-900">Agreement</h3>
@@ -318,32 +265,36 @@
     <!-- FAQ Section -->
     <section class="py-24 bg-white">
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16">
+            <div class="text-center mb-16 animate-fade-in-up">
                 <h2 class="text-3xl font-extrabold text-gray-900 sm:text-4xl">
                     Frequently Asked Questions
                 </h2>
             </div>
 
             <div class="space-y-6">
-                <div class="card bg-gray-50 p-6 rounded-xl">
+                <div
+                    class="card bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300 animate-fade-in-up animation-delay-200">
                     <h3 class="text-lg font-semibold text-primary mb-2">When is the application window open?</h3>
                     <p class="text-gray-600">Applications are typically open once a year. Check our homepage for current
                         application windows.</p>
                 </div>
 
-                <div class="card bg-gray-50 p-6 rounded-xl">
+                <div
+                    class="card bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300 animate-fade-in-up animation-delay-400">
                     <h3 class="text-lg font-semibold text-primary mb-2">What documents do I need to apply?</h3>
                     <p class="text-gray-600">You'll need your WAEC/GCE results, JAMB result slip, birth certificate, proof
                         of indigene status, and passport photograph.</p>
                 </div>
 
-                <div class="card bg-gray-50 p-6 rounded-xl">
+                <div
+                    class="card bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300 animate-fade-in-up animation-delay-600">
                     <h3 class="text-lg font-semibold text-primary mb-2">How much funding can I receive?</h3>
                     <p class="text-gray-600">Funding is performance-based, up to ₦100,000 per academic year, with potential
                         rollover for excellent performance.</p>
                 </div>
 
-                <div class="card bg-gray-50 p-6 rounded-xl">
+                <div
+                    class="card bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300 animate-fade-in-up animation-delay-800">
                     <h3 class="text-lg font-semibold text-primary mb-2">Can I apply if I'm already in university?</h3>
                     <p class="text-gray-600">The scholarship is primarily for new admissions, but exceptional cases may be
                         considered. Contact us for details.</p>
@@ -351,14 +302,4 @@
             </div>
         </div>
     </section>
-
-
-
-    <script>
-        // Function to toggle mobile menu visibility
-        function toggleMenu() {
-            const menu = document.getElementById('mobile-menu');
-            menu.classList.toggle('hidden');
-        }
-    </script>
 @endsection

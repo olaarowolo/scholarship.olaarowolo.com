@@ -9,64 +9,77 @@ use App\Http\Controllers\Auth\ScholarAuthController;
 use App\Http\Controllers\TwoFactorController;
 // use App\Http\Controllers\NewsletterController;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+Route::middleware(['track.visitors'])->group(function () {
+    Route::get('/', function () {
+        return view('home');
+    })->name('home');
 
-Route::get('/about', function () {
-    return view('about');
-})->name('about');
+    Route::get('/about', function () {
+        return view('about');
+    })->name('about');
 
-Route::get('/how-it-works', function () {
-    return view('how-it-works');
-})->name('how-it-works');
+    Route::get('/how-it-works', function () {
+        return view('how-it-works');
+    })->name('how-it-works');
 
-Route::get('/apply', function () {
-    return view('apply');
-})->name('apply');
+    Route::get('/apply', function () {
+        return view('apply');
+    })->name('apply');
 
-Route::get('/contact', function () {
-    return view('contact');
-})->name('contact');
+    Route::get('/contact', function () {
+        return view('contact');
+    })->name('contact');
 
-Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
+    Route::post('/contact/send', [ContactController::class, 'send'])->name('contact.send');
+    Route::get('/contact/send', function () {
+        return redirect()->route('contact');
+    });
 
-Route::get('/press', function () {
-    return view('press');
-})->name('press');
+    Route::get('/press', function () {
+        return view('press');
+    })->name('press');
 
-Route::get('/our-story', function () {
-    return view('our-story');
-})->name('our-story');
+    Route::get('/our-story', function () {
+        return view('our-story');
+    })->name('our-story');
 
-Route::get('/application-steps', function () {
-    return view('application-steps');
-})->name('application-steps');
+    Route::get('/application-steps', function () {
+        return view('application-steps');
+    })->name('application-steps');
 
-Route::get('/view-impact', function () {
-    return view('view-impact');
-})->name('view-impact');
+    Route::get('/view-impact', function () {
+        return view('view-impact');
+    })->name('view-impact');
 
-Route::get('/scholar-login', [ScholarAuthController::class, 'create'])->name('scholar-login');
-Route::post('/scholar-login', [ScholarAuthController::class, 'store'])->name('scholar.login');
+    Route::get('/scholar-login', [ScholarAuthController::class, 'create'])->name('scholar-login');
+    Route::post('/scholar-login', [ScholarAuthController::class, 'store'])->name('scholar.login');
 
-Route::get('/scholar-register', [ScholarAuthController::class, 'createRegistration'])->name('scholar-register');
-Route::post('/scholar-register', [ScholarAuthController::class, 'storeRegistration'])->name('scholar.register');
+    Route::get('/scholar-register', [ScholarAuthController::class, 'createRegistration'])->name('scholar-register');
+    Route::post('/scholar-register', [ScholarAuthController::class, 'storeRegistration'])->name('scholar.register');
 
-Route::get('/sponsor-information', function () {
-    return view('sponsor-information');
-})->name('sponsor-information');
+    Route::get('/sponsor-information', function () {
+        return view('sponsor-information');
+    })->name('sponsor-information');
 
-Route::get('/terms', function () {
-    return view('terms');
-})->name('terms');
+    Route::get('/terms', function () {
+        return view('terms');
+    })->name('terms');
 
-// Route for terms acceptance page
-Route::get('/terms-acceptance', [TermsController::class, 'showAcceptancePage'])->name('terms.acceptance');
-Route::post('/terms-acceptance', [TermsController::class, 'acceptTerms'])->name('terms.accept');
+    // Route for terms acceptance page
+    Route::get('/terms-acceptance', [TermsController::class, 'showAcceptancePage'])->name('terms.acceptance');
+    Route::post('/terms-acceptance', [TermsController::class, 'acceptTerms'])->name('terms.accept');
 
-// API endpoint for form settings
-Route::get('/api/form-settings/{formName}', [ApplicationController::class, 'getFormSettings'])->name('api.form-settings');
+    // API endpoint for form settings
+    Route::get('/api/form-settings/{formName}', [ApplicationController::class, 'getFormSettings'])->name('api.form-settings');
+
+    Route::get('/resources', function () {
+        return view('resources');
+    })->name('resources');
+
+    Route::get('/testimonials', function () {
+        return view('testimonials');
+    })->name('testimonials');
+});
 
 Route::get('/apply-form', function () {
     return view('apply-form');

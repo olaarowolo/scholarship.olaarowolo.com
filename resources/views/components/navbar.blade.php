@@ -21,10 +21,32 @@
 
         <!-- Desktop Links -->
         <div class="nav-links">
-            <a href="#mission">Our Mission</a>
-            <a href="#process">How to Apply</a>
-            <a href="#impact">Impact</a>
-            <a href="#contact">Contact</a>
+            <a href="{{ route('home') }}#mission">Our Mission</a>
+            <a href="{{ route('home') }}#process">How to Apply</a>
+
+            <!-- Impact Dropdown -->
+            <div class="relative inline-block impact-dropdown">
+                <button onclick="toggleImpactDropdown()"
+                    class="text-gray-700 hover:text-black transition-colors duration-200 flex items-center space-x-1">
+                    <span>Impact</span>
+                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                    </svg>
+                </button>
+                <div id="impactDropdown"
+                    class="hidden absolute left-0 mt-2 w-48 bg-white rounded-xl shadow-xl border border-gray-200 py-2 z-50">
+                    <a href="{{ route('home') }}#impact"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                        Our Impact
+                    </a>
+                    <a href="{{ route('testimonials') }}"
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 transition-colors">
+                        Testimonials
+                    </a>
+                </div>
+            </div>
+
+            <a href="{{ route('home') }}#contact">Contact</a>
 
             @if (isset($user) && $user->role === 'admin')
                 <div class="flex items-center space-x-3">
@@ -110,10 +132,27 @@
      MOBILE MENU
 ============================= -->
 <div id="mobile-menu" class="mobile-menu">
-    <a href="#mission" onclick="toggleMenu()">Our Mission</a>
-    <a href="#process" onclick="toggleMenu()">How to Apply</a>
-    <a href="#impact" onclick="toggleMenu()">Impact</a>
-    <a href="#contact" onclick="toggleMenu()">Contact</a>
+    <a href="{{ route('home') }}#mission" onclick="toggleMenu()">Our Mission</a>
+    <a href="{{ route('home') }}#process" onclick="toggleMenu()">How to Apply</a>
+
+    <!-- Mobile Impact Submenu -->
+    <div>
+        <button onclick="toggleMobileImpactDropdown()"
+            class="w-full text-left font-medium text-gray-700 flex items-center justify-between py-2">
+            <span>Impact</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+        </button>
+        <div id="mobileImpactDropdown" class="hidden pl-4 space-y-2">
+            <a href="{{ route('home') }}#impact" class="block py-2 text-gray-600" onclick="toggleMenu()">Our
+                Impact</a>
+            <a href="{{ route('testimonials') }}" class="block py-2 text-gray-600"
+                onclick="toggleMenu()">Testimonials</a>
+        </div>
+    </div>
+
+    <a href="{{ route('home') }}#contact" onclick="toggleMenu()">Contact</a>
 
     @if (isset($user) && $user->role === 'admin')
         <div class="px-4 py-3 border-t border-gray-200 mt-2">
@@ -215,12 +254,13 @@
         transform: translateX(-50%);
         width: 100%;
         max-width: 1400px;
-        background: rgba(255, 255, 255, 0.90);
-        backdrop-filter: blur(12px);
-        border: 1px solid #e5e7eb;
-        border-radius: 40px;
+        background: rgba(255, 255, 255, 0.75);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border: 1px solid rgba(229, 231, 235, 0.5);
+        border-radius: 40px 40px 20px 20px;
         padding: 12px 20px;
-        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 10px 35px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.5) inset;
         z-index: 1000;
     }
 
@@ -469,9 +509,21 @@
         dropdown.classList.toggle("hidden");
     }
 
+    // Toggle desktop impact dropdown
+    function toggleImpactDropdown() {
+        const dropdown = document.getElementById("impactDropdown");
+        dropdown.classList.toggle("hidden");
+    }
+
     // Toggle mobile login dropdown
     function toggleMobileLoginDropdown() {
         const dropdown = document.getElementById("mobileLoginDropdown");
+        dropdown.classList.toggle("hidden");
+    }
+
+    // Toggle mobile impact dropdown
+    function toggleMobileImpactDropdown() {
+        const dropdown = document.getElementById("mobileImpactDropdown");
         dropdown.classList.toggle("hidden");
     }
 
@@ -479,10 +531,55 @@
     document.addEventListener('click', function(event) {
         const loginDropdown = document.getElementById("loginDropdown");
         const mobileLoginDropdown = document.getElementById("mobileLoginDropdown");
+        const impactDropdown = document.getElementById("impactDropdown");
 
         // Check if click is outside the dropdown
         if (loginDropdown && !event.target.closest('.relative.inline-block')) {
             loginDropdown.classList.add("hidden");
         }
+
+        // Close impact dropdown when clicking outside
+        if (impactDropdown && !event.target.closest('.impact-dropdown')) {
+            impactDropdown.classList.add("hidden");
+        }
+    });
+
+    // Smooth scroll handling for anchor links (only on same page)
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get all anchor links in navbar
+        const navLinks = document.querySelectorAll('.navbar a[href*="#"], .mobile-menu a[href*="#"]');
+
+        navLinks.forEach(link => {
+            link.addEventListener('click', function(e) {
+                const href = this.getAttribute('href');
+                const url = new URL(href, window.location.origin);
+
+                // Check if the link is to the current page (only hash changes)
+                if (url.pathname === window.location.pathname && url.hash) {
+                    const targetId = url.hash.substring(1);
+                    const targetElement = document.getElementById(targetId);
+
+                    if (targetElement) {
+                        e.preventDefault();
+                        targetElement.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+
+                        // Close mobile menu if open
+                        const menu = document.getElementById('mobile-menu');
+                        const toggle = document.querySelector(".nav-toggle");
+                        if (menu && menu.classList.contains('active')) {
+                            menu.classList.remove('active');
+                            if (toggle) toggle.classList.remove('active');
+                        }
+
+                        // Update URL without page reload
+                        history.pushState(null, null, href);
+                    }
+                }
+                // Otherwise, let the browser handle the navigation normally
+            });
+        });
     });
 </script>

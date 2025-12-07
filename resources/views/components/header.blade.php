@@ -1,42 +1,51 @@
 <!-- 1. Hero Section -->
-<header class="hero-bg relative overflow-hidden pt-24 pb-28 sm:pt-32 lg:pt-40">
+<header class="hero-bg relative overflow-hidden pt-32 pb-28 sm:pt-40 lg:pt-48">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="lg:grid lg:grid-cols-12 lg:gap-12 items-center">
             <div class="sm:text-center md:max-w-2xl md:mx-auto lg:col-span-7 lg:text-left">
-                <div class="text-sm font-semibold uppercase tracking-widest text-primary">
-                    Empowering Local Excellence
+                <div
+                    class="text-sm font-semibold uppercase tracking-widest text-primary flex items-center gap-2 justify-center lg:justify-start animate-fade-in-down">
+                    <span>Empowering Local Excellence</span>
+                    <span
+                        class="inline-flex items-center px-3 py-1 rounded-full text-xs font-bold bg-black text-white shadow-md animate-pulse-slow">
+                        Since 2022
+                    </span>
                 </div>
                 <h1
-                    class="mt-4 text-5xl tracking-tight font-extrabold text-gray-900 sm:text-6xl lg:text-5xl xl:text-7xl">
+                    class="mt-4 text-5xl tracking-tight font-extrabold text-gray-900 sm:text-6xl lg:text-5xl xl:text-7xl animate-fade-in-up animation-delay-200">
                     The <span class="text-primary block lg:inline">Scholarship</span> for Iba Town's Brightest
                 </h1>
-                <p class="mt-6 text-xl text-gray-600 max-w-xl mx-auto lg:mx-0">
+                <p class="mt-6 text-xl text-gray-600 max-w-xl mx-auto lg:mx-0 animate-fade-in-up animation-delay-400">
                     Providing financial and mentorship support to emerging leaders to access and excel in quality
                     university education.
                 </p>
 
                 <!-- Countdown Timer -->
-                <div class="mt-8 max-w-xl mx-auto lg:mx-0">
+                <div class="mt-8 max-w-xl mx-auto lg:mx-0 animate-fade-in-up animation-delay-600">
                     <div
-                        class="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-6 backdrop-blur-sm border border-primary/20">
+                        class="bg-gradient-to-r from-primary/10 to-secondary/10 rounded-2xl p-6 backdrop-blur-sm border border-primary/20 hover:shadow-xl transition-shadow duration-300">
                         <p id="countdown-label"
                             class="text-sm font-semibold text-gray-700 text-center lg:text-left mb-3">
                             🎓 Next Application Opens In:
                         </p>
                         <div id="countdown" class="grid grid-cols-4 gap-3 text-center">
-                            <div class="bg-white rounded-lg p-3 shadow-md">
+                            <div
+                                class="bg-white rounded-lg p-3 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">
                                 <div id="days" class="text-3xl font-bold text-primary">00</div>
                                 <div class="text-xs text-gray-600 font-medium mt-1">Days</div>
                             </div>
-                            <div class="bg-white rounded-lg p-3 shadow-md">
+                            <div
+                                class="bg-white rounded-lg p-3 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">
                                 <div id="hours" class="text-3xl font-bold text-primary">00</div>
                                 <div class="text-xs text-gray-600 font-medium mt-1">Hours</div>
                             </div>
-                            <div class="bg-white rounded-lg p-3 shadow-md">
+                            <div
+                                class="bg-white rounded-lg p-3 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">
                                 <div id="minutes" class="text-3xl font-bold text-primary">00</div>
                                 <div class="text-xs text-gray-600 font-medium mt-1">Minutes</div>
                             </div>
-                            <div class="bg-white rounded-lg p-3 shadow-md">
+                            <div
+                                class="bg-white rounded-lg p-3 shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300">
                                 <div id="seconds" class="text-3xl font-bold text-primary">00</div>
                                 <div class="text-xs text-gray-600 font-medium mt-1">Seconds</div>
                             </div>
@@ -44,31 +53,32 @@
                     </div>
                 </div>
 
-                <div class="mt-10 flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4">
+                <div
+                    class="mt-10 flex flex-col sm:flex-row sm:justify-center lg:justify-start gap-4 animate-fade-in-up animation-delay-800">
                     @auth
                         <a id="apply-btn-auth" href="{{ route('apply-form') }}"
-                            class="btn-primary text-lg font-bold px-10 py-4 rounded-full shadow-lg inline-flex items-center justify-center transition-all duration-300"
+                            class="btn-primary text-lg font-bold px-10 py-4 rounded-full shadow-lg inline-flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                             style="display: none;">
                             <span id="apply-btn-text-auth">Start Application &rarr;</span>
                         </a>
                     @else
                         <a id="apply-btn-guest" href="{{ route('register') }}"
-                            class="btn-primary text-lg font-bold px-10 py-4 rounded-full shadow-lg inline-flex items-center justify-center transition-all duration-300"
+                            class="btn-primary text-lg font-bold px-10 py-4 rounded-full shadow-lg inline-flex items-center justify-center transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                             style="display: none;">
                             <span id="apply-btn-text-guest">Start Application &rarr;</span>
                         </a>
                     @endauth
                     <a href="#process"
-                        class="inline-flex items-center justify-center px-10 py-4 border border-secondary text-base font-medium rounded-full text-primary bg-white hover:bg-gray-100 transition duration-300 shadow-md">
+                        class="inline-flex items-center justify-center px-10 py-4 border border-secondary text-base font-medium rounded-full text-primary bg-white hover:bg-gray-100 hover:scale-105 transition-all duration-300 shadow-md hover:shadow-xl">
                         View Process
                     </a>
                 </div>
             </div>
 
             <!-- Mockup Image/Illustration Placeholder -->
-            <div class="mt-16 lg:mt-0 lg:col-span-5">
+            <div class="mt-16 lg:mt-0 lg:col-span-5 animate-fade-in-right animation-delay-400">
                 <div
-                    class="aspect-w-4 aspect-h-3 rounded-3xl overflow-hidden shadow-2xl card transform hover:scale-[1.01]">
+                    class="aspect-w-4 aspect-h-3 rounded-3xl overflow-hidden shadow-2xl card transform hover:scale-[1.02] transition-all duration-500 animate-float">
                     <img class="w-full object-cover h-auto rounded-3xl"
                         src="{{ asset('assets/img/2025_UTME_Scholarship_Application_for_Iba_Indigenes -  Web Open.jpg') }}"
                         alt="Students studying together">

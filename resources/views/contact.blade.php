@@ -81,76 +81,15 @@
     </script>
 
     <!-- Navigation Bar -->
-    <nav class="bg-white shadow-md sticky top-0 z-50 transition-shadow duration-300 border-b border-accent">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <!-- Logo -->
-                <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('home') }}">
-                        <img class="h-10 w-auto" src="{{ asset('assets/img/favicon/olaarowolo.com_logo_black.png') }}"
-                            alt="OA Foundation & Scholarship Logo">
-                    </a>
-                </div>
-
-                <!-- Desktop Links -->
-                <div class="hidden sm:ml-6 sm:flex sm:space-x-8 items-center">
-                    <a href="{{ route('home') }}#mission"
-                        class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Our
-                        Mission</a>
-                    <a href="{{ route('how-it-works') }}"
-                        class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">How
-                        to Apply</a>
-                    <a href="{{ route('home') }}#impact"
-                        class="text-gray-600 hover:text-primary px-3 py-2 text-base font-medium transition duration-200">Impact</a>
-                    <a href="{{ route('contact') }}"
-                        class="text-primary px-3 py-2 text-base font-medium transition duration-200">Contact</a>
-                    <!-- CTA Button -->
-                    <a href="{{ route('apply') }}" class="btn-primary text-sm font-semibold px-6 py-2.5 rounded-full ml-4">
-                        Apply Now
-                    </a>
-                </div>
-
-                <!-- Mobile Menu Button -->
-                <div class="flex items-center sm:hidden">
-                    <button type="button"
-                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-primary hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-primary"
-                        aria-expanded="false" onclick="toggleMenu()">
-                        <span class="sr-only">Open main menu</span>
-                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke="currentColor" aria-hidden="true">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 6h16M4 12h16M4 18h16" />
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-
-        <!-- Mobile Menu (Hidden by default) -->
-        <div class="sm:hidden hidden" id="mobile-menu">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="{{ route('home') }}#mission"
-                    class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Our Mission</a>
-                <a href="{{ route('how-it-works') }}"
-                    class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">How to Apply</a>
-                <a href="{{ route('home') }}#impact"
-                    class="text-gray-600 hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Impact</a>
-                <a href="{{ route('contact') }}"
-                    class="text-primary hover:bg-gray-50 block px-3 py-2 rounded-md text-base font-medium">Contact</a>
-                <a href="{{ route('apply') }}"
-                    class="btn-primary block w-full text-center mt-4 px-3 py-2 rounded-full text-base font-medium">Apply
-                    Now</a>
-            </div>
-        </div>
-    </nav>
+    @include('components.navbar', ['user' => Auth::user()])
 
     <!-- Header Section -->
-    <header class="hero-bg relative overflow-hidden pt-20 pb-16">
+    <header class="hero-bg relative overflow-hidden pt-32 pb-20 sm:pt-40 lg:pt-48">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl lg:text-6xl">
+            <h1 class="text-4xl tracking-tight font-extrabold text-gray-900 sm:text-5xl lg:text-6xl animate-fade-in-down">
                 Contact <span class="text-primary">Us</span>
             </h1>
-            <p class="mt-6 text-xl text-gray-600 max-w-3xl mx-auto">
+            <p class="mt-6 text-xl text-gray-600 max-w-3xl mx-auto animate-fade-in-up animation-delay-200">
                 Have questions about the scholarship? We're here to help. Send us your inquiries and we'll get back to you
                 promptly.
             </p>
@@ -162,14 +101,15 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
                 <!-- Contact Information -->
-                <div>
+                <div class="animate-slide-in-left animation-delay-200">
                     <h2 class="text-3xl font-extrabold text-gray-900 mb-8">Get in Touch</h2>
 
                     <div class="space-y-8">
                         <!-- Email -->
-                        <div class="flex items-start space-x-4">
+                        <div class="flex items-start space-x-4 hover:scale-105 transition-all duration-300">
                             <div class="flex-shrink-0">
-                                <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center">
+                                <div
+                                    class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center animate-pulse-slow">
                                     <i class="fas fa-envelope text-xl"></i>
                                 </div>
                             </div>
@@ -184,9 +124,10 @@
                         </div>
 
                         <!-- Location -->
-                        <div class="flex items-start space-x-4">
+                        <div class="flex items-start space-x-4 hover:scale-105 transition-all duration-300">
                             <div class="flex-shrink-0">
-                                <div class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center">
+                                <div
+                                    class="w-12 h-12 bg-primary text-white rounded-full flex items-center justify-center animate-pulse-slow">
                                     <i class="fas fa-map-marker-alt text-xl"></i>
                                 </div>
                             </div>
@@ -202,11 +143,12 @@
                 </div>
 
                 <!-- Contact Form -->
-                <div class="bg-gray-50 rounded-lg p-8 shadow-sm">
+                <div
+                    class="bg-gray-50 rounded-lg p-8 shadow-sm hover:shadow-lg transition-shadow duration-300 animate-slide-in-right animation-delay-400">
                     <h2 class="text-2xl font-extrabold text-gray-900 mb-6">Send us a Message</h2>
 
                     @if (session('success'))
-                        <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded">
+                        <div class="mb-4 p-4 bg-green-100 border border-green-400 text-green-700 rounded animate-scale-in">
                             {{ session('success') }}
                         </div>
                     @endif
@@ -245,7 +187,7 @@
 
                         <div>
                             <button type="submit"
-                                class="btn-primary w-full py-3 px-6 rounded-lg text-base font-semibold">
+                                class="btn-primary w-full py-3 px-6 rounded-lg text-base font-semibold hover:scale-105 transition-all duration-300">
                                 Send Message
                             </button>
                         </div>

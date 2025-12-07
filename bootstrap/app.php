@@ -16,6 +16,7 @@ return Application::configure(basePath: dirname(__DIR__))
             'terms.accepted' => \App\Http\Middleware\CheckTermsAcceptance::class,
             'two-factor' => \App\Http\Middleware\EnsureTwoFactorVerified::class,
             'form.open' => \App\Http\Middleware\CheckFormOpen::class,
+            'track.visitors' => \App\Http\Middleware\TrackVisitors::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

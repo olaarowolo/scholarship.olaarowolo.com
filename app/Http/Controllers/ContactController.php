@@ -16,8 +16,10 @@ class ContactController extends Controller
             'message' => 'required|string',
         ]);
 
-        Mail::to(config('mail.admin.address'))->send(new ContactMail($request->all()));
+        $adminEmail = config('mail.admin.address');
 
-        return back()->with('success', 'Your message has been sent successfully!');
+        Mail::to($adminEmail)->send(new ContactMail($request->all()));
+
+        return redirect()->route('contact')->with('success', 'Your message has been sent successfully!');
     }
 }

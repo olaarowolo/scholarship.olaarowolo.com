@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Application;
 use App\Models\User;
 use App\Models\FormSetting;
+use App\Models\Visitor;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -153,7 +154,7 @@ class AdminController extends Controller
         $rejectedApplications = Application::where('status', 'rejected')->count();
 
         // Applications by month (last 6 months)
-        $applicationsByMonth = Application::selectRaw('DATE_FORMAT(created_at, "%Y-%m") as month, COUNT(*) as count')
+        $applicationsByMonth = Application::selectRaw('strftime("%Y-%m", created_at) as month, COUNT(*) as count')
             ->where('created_at', '>=', now()->subMonths(6))
             ->groupBy('month')
             ->orderBy('month')
@@ -171,6 +172,9 @@ class AdminController extends Controller
             ->groupBy('status')
             ->get();
 
+        // Visitor statistics
+        $visitorStats = Visitor::getStatistics();
+
         return view('admin.analytics', compact(
             'totalApplications',
             'pendingApplications',
@@ -178,7 +182,8 @@ class AdminController extends Controller
             'rejectedApplications',
             'applicationsByMonth',
             'topCourses',
-            'avgScoreByStatus'
+            'avgScoreByStatus',
+            'visitorStats'
         ));
     }
 

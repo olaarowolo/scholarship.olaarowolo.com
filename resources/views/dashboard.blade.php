@@ -395,6 +395,17 @@
                     <h3 class="text-xl font-semibold text-gray-900 mb-4">Quick Links</h3>
                     <div class="space-y-3">
                         @if ($isAdmin)
+                            <a href="{{ route('admin.dashboard') }}"
+                                class="block text-base font-semibold text-black hover:text-gray-700 transition duration-200 bg-gray-50 -mx-2 px-2 py-2 rounded-lg">
+                                <span class="inline-flex items-center">
+                                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
+                                        </path>
+                                    </svg>
+                                    Admin Dashboard
+                                </span>
+                            </a>
                             <a href="{{ route('admin.form-settings') }}"
                                 class="block text-base text-gray-600 hover:text-black transition duration-200">→ Form
                                 Settings</a>
