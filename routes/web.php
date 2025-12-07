@@ -65,6 +65,10 @@ Route::middleware(['track.visitors'])->group(function () {
         return view('terms');
     })->name('terms');
 
+    Route::get('/privacy', function () {
+        return view('privacy');
+    })->name('privacy');
+
     // Route for terms acceptance page
     Route::get('/terms-acceptance', [TermsController::class, 'showAcceptancePage'])->name('terms.acceptance');
     Route::post('/terms-acceptance', [TermsController::class, 'acceptTerms'])->name('terms.accept');

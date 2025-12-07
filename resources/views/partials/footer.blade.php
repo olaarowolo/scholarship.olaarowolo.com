@@ -49,6 +49,7 @@
                     {{-- <li><a href="{{ route('sponsor-information') }}" class="text-base text-gray-300 hover:text-white">Sponsor Information</a></li> --}}
                     <li><a href="{{ route('terms') }}" class="text-base text-gray-300 hover:text-white">Terms &
                             Conditions</a></li>
+                    <li><a href="{{ route('privacy') }}" class="text-base text-gray-300 hover:text-white">Privacy Policy</a></li>
                     <li><a href="{{ route('contact') }}" class="text-base text-gray-300 hover:text-white">Contact Us</a>
                     </li>
                     <li><a href="{{ route('resources') }}"
@@ -99,13 +100,15 @@
                     </a>
                 </div>
                 <p class="text-base text-gray-400 text-center md:text-right">
-                    &copy; 2024 OA Foundation & Scholarship. All rights reserved.
+                    &copy; 2025 OA Foundation & Scholarship. All rights reserved.
                 </p>
             </div>
-            <div class="mt-4 text-sm text-gray-500">
-                <ul class="list-disc list-inside">
-                    <a href="{{ route('resources') }}" class="hover:text-white">Resources</a>
-                </ul>
+            <div class="mt-4 text-center text-sm text-gray-500">
+                <a href="{{ route('terms') }}" class="hover:text-white">Terms & Conditions</a>
+                <span class="mx-2">|</span>
+                <a href="{{ route('privacy') }}" class="hover:text-white">Privacy Policy</a>
+                <span class="mx-2">|</span>
+                <a href="{{ route('contact') }}" class="hover:text-white">Contact</a>
             </div>
         </div>
     </div>
