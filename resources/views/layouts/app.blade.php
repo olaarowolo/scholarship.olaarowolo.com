@@ -29,15 +29,24 @@
     <meta property="og:title" content="Apply for the OA Foundation & Scholarship">
     <meta property="og:description"
         content="Achieve your educational dreams with the OA Foundation & Scholarship. Learn about eligibility, required documents, and the application process.">
-    <meta property="og:image"
-        content="{{ asset('assets/img/2026_UTME_Scholarship_Application_for_Iba_Indigenes -  Web Open.jpg') }}">
-    <meta property="og:image:secure_url"
-        content="{{ secure_asset('assets/img/2026_UTME_Scholarship_Application_for_Iba_Indigenes -  Web Open.jpg') }}">
-    <meta property="og:image:type" content="image/jpeg">
-    <meta property="og:image:width" content="1200">
-    <meta property="og:image:height" content="630">
-    <meta property="og:image:alt"
-        content="OA Foundation & Scholarship - 2026 UTME Scholarship Application for Iba Indigenes">
+    @php
+        $isApplyPage = request()->is('apply') || request()->is('apply-form') || request()->is('apply-utme-jamb-form');
+        $socialImage = $isApplyPage 
+            ? asset('assets/img/2026_UTME_Scholarship_Application_for_Iba_Indigenes -  Web Open.jpg')
+            : asset('assets/img/favicon/olaarowolo.com_logo_black.png');
+        $imageType = $isApplyPage ? 'image/jpeg' : 'image/png';
+        $imageWidth = $isApplyPage ? '1200' : '512';
+        $imageHeight = $isApplyPage ? '630' : '512';
+        $imageAlt = $isApplyPage 
+            ? 'OA Foundation & Scholarship - 2026 UTME Scholarship Application for Iba Indigenes'
+            : 'OA Foundation & Scholarship Logo';
+    @endphp
+    <meta property="og:image" content="{{ $socialImage }}">
+    <meta property="og:image:secure_url" content="{{ $socialImage }}">
+    <meta property="og:image:type" content="{{ $imageType }}">
+    <meta property="og:image:width" content="{{ $imageWidth }}">
+    <meta property="og:image:height" content="{{ $imageHeight }}">
+    <meta property="og:image:alt" content="{{ $imageAlt }}">
     <meta property="og:url" content="{{ url()->current() }}">
     <meta property="og:type" content="website">
 
@@ -48,10 +57,8 @@
     <meta name="twitter:title" content="Apply for the OA Foundation & Scholarship">
     <meta name="twitter:description"
         content="Achieve your educational dreams with the OA Foundation & Scholarship. Learn about eligibility, required documents, and the application process.">
-    <meta name="twitter:image"
-        content="{{ asset('assets/img/2026_UTME_Scholarship_Application_for_Iba_Indigenes -  Web Open.jpg') }}">
-    <meta name="twitter:image:alt"
-        content="OA Foundation & Scholarship - 2026 UTME Scholarship Application for Iba Indigenes">
+    <meta name="twitter:image" content="{{ $socialImage }}">
+    <meta name="twitter:image:alt" content="{{ $imageAlt }}">
 
     <!-- WhatsApp Optimization -->
     <meta property="og:site_name" content="OA Foundation & Scholarship">
