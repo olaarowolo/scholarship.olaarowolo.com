@@ -19,16 +19,70 @@
     <link rel="manifest" href="{{ asset('assets/favicon_io/site.webmanifest') }}">
 
     <!-- Optimized Meta Tags for SEO and WhatsApp -->
-    <meta name="description"
-        content="Apply for the OA Foundation & Scholarship to achieve your educational dreams. Check eligibility, required documents, and the application process.">
+    @php
+        $pageDescriptions = [
+            'home' => 'OA Foundation Scholarship for Iba Town\'s brightest students. Financial support and mentorship for university education. Apply now for the 2026 UTME Scholarship.',
+            'apply' => 'Apply for the OA Foundation Scholarship - Financial aid and mentorship support for Iba indigenes pursuing university education. Check eligibility and submit your application.',
+            'how-it-works' => 'Learn how the OA Foundation Scholarship application process works. From eligibility criteria to selection, understand each step of your journey to receiving support.',
+            'resources' => 'Access study guides, JAMB prep materials, and promotional assets for the OA Foundation Scholarship. Download flyers, social media kits, and application resources.',
+            'testimonials' => 'Read success stories from OA Foundation Scholarship beneficiaries. Discover how the scholarship has transformed lives and enabled academic excellence.',
+            'our-story' => 'Learn about the OA Foundation\'s mission to empower Iba Town\'s brightest minds through education. Discover our vision, values, and commitment to academic excellence.',
+            'contact' => 'Get in touch with the OA Foundation Scholarship team. Have questions about eligibility, application process, or scholarship benefits? Contact us today.',
+            'terms' => 'Terms and Conditions for the OA Foundation Scholarship. Read the complete terms of service, privacy policy, and legal agreements.',
+            'privacy' => 'Privacy Policy for OA Foundation Scholarship Portal. Learn how we collect, use, and protect your personal information and application data.',
+            'press' => 'Latest news and press releases from OA Foundation. Media coverage, announcements, and updates about scholarship programs and beneficiaries.',
+            'sponsor-information' => 'Information for sponsors and partners of OA Foundation. Learn how to support education and empower Iba Town\'s youth through scholarship sponsorship.',
+        ];
+        
+        $currentPath = request()->path();
+        $currentRoute = request()->route() ? request()->route()->getName() : null;
+        
+        // Determine page key
+        $pageKey = 'home';
+        if (str_contains($currentPath, 'apply')) {
+            $pageKey = 'apply';
+        } elseif (str_contains($currentPath, 'how-it-works')) {
+            $pageKey = 'how-it-works';
+        } elseif (str_contains($currentPath, 'resources')) {
+            $pageKey = 'resources';
+        } elseif (str_contains($currentPath, 'testimonials')) {
+            $pageKey = 'testimonials';
+        } elseif (str_contains($currentPath, 'our-story')) {
+            $pageKey = 'our-story';
+        } elseif (str_contains($currentPath, 'contact')) {
+            $pageKey = 'contact';
+        } elseif (str_contains($currentPath, 'terms')) {
+            $pageKey = 'terms';
+        } elseif (str_contains($currentPath, 'privacy')) {
+            $pageKey = 'privacy';
+        } elseif (str_contains($currentPath, 'press')) {
+            $pageKey = 'press';
+        } elseif (str_contains($currentPath, 'sponsor')) {
+            $pageKey = 'sponsor-information';
+        }
+        
+        $metaDescription = $pageDescriptions[$pageKey] ?? $pageDescriptions['home'];
+    @endphp
+    <meta name="description" content="{{ $metaDescription }}">
     <meta name="keywords"
-        content="Scholarship, OA Foundation & Scholarship, Financial Aid, Education Support, University Scholarship, Academic Excellence">
-    <meta name="author" content="OA Foundation & Scholarship Foundation">
+        content="Scholarship, OA Foundation Scholarship, Financial Aid, Education Support, University Scholarship, Academic Excellence, Iba Town, UTME Scholarship, JAMB Scholarship">
+    <meta name="author" content="OA Foundation Scholarship Foundation">
 
     <!-- Open Graph Meta Tags (Optimized for WhatsApp Sharing) -->
-    <meta property="og:title" content="Apply for the OA Foundation & Scholarship">
-    <meta property="og:description"
-        content="Achieve your educational dreams with the OA Foundation & Scholarship. Learn about eligibility, required documents, and the application process.">
+    @php
+        $ogTitles = [
+            'home' => 'OA Foundation Scholarship - Empowering Iba Town\'s Brightest',
+            'apply' => '2026 UTME Scholarship Application - OA Foundation',
+            'how-it-works' => 'How the Scholarship Process Works - OA Foundation',
+            'resources' => 'Scholarship Resources & Study Materials - OA Foundation',
+            'testimonials' => 'Success Stories & Testimonials - OA Foundation Scholars',
+            'our-story' => 'Our Story & Mission - OA Foundation',
+            'contact' => 'Contact Us - OA Foundation Scholarship',
+        ];
+        $ogTitle = $ogTitles[$pageKey] ?? $ogTitles['home'];
+    @endphp
+    <meta property="og:title" content="{{ $ogTitle }}">
+    <meta property="og:description" content="{{ $metaDescription }}">
     @php
         $isApplyPage = request()->is('apply') || request()->is('apply-form') || request()->is('apply-utme-jamb-form');
         $socialImage = $isApplyPage
