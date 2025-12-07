@@ -131,6 +131,9 @@
 <!-- ============================
      MOBILE MENU
 ============================= -->
+<!-- Mobile menu backdrop -->
+<div id="mobile-menu-backdrop" class="mobile-menu-backdrop"></div>
+
 <div id="mobile-menu" class="mobile-menu">
     <a href="{{ route('home') }}#mission" onclick="toggleMenu()">Our Mission</a>
     <a href="{{ route('home') }}#process" onclick="toggleMenu()">How to Apply</a>
@@ -331,16 +334,38 @@
     /* ============================
    MOBILE SLIDE-UP MENU
 ============================= */
+    /* Mobile menu backdrop */
+    .mobile-menu-backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(59, 130, 246, 0.15);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+        z-index: 998;
+    }
+
+    .mobile-menu-backdrop.active {
+        opacity: 1;
+        visibility: visible;
+    }
+
     .mobile-menu {
         position: fixed;
         bottom: 0;
         left: 0;
         width: 100%;
         padding: 30px 20px;
-        background: rgba(255, 255, 255, 0.90);
-        backdrop-filter: blur(12px);
+        background: rgba(240, 245, 255, 0.85);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
         border-radius: 30px 30px 0 0;
-        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.12);
+        box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.15);
 
         display: flex;
         flex-direction: column;
@@ -348,6 +373,7 @@
 
         transform: translateY(100%);
         transition: transform 0.3s ease;
+        z-index: 999;
         z-index: 999;
     }
 
@@ -500,10 +526,12 @@
 <script>
     function toggleMenu() {
         const menu = document.getElementById("mobile-menu");
+        const backdrop = document.getElementById("mobile-menu-backdrop");
         const toggle = document.querySelector(".nav-toggle");
 
         // open/close mobile menu
         menu.classList.toggle("active");
+        backdrop.classList.toggle("active");
 
         // animate hamburger -> X
         toggle.classList.toggle("active");
@@ -532,6 +560,14 @@
         const dropdown = document.getElementById("mobileImpactDropdown");
         dropdown.classList.toggle("hidden");
     }
+
+    // Close mobile menu when clicking backdrop
+    document.addEventListener('DOMContentLoaded', function() {
+        const backdrop = document.getElementById("mobile-menu-backdrop");
+        if (backdrop) {
+            backdrop.addEventListener('click', toggleMenu);
+        }
+    });
 
     // Close dropdown when clicking outside
     document.addEventListener('click', function(event) {
