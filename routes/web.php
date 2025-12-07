@@ -7,7 +7,12 @@ use App\Http\Controllers\TermsController;
 use App\Http\Controllers\ApplicationController;
 use App\Http\Controllers\Auth\ScholarAuthController;
 use App\Http\Controllers\TwoFactorController;
+use App\Http\Controllers\ConsentController;
 // use App\Http\Controllers\NewsletterController;
+
+// Consent routes (outside visitor tracking to avoid circular dependency)
+Route::post('/consent', [ConsentController::class, 'store'])->name('consent.store');
+Route::get('/consent/check', [ConsentController::class, 'check'])->name('consent.check');
 
 Route::middleware(['track.visitors'])->group(function () {
     Route::get('/', function () {

@@ -49,7 +49,8 @@
                     {{-- <li><a href="{{ route('sponsor-information') }}" class="text-base text-gray-300 hover:text-white">Sponsor Information</a></li> --}}
                     <li><a href="{{ route('terms') }}" class="text-base text-gray-300 hover:text-white">Terms &
                             Conditions</a></li>
-                    <li><a href="{{ route('privacy') }}" class="text-base text-gray-300 hover:text-white">Privacy Policy</a></li>
+                    <li><a href="{{ route('privacy') }}" class="text-base text-gray-300 hover:text-white">Privacy
+                            Policy</a></li>
                     <li><a href="{{ route('contact') }}" class="text-base text-gray-300 hover:text-white">Contact Us</a>
                     </li>
                     <li><a href="{{ route('resources') }}"
