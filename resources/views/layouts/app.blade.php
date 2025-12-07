@@ -21,22 +21,33 @@
     <!-- Optimized Meta Tags for SEO and WhatsApp -->
     @php
         $pageDescriptions = [
-            'home' => 'OA Foundation Scholarship for Iba Town\'s brightest students. Financial support and mentorship for university education. Apply now for the 2026 UTME Scholarship.',
-            'apply' => 'Apply for the OA Foundation Scholarship - Financial aid and mentorship support for Iba indigenes pursuing university education. Check eligibility and submit your application.',
-            'how-it-works' => 'Learn how the OA Foundation Scholarship application process works. From eligibility criteria to selection, understand each step of your journey to receiving support.',
-            'resources' => 'Access study guides, JAMB prep materials, and promotional assets for the OA Foundation Scholarship. Download flyers, social media kits, and application resources.',
-            'testimonials' => 'Read success stories from OA Foundation Scholarship beneficiaries. Discover how the scholarship has transformed lives and enabled academic excellence.',
-            'our-story' => 'Learn about the OA Foundation\'s mission to empower Iba Town\'s brightest minds through education. Discover our vision, values, and commitment to academic excellence.',
-            'contact' => 'Get in touch with the OA Foundation Scholarship team. Have questions about eligibility, application process, or scholarship benefits? Contact us today.',
-            'terms' => 'Terms and Conditions for the OA Foundation Scholarship. Read the complete terms of service, privacy policy, and legal agreements.',
-            'privacy' => 'Privacy Policy for OA Foundation Scholarship Portal. Learn how we collect, use, and protect your personal information and application data.',
-            'press' => 'Latest news and press releases from OA Foundation. Media coverage, announcements, and updates about scholarship programs and beneficiaries.',
-            'sponsor-information' => 'Information for sponsors and partners of OA Foundation. Learn how to support education and empower Iba Town\'s youth through scholarship sponsorship.',
+            'home' =>
+                'OA Foundation Scholarship for Iba Town\'s brightest students. Financial support and mentorship for university education. Apply now for the 2026 UTME Scholarship.',
+            'apply' =>
+                'Apply for the OA Foundation Scholarship - Financial aid and mentorship support for Iba indigenes pursuing university education. Check eligibility and submit your application.',
+            'how-it-works' =>
+                'Learn how the OA Foundation Scholarship application process works. From eligibility criteria to selection, understand each step of your journey to receiving support.',
+            'resources' =>
+                'Access study guides, JAMB prep materials, and promotional assets for the OA Foundation Scholarship. Download flyers, social media kits, and application resources.',
+            'testimonials' =>
+                'Read success stories from OA Foundation Scholarship beneficiaries. Discover how the scholarship has transformed lives and enabled academic excellence.',
+            'our-story' =>
+                'Learn about the OA Foundation\'s mission to empower Iba Town\'s brightest minds through education. Discover our vision, values, and commitment to academic excellence.',
+            'contact' =>
+                'Get in touch with the OA Foundation Scholarship team. Have questions about eligibility, application process, or scholarship benefits? Contact us today.',
+            'terms' =>
+                'Terms and Conditions for the OA Foundation Scholarship. Read the complete terms of service, privacy policy, and legal agreements.',
+            'privacy' =>
+                'Privacy Policy for OA Foundation Scholarship Portal. Learn how we collect, use, and protect your personal information and application data.',
+            'press' =>
+                'Latest news and press releases from OA Foundation. Media coverage, announcements, and updates about scholarship programs and beneficiaries.',
+            'sponsor-information' =>
+                'Information for sponsors and partners of OA Foundation. Learn how to support education and empower Iba Town\'s youth through scholarship sponsorship.',
         ];
-        
+
         $currentPath = request()->path();
         $currentRoute = request()->route() ? request()->route()->getName() : null;
-        
+
         // Determine page key
         $pageKey = 'home';
         if (str_contains($currentPath, 'apply')) {
@@ -60,7 +71,7 @@
         } elseif (str_contains($currentPath, 'sponsor')) {
             $pageKey = 'sponsor-information';
         }
-        
+
         $metaDescription = $pageDescriptions[$pageKey] ?? $pageDescriptions['home'];
     @endphp
     <meta name="description" content="{{ $metaDescription }}">
