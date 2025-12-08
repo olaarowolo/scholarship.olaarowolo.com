@@ -21,6 +21,13 @@
                     class="w-10 h-10 rounded-full bg-gradient-to-br from-black to-gray-700 flex items-center justify-center text-white font-bold text-sm shadow-lg">
                     {{ strtoupper(substr(Auth::user()->name, 0, 1)) }}
                 </div>
+                <!-- Logout Button -->
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button type="submit" class="ml-4 px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-semibold rounded-lg shadow focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2">
+                        Logout
+                    </button>
+                </form>
             </div>
         </div>
     </x-slot>
@@ -343,7 +350,7 @@
                                 <div
                                     class="flex-shrink-0 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-3 shadow-lg group-hover:scale-110 transition-transform">
                                     <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                             d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
                                     </svg>
@@ -611,9 +618,9 @@
                                     <div
                                         class="flex-shrink-0 bg-gradient-to-br from-red-500 to-red-600 rounded-xl p-3 shadow-lg">
                                         <svg class="h-7 w-7 text-white" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
+                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                                d="M6 18L18 6M6 6l12 12" />
                                     </div>
                                     <div class="ml-4">
                                         <p class="text-sm font-medium text-gray-900">Rejected Users</p>
