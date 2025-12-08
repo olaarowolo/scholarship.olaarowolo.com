@@ -567,7 +567,7 @@ class AdminController extends Controller
     public function updateScholarRequestStatus(Request $request, $id)
     {
         $request->validate([
-            'status' => 'required|in:pending,in_progress,resolved,closed',
+            'status' => 'required|in:pending,in_progress,resolved,closed,approved,rejected',
             'admin_notes' => 'nullable|string',
         ]);
 
