@@ -3,12 +3,6 @@
 @section('content')
     <script src="https://cdn.tailwindcss.com"></script>
 
-    @php
-        $user = Auth::user();
-    @endphp
-
-    @include('components.navbar', ['user' => $user])
-
     <div class="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
         <div class="max-w-7xl mx-auto">
             <!-- Header -->

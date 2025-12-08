@@ -148,6 +148,16 @@ class User extends Authenticatable
     }
 
     /**
+     * Get the user's consent record
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function consent()
+    {
+        return $this->hasOne(UserConsent::class);
+    }
+
+    /**
      * Generate a two-factor authentication code
      *
      * @return string

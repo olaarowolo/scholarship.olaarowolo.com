@@ -18,7 +18,12 @@ class CheckTermsAcceptance
     public function handle(Request $request, Closure $next)
     {
         // Check if the user has accepted terms and cookies
-        if (!session('terms_accepted') && !Auth::user()?->terms_accepted) {
+        $user = Auth::user();
+        $hasConsent = session('terms_accepted') ||
+                     ($user && $user->consent && $user->consent->terms_accepted) ||
+                     ($user && $user->terms_accepted); // Fallback for legacy users
+
+        if (!$hasConsent) {
             return redirect()->route('terms.acceptance');
         }
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\TwoFactorController;
 use App\Http\Controllers\ConsentController;
 // use App\Http\Controllers\NewsletterController;
 
+
 // Consent routes (outside visitor tracking to avoid circular dependency)
 Route::post('/consent', [ConsentController::class, 'store'])->name('consent.store');
 Route::get('/consent/check', [ConsentController::class, 'check'])->name('consent.check');
@@ -28,6 +29,8 @@ Route::middleware(['track.visitors'])->group(function () {
     Route::get('/', function () {
         return view('home');
     })->name('home');
+    // Message tray route for logged-in users
+    Route::middleware(['auth'])->get('/messages/tray', [MessageController::class, 'tray'])->name('messages.tray');
 
     Route::get('/about', function () {
         return view('about');
@@ -114,12 +117,9 @@ Route::post('/apply-form', [ApplicationController::class, 'submit'])->middleware
 
 Route::get('/dashboard', function () {
     $user = Auth::user();
-
-    // Redirect scholars to their specific dashboard
     if ($user->role === 'scholar') {
-        return view('scholar-dashboard');
+        return app(\App\Http\Controllers\ScholarController::class)->dashboard();
     }
-
     // Default dashboard for other users
     return view('dashboard');
 })->middleware(['auth', 'two-factor'])->name('dashboard');
@@ -163,13 +163,49 @@ Route::middleware(['auth', 'two-factor', 'role:admin'])->prefix('admin')->name('
     // Form Settings Routes
     Route::get('/form-settings', [App\Http\Controllers\AdminController::class, 'formSettings'])->name('form-settings');
     Route::put('/form-settings/{id}', [App\Http\Controllers\AdminController::class, 'updateFormSetting'])->name('form-settings.update');
+
+    // Scholar Submissions Routes
+    Route::get('/scholar-requests', [App\Http\Controllers\AdminController::class, 'scholarRequests'])->name('scholar-requests');
+    Route::get('/scholar-requests/{id}', [App\Http\Controllers\AdminController::class, 'showScholarRequest'])->name('scholar-requests.show');
+    Route::put('/scholar-requests/{id}/status', [App\Http\Controllers\AdminController::class, 'updateScholarRequestStatus'])->name('scholar-requests.update-status');
+
+    Route::get('/academic-reports', [App\Http\Controllers\AdminController::class, 'academicReports'])->name('academic-reports');
+    Route::get('/academic-reports/{id}', [App\Http\Controllers\AdminController::class, 'showAcademicReport'])->name('academic-reports.show');
+    Route::put('/academic-reports/{id}/status', [App\Http\Controllers\AdminController::class, 'updateAcademicReportStatus'])->name('academic-reports.update-status');
+
+    Route::get('/challenge-reports', [App\Http\Controllers\AdminController::class, 'challengeReports'])->name('challenge-reports');
+    Route::get('/challenge-reports/{id}', [App\Http\Controllers\AdminController::class, 'showChallengeReport'])->name('challenge-reports.show');
+    Route::put('/challenge-reports/{id}/status', [App\Http\Controllers\AdminController::class, 'updateChallengeReportStatus'])->name('challenge-reports.update-status');
+
+    Route::get('/mentorship-bookings', [App\Http\Controllers\AdminController::class, 'mentorshipBookings'])->name('mentorship-bookings');
+    Route::get('/mentorship-bookings/{id}', [App\Http\Controllers\AdminController::class, 'showMentorshipBooking'])->name('mentorship-bookings.show');
+    Route::put('/mentorship-bookings/{id}/status', [App\Http\Controllers\AdminController::class, 'updateMentorshipBookingStatus'])->name('mentorship-bookings.update-status');
+
+    Route::get('/advice-requests', [App\Http\Controllers\AdminController::class, 'adviceRequests'])->name('advice-requests');
+    Route::get('/advice-requests/{id}', [App\Http\Controllers\AdminController::class, 'showAdviceRequest'])->name('advice-requests.show');
+    Route::put('/advice-requests/{id}/status', [App\Http\Controllers\AdminController::class, 'updateAdviceRequestStatus'])->name('advice-requests.update-status');
 });
 
 // Scholar Routes
 Route::middleware(['auth', 'two-factor', 'role:scholar'])->prefix('scholar')->name('scholar.')->group(function () {
     Route::get('/requests/create', [App\Http\Controllers\ScholarController::class, 'createRequest'])->name('requests.create');
+    Route::post('/requests/create', [App\Http\Controllers\ScholarController::class, 'storeRequest'])->name('requests.store.create');
+    Route::post('/requests', [App\Http\Controllers\ScholarController::class, 'storeRequest'])->name('requests.store');
+    Route::get('/requests/my-requests', [App\Http\Controllers\ScholarController::class, 'myRequests'])->name('my-requests');
+
     Route::get('/academic-standing', [App\Http\Controllers\ScholarController::class, 'academicStanding'])->name('academic-standing');
+    Route::post('/academic-reports', [App\Http\Controllers\ScholarController::class, 'storeAcademicReport'])->name('academic-reports.store');
+    Route::get('/academic-reports/my-reports', [App\Http\Controllers\ScholarController::class, 'myAcademicReports'])->name('my-academic-reports');
+
     Route::get('/challenges', [App\Http\Controllers\ScholarController::class, 'challenges'])->name('challenges');
+    Route::post('/challenges', [App\Http\Controllers\ScholarController::class, 'storeChallenge'])->name('challenges.store');
+    Route::get('/challenges/my-challenges', [App\Http\Controllers\ScholarController::class, 'myChallenges'])->name('my-challenges');
+
     Route::get('/mentorship', [App\Http\Controllers\ScholarController::class, 'mentorship'])->name('mentorship');
+    Route::post('/mentorship', [App\Http\Controllers\ScholarController::class, 'storeMentorshipBooking'])->name('mentorship.store');
+    Route::get('/mentorship/my-bookings', [App\Http\Controllers\ScholarController::class, 'myMentorshipBookings'])->name('my-mentorship-bookings');
+
     Route::get('/advice', [App\Http\Controllers\ScholarController::class, 'advice'])->name('advice');
+    Route::post('/advice', [App\Http\Controllers\ScholarController::class, 'storeAdviceRequest'])->name('advice.store');
+    Route::get('/advice/my-requests', [App\Http\Controllers\ScholarController::class, 'myAdviceRequests'])->name('my-advice-requests');
 });

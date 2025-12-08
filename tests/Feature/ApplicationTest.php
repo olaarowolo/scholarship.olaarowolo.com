@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\Application;
 use App\Models\User;
+use App\Models\FormSetting;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Http\UploadedFile;
@@ -15,9 +16,27 @@ class ApplicationTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
+    protected function setUp(): void
+    {
+        parent::setUp();
+        // Create an open form setting for tests
+        FormSetting::create([
+            'form_name' => 'application_form',
+            'label' => 'Application Form',
+            'is_open' => true,
+            'open_date' => now()->subDay(),
+            'close_date' => now()->addMonth(),
+        ]);
+    }
+
     public function test_apply_form_page_can_be_rendered()
     {
         $user = User::factory()->create(['role' => 'applicant']);
+        $user->consent()->create([
+            'terms_accepted' => true,
+            'privacy_accepted' => true,
+            'ip_address' => '127.0.0.1'
+        ]);
 
         $response = $this->actingAs($user)->get('/apply-form');
 
@@ -31,6 +50,11 @@ class ApplicationTest extends TestCase
         Mail::fake();
 
         $user = User::factory()->create(['role' => 'applicant']);
+        $user->consent()->create([
+            'terms_accepted' => true,
+            'privacy_accepted' => true,
+            'ip_address' => '127.0.0.1'
+        ]);
 
         $data = [
             'hasTakenJamb' => 'Yes',
@@ -78,6 +102,11 @@ class ApplicationTest extends TestCase
     public function test_application_submission_validation_fails_with_missing_fields()
     {
         $user = User::factory()->create(['role' => 'applicant']);
+        $user->consent()->create([
+            'terms_accepted' => true,
+            'privacy_accepted' => true,
+            'ip_address' => '127.0.0.1'
+        ]);
 
         $data = [
             'firstName' => '',
@@ -113,6 +142,11 @@ class ApplicationTest extends TestCase
     public function test_application_submission_validation_fails_with_invalid_jamb_score()
     {
         $user = User::factory()->create(['role' => 'applicant']);
+        $user->consent()->create([
+            'terms_accepted' => true,
+            'privacy_accepted' => true,
+            'ip_address' => '127.0.0.1'
+        ]);
 
         $data = [
             'fullName' => $this->faker->name,
@@ -141,6 +175,11 @@ class ApplicationTest extends TestCase
     public function test_application_submission_validation_fails_with_invalid_file_types()
     {
         $user = User::factory()->create(['role' => 'applicant']);
+        $user->consent()->create([
+            'terms_accepted' => true,
+            'privacy_accepted' => true,
+            'ip_address' => '127.0.0.1'
+        ]);
 
         $data = [
             'fullName' => $this->faker->name,
@@ -169,6 +208,11 @@ class ApplicationTest extends TestCase
     public function test_application_submission_validation_fails_with_large_files()
     {
         $user = User::factory()->create(['role' => 'applicant']);
+        $user->consent()->create([
+            'terms_accepted' => true,
+            'privacy_accepted' => true,
+            'ip_address' => '127.0.0.1'
+        ]);
 
         $data = [
             'fullName' => $this->faker->name,

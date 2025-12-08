@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Models\User;
 use App\Models\Application;
+use App\Models\FormSetting;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
@@ -17,14 +18,34 @@ class ApplyFormTest extends TestCase
     {
         parent::setUp();
         Storage::fake('public');
+
+        // Create an open form setting for tests
+        FormSetting::create([
+            'form_name' => 'application_form',
+            'label' => 'Application Form',
+            'is_open' => true,
+            'open_date' => now()->subDay(),
+            'close_date' => now()->addMonth(),
+        ]);
+    }
+
+    /**
+     * Create a user with accepted terms
+     */
+    protected function createUserWithConsent($attributes = [])
+    {
+        $user = User::factory()->create($attributes);
+        $user->consent()->create([
+            'terms_accepted' => true,
+            'privacy_accepted' => true,
+            'ip_address' => '127.0.0.1'
+        ]);
+        return $user;
     }
 
     public function test_apply_form_page_loads_successfully()
     {
-        $user = User::factory()->create([
-            'terms_accepted' => true,
-            'terms_accepted_at' => now(),
-        ]);
+        $user = $this->createUserWithConsent();
 
         $response = $this->actingAs($user)->get('/apply-form');
 
@@ -34,10 +55,8 @@ class ApplyFormTest extends TestCase
 
     public function test_authenticated_user_can_submit_application_with_valid_data()
     {
-        $user = User::factory()->create([
+        $user = $this->createUserWithConsent([
             'email' => 'john.doe@example.com',
-            'terms_accepted' => true,
-            'terms_accepted_at' => now(),
         ]);
 
         // Create fake file uploads
@@ -121,11 +140,7 @@ class ApplyFormTest extends TestCase
             'indigeneCert' => UploadedFile::fake()->image('cert.jpg'),
         ];
 
-        $user = User::factory()->create([
-            'email' => 'jane@example.com',
-            'terms_accepted' => true,
-            'terms_accepted_at' => now(),
-        ]);
+        $user = $this->createUserWithConsent(['email' => 'jane@example.com']);
 
         $response = $this->actingAs($user)->post('/apply-form', $formData);
 
@@ -136,10 +151,7 @@ class ApplyFormTest extends TestCase
 
     public function test_application_validates_required_fields()
     {
-        $user = User::factory()->create([
-            'terms_accepted' => true,
-            'terms_accepted_at' => now(),
-        ]);
+        $user = $this->createUserWithConsent();
 
         $response = $this->actingAs($user)
             ->withHeaders(['Accept' => 'application/json'])
@@ -171,10 +183,7 @@ class ApplyFormTest extends TestCase
 
     public function test_application_validates_jamb_score_range()
     {
-        $user = User::factory()->create([
-            'terms_accepted' => true,
-            'terms_accepted_at' => now(),
-        ]);
+        $user = $this->createUserWithConsent();
 
         // Test score below minimum (180)
         $response = $this->actingAs($user)
@@ -237,10 +246,7 @@ class ApplyFormTest extends TestCase
 
     public function test_application_validates_indigene_status()
     {
-        $user = User::factory()->create([
-            'terms_accepted' => true,
-            'terms_accepted_at' => now(),
-        ]);
+        $user = $this->createUserWithConsent();
 
         // Test that 'No' is accepted by validation (frontend will handle eligibility)
         $response = $this->actingAs($user)
@@ -274,10 +280,7 @@ class ApplyFormTest extends TestCase
 
     public function test_application_validates_file_types()
     {
-        $user = User::factory()->create([
-            'terms_accepted' => true,
-            'terms_accepted_at' => now(),
-        ]);
+        $user = $this->createUserWithConsent();
 
         // Test with invalid file type (txt file)
         $response = $this->actingAs($user)
@@ -311,16 +314,8 @@ class ApplyFormTest extends TestCase
 
     public function test_multiple_users_can_submit_applications()
     {
-        $user1 = User::factory()->create([
-            'email' => 'user1@example.com',
-            'terms_accepted' => true,
-            'terms_accepted_at' => now(),
-        ]);
-        $user2 = User::factory()->create([
-            'email' => 'user2@example.com',
-            'terms_accepted' => true,
-            'terms_accepted_at' => now(),
-        ]);
+        $user1 = $this->createUserWithConsent(['email' => 'user1@example.com']);
+        $user2 = $this->createUserWithConsent(['email' => 'user2@example.com']);
 
         $formData1 = [
             'hasTakenJamb' => 'Yes',
@@ -378,10 +373,7 @@ class ApplyFormTest extends TestCase
 
     public function test_application_generates_unique_application_id()
     {
-        $user = User::factory()->create([
-            'terms_accepted' => true,
-            'terms_accepted_at' => now(),
-        ]);
+        $user = $this->createUserWithConsent();
 
         $formData = [
             'hasTakenJamb' => 'Yes',

@@ -26,9 +26,6 @@
         }
     </style>
 
-    <!-- Navigation Bar -->
-    @include('components.navbar', ['user' => Auth::user()])
-
     <!-- Export Page Content -->
     <div class="min-h-screen pt-12 pb-16">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

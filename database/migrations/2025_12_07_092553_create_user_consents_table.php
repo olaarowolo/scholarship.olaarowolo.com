@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('user_consents', function (Blueprint $table) {
             $table->id();
-            $table->string('session_id')->unique();
+            $table->foreignId('user_id')->nullable()->constrained()->onDelete('cascade');
+            $table->string('session_id')->nullable();
             $table->string('ip_address');
             $table->boolean('terms_accepted')->default(false);
             $table->boolean('privacy_accepted')->default(false);
@@ -22,6 +23,7 @@ return new class extends Migration
             $table->timestamps();
 
             $table->index(['session_id', 'ip_address']);
+            $table->index('user_id');
         });
     }
 

@@ -3,12 +3,27 @@
 namespace Tests\Feature;
 
 use App\Models\User;
+use App\Models\FormSetting;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class RouteTest extends TestCase
 {
     use RefreshDatabase;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+
+        // Create an open form setting for tests
+        FormSetting::create([
+            'form_name' => 'application_form',
+            'label' => 'Application Form',
+            'is_open' => true,
+            'open_date' => now()->subDay(),
+            'close_date' => now()->addMonth(),
+        ]);
+    }
 
     public function test_home_page_can_be_rendered()
     {
@@ -133,9 +148,11 @@ class RouteTest extends TestCase
 
     public function test_apply_form_page_can_be_rendered()
     {
-        $user = \App\Models\User::factory()->create([
+        $user = \App\Models\User::factory()->create();
+        $user->consent()->create([
             'terms_accepted' => true,
-            'terms_accepted_at' => now(),
+            'privacy_accepted' => true,
+            'ip_address' => '127.0.0.1'
         ]);
 
         $response = $this->actingAs($user)->get('/apply-form');
@@ -146,9 +163,11 @@ class RouteTest extends TestCase
 
     public function test_apply_utme_jamb_form_page_can_be_rendered()
     {
-        $user = \App\Models\User::factory()->create([
+        $user = \App\Models\User::factory()->create();
+        $user->consent()->create([
             'terms_accepted' => true,
-            'terms_accepted_at' => now(),
+            'privacy_accepted' => true,
+            'ip_address' => '127.0.0.1'
         ]);
 
         $response = $this->actingAs($user)->get('/apply-utme-jamb-form');

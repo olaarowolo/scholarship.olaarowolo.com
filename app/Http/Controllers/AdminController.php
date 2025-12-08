@@ -6,7 +6,13 @@ use App\Models\Application;
 use App\Models\User;
 use App\Models\FormSetting;
 use App\Models\Visitor;
+use App\Models\ScholarRequest;
+use App\Models\AcademicReport;
+use App\Models\ChallengeReport;
+use App\Models\MentorshipBooking;
+use App\Models\AdviceRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -20,7 +26,29 @@ class AdminController extends Controller
         $approvedApplications = Application::where('status', 'approved')->count();
         $rejectedApplications = Application::where('status', 'rejected')->count();
         $totalUsers = User::count();
+        $approvedUsers = User::where('status', 'approved')->count();
+        $rejectedUsers = User::where('status', 'rejected')->count();
+        $pendingUsers = User::where('status', 'pending')->count();
         $recentApplications = Application::with('user')->latest()->take(10)->get();
+
+        // Scholar submissions statistics
+        $totalScholarRequests = ScholarRequest::count();
+        $pendingScholarRequests = ScholarRequest::where('status', 'pending')->count();
+        $totalAcademicReports = AcademicReport::count();
+        $pendingAcademicReports = AcademicReport::where('status', 'submitted')->count();
+        $totalChallengeReports = ChallengeReport::count();
+        $criticalChallenges = ChallengeReport::where('severity', 'critical')->where('status', '!=', 'addressed')->count();
+        $totalMentorshipBookings = MentorshipBooking::count();
+        $pendingMentorshipBookings = MentorshipBooking::where('status', 'pending')->count();
+        $totalAdviceRequests = AdviceRequest::count();
+        $pendingAdviceRequests = AdviceRequest::where('status', 'pending')->count();
+
+        $userId = Auth::id();
+        $messages = \App\Models\Message::where('sender_id', $userId)
+            ->orWhere('receiver_id', $userId)
+            ->with(['sender', 'receiver'])
+            ->orderByDesc('created_at')
+            ->get();
 
         return view('admin.dashboard', compact(
             'totalApplications',
@@ -28,7 +56,21 @@ class AdminController extends Controller
             'approvedApplications',
             'rejectedApplications',
             'totalUsers',
-            'recentApplications'
+            'approvedUsers',
+            'rejectedUsers',
+            'pendingUsers',
+            'recentApplications',
+            'totalScholarRequests',
+            'pendingScholarRequests',
+            'totalAcademicReports',
+            'pendingAcademicReports',
+            'totalChallengeReports',
+            'criticalChallenges',
+            'totalMentorshipBookings',
+            'pendingMentorshipBookings',
+            'totalAdviceRequests',
+            'pendingAdviceRequests',
+            'messages'
         ));
     }
 
@@ -133,7 +175,7 @@ class AdminController extends Controller
     public function updateUserRole(Request $request, $id)
     {
         $request->validate([
-            'role' => 'required|in:user,admin',
+            'role' => 'required|in:user,admin,applicant,scholar,review_team,verified_beneficiary',
         ]);
 
         $user = User::findOrFail($id);
@@ -492,5 +534,218 @@ class AdminController extends Controller
 
         return redirect()->route('admin.form-settings')
             ->with('success', 'Form setting updated successfully!');
+    }
+
+    /**
+     * Display all scholar requests
+     */
+    public function scholarRequests(Request $request)
+    {
+        $query = ScholarRequest::with('user')->latest();
+
+        if ($request->has('status') && $request->status != 'all') {
+            $query->where('status', $request->status);
+        }
+
+        $requests = $query->paginate(20);
+
+        return view('admin.scholar-requests', compact('requests'));
+    }
+
+    /**
+     * View single scholar request
+     */
+    public function showScholarRequest($id)
+    {
+        $request = ScholarRequest::with('user')->findOrFail($id);
+        return view('admin.scholar-request-detail', compact('request'));
+    }
+
+    /**
+     * Update scholar request status
+     */
+    public function updateScholarRequestStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,in_progress,resolved,closed',
+            'admin_notes' => 'nullable|string',
+        ]);
+
+        $scholarRequest = ScholarRequest::findOrFail($id);
+        $scholarRequest->update($request->only('status', 'admin_notes'));
+
+        return redirect()->back()->with('success', 'Request status updated successfully!');
+    }
+
+    /**
+     * Display all academic reports
+     */
+    public function academicReports(Request $request)
+    {
+        $query = AcademicReport::with('user')->latest();
+
+        if ($request->has('status') && $request->status != 'all') {
+            $query->where('status', $request->status);
+        }
+
+        $reports = $query->paginate(20);
+
+        return view('admin.academic-reports', compact('reports'));
+    }
+
+    /**
+     * View single academic report
+     */
+    public function showAcademicReport($id)
+    {
+        $report = AcademicReport::with('user')->findOrFail($id);
+        return view('admin.academic-report-detail', compact('report'));
+    }
+
+    /**
+     * Update academic report status
+     */
+    public function updateAcademicReportStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:submitted,reviewed,flagged',
+            'admin_feedback' => 'nullable|string',
+        ]);
+
+        $report = AcademicReport::findOrFail($id);
+        $report->update($request->only('status', 'admin_feedback'));
+
+        return redirect()->back()->with('success', 'Report status updated successfully!');
+    }
+
+    /**
+     * Display all challenge reports
+     */
+    public function challengeReports(Request $request)
+    {
+        $query = ChallengeReport::with('user')->latest();
+
+        if ($request->has('status') && $request->status != 'all') {
+            $query->where('status', $request->status);
+        }
+
+        $reports = $query->paginate(20);
+
+        return view('admin.challenge-reports', compact('reports'));
+    }
+
+    /**
+     * View single challenge report
+     */
+    public function showChallengeReport($id)
+    {
+        $report = ChallengeReport::with('user')->findOrFail($id);
+        return view('admin.challenge-report-detail', compact('report'));
+    }
+
+    /**
+     * Update challenge report status
+     */
+    public function updateChallengeReportStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:submitted,under_review,addressed,ongoing',
+            'admin_response' => 'nullable|string',
+        ]);
+
+        $report = ChallengeReport::findOrFail($id);
+        $report->update($request->only('status', 'admin_response'));
+
+        return redirect()->back()->with('success', 'Challenge report updated successfully!');
+    }
+
+    /**
+     * Display all mentorship bookings
+     */
+    public function mentorshipBookings(Request $request)
+    {
+        $query = MentorshipBooking::with('user')->latest();
+
+        if ($request->has('status') && $request->status != 'all') {
+            $query->where('status', $request->status);
+        }
+
+        $bookings = $query->paginate(20);
+
+        return view('admin.mentorship-bookings', compact('bookings'));
+    }
+
+    /**
+     * View single mentorship booking
+     */
+    public function showMentorshipBooking($id)
+    {
+        $booking = MentorshipBooking::with('user')->findOrFail($id);
+        return view('admin.mentorship-booking-detail', compact('booking'));
+    }
+
+    /**
+     * Update mentorship booking status
+     */
+    public function updateMentorshipBookingStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,confirmed,completed,cancelled',
+            'scheduled_at' => 'nullable|date',
+            'admin_notes' => 'nullable|string',
+        ]);
+
+        $booking = MentorshipBooking::findOrFail($id);
+        $booking->update($request->only('status', 'scheduled_at', 'admin_notes'));
+
+        return redirect()->back()->with('success', 'Booking status updated successfully!');
+    }
+
+    /**
+     * Display all advice requests
+     */
+    public function adviceRequests(Request $request)
+    {
+        $query = AdviceRequest::with('user')->latest();
+
+        if ($request->has('status') && $request->status != 'all') {
+            $query->where('status', $request->status);
+        }
+
+        $requests = $query->paginate(20);
+
+        return view('admin.advice-requests', compact('requests'));
+    }
+
+    /**
+     * View single advice request
+     */
+    public function showAdviceRequest($id)
+    {
+        $request = AdviceRequest::with('user')->findOrFail($id);
+        return view('admin.advice-request-detail', compact('request'));
+    }
+
+    /**
+     * Update advice request status
+     */
+    public function updateAdviceRequestStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:pending,answered,closed',
+            'advice_response' => 'nullable|string',
+        ]);
+
+        $adviceRequest = AdviceRequest::findOrFail($id);
+        $adviceRequest->status = $request->status;
+
+        if ($request->advice_response) {
+            $adviceRequest->advice_response = $request->advice_response;
+            $adviceRequest->responded_at = now();
+        }
+
+        $adviceRequest->save();
+
+        return redirect()->back()->with('success', 'Advice request updated successfully!');
     }
 }

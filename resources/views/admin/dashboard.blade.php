@@ -316,6 +316,130 @@
                 </div>
             </div>
 
+            <!-- Scholar Submissions Statistics -->
+            <div class="bg-gradient-to-br from-white to-gray-50 overflow-hidden shadow-2xl rounded-2xl mb-8 border border-gray-200 animate-fadeInUp"
+                style="animation-delay: 0.65s">
+                <div class="px-6 py-5 border-b border-gray-200 bg-white">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center">
+                            <svg class="h-6 w-6 text-indigo-600 mr-3" fill="none" stroke="currentColor"
+                                viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253">
+                                </path>
+                            </svg>
+                            <h3 class="text-xl font-bold text-gray-900">Scholar Submissions</h3>
+                        </div>
+                        <span class="text-xs font-medium text-indigo-600 bg-indigo-50 px-3 py-1 rounded-full">Active
+                            Scholars</span>
+                    </div>
+                </div>
+                <div class="p-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4">
+                        <!-- Scholar Requests -->
+                        <a href="{{ route('admin.scholar-requests') }}"
+                            class="group flex flex-col p-5 bg-white rounded-xl hover:bg-blue-50 transition-all duration-300 border-2 border-transparent hover:border-blue-200 shadow-md hover:shadow-lg">
+                            <div class="flex items-center justify-between mb-3">
+                                <div
+                                    class="flex-shrink-0 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg p-3 shadow-lg group-hover:scale-110 transition-transform">
+                                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                    </svg>
+                                </div>
+                                @if ($pendingScholarRequests > 0)
+                                    <span
+                                        class="bg-red-500 text-white text-xs font-bold px-2 py-1 rounded-full pulse-icon">{{ $pendingScholarRequests }}</span>
+                                @endif
+                            </div>
+                            <div class="text-2xl font-bold text-gray-900">{{ $totalScholarRequests }}</div>
+                            <span class="text-sm font-medium text-gray-600 mt-1">Requests</span>
+                        </a>
+
+                        <!-- Academic Reports -->
+                        <a href="{{ route('admin.academic-reports') }}"
+                            class="group flex flex-col p-5 bg-white rounded-xl hover:bg-green-50 transition-all duration-300 border-2 border-transparent hover:border-green-200 shadow-md hover:shadow-lg">
+                            <div class="flex items-center justify-between mb-3">
+                                <div
+                                    class="flex-shrink-0 bg-gradient-to-br from-green-500 to-green-600 rounded-lg p-3 shadow-lg group-hover:scale-110 transition-transform">
+                                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                </div>
+                                @if ($pendingAcademicReports > 0)
+                                    <span
+                                        class="bg-yellow-500 text-white text-xs font-bold px-2 py-1 rounded-full">{{ $pendingAcademicReports }}</span>
+                                @endif
+                            </div>
+                            <div class="text-2xl font-bold text-gray-900">{{ $totalAcademicReports }}</div>
+                            <span class="text-sm font-medium text-gray-600 mt-1">Reports</span>
+                        </a>
+
+                        <!-- Challenge Reports -->
+                        <a href="{{ route('admin.challenge-reports') }}"
+                            class="group flex flex-col p-5 bg-white rounded-xl hover:bg-yellow-50 transition-all duration-300 border-2 border-transparent hover:border-yellow-200 shadow-md hover:shadow-lg">
+                            <div class="flex items-center justify-between mb-3">
+                                <div
+                                    class="flex-shrink-0 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-lg p-3 shadow-lg group-hover:scale-110 transition-transform">
+                                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                                </div>
+                                @if ($criticalChallenges > 0)
+                                    <span
+                                        class="bg-red-600 text-white text-xs font-bold px-2 py-1 rounded-full pulse-icon">{{ $criticalChallenges }}</span>
+                                @endif
+                            </div>
+                            <div class="text-2xl font-bold text-gray-900">{{ $totalChallengeReports }}</div>
+                            <span class="text-sm font-medium text-gray-600 mt-1">Challenges</span>
+                        </a>
+
+                        <!-- Mentorship Bookings -->
+                        <a href="{{ route('admin.mentorship-bookings') }}"
+                            class="group flex flex-col p-5 bg-white rounded-xl hover:bg-purple-50 transition-all duration-300 border-2 border-transparent hover:border-purple-200 shadow-md hover:shadow-lg">
+                            <div class="flex items-center justify-between mb-3">
+                                <div
+                                    class="flex-shrink-0 bg-gradient-to-br from-purple-500 to-purple-600 rounded-lg p-3 shadow-lg group-hover:scale-110 transition-transform">
+                                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                                </div>
+                                @if ($pendingMentorshipBookings > 0)
+                                    <span
+                                        class="bg-blue-500 text-white text-xs font-bold px-2 py-1 rounded-full">{{ $pendingMentorshipBookings }}</span>
+                                @endif
+                            </div>
+                            <div class="text-2xl font-bold text-gray-900">{{ $totalMentorshipBookings }}</div>
+                            <span class="text-sm font-medium text-gray-600 mt-1">Bookings</span>
+                        </a>
+
+                        <!-- Advice Requests -->
+                        <a href="{{ route('admin.advice-requests') }}"
+                            class="group flex flex-col p-5 bg-white rounded-xl hover:bg-indigo-50 transition-all duration-300 border-2 border-transparent hover:border-indigo-200 shadow-md hover:shadow-lg">
+                            <div class="flex items-center justify-between mb-3">
+                                <div
+                                    class="flex-shrink-0 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-lg p-3 shadow-lg group-hover:scale-110 transition-transform">
+                                    <svg class="h-6 w-6 text-white" fill="none" stroke="currentColor"
+                                        viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                                </div>
+                                @if ($pendingAdviceRequests > 0)
+                                    <span
+                                        class="bg-orange-500 text-white text-xs font-bold px-2 py-1 rounded-full">{{ $pendingAdviceRequests }}</span>
+                                @endif
+                            </div>
+                            <div class="text-2xl font-bold text-gray-900">{{ $totalAdviceRequests }}</div>
+                            <span class="text-sm font-medium text-gray-600 mt-1">Advice</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
             <!-- Recent Applications & User Management -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
                 <!-- Recent Applications -->
@@ -431,37 +555,25 @@
                                         <svg class="h-7 w-7 text-white" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.025 12.025 0 003 12a12.025 12.025 0 001.382 5.618A11.955 11.955 0 0112 21.056a11.955 11.955 0 008.618-3.04A12.025 12.025 0 0021 12a12.025 12.025 0 00-1.382-5.618A11.955 11.955 0 0112 2.944z">
+                                            </path>
                                         </svg>
                                     </div>
                                     <div class="ml-4">
-                                        <p class="text-sm font-bold text-gray-900">Admin Users</p>
-                                        <p class="text-xs text-gray-600 mt-0.5">Full system access</p>
+                                        <p class="text-sm font-medium text-gray-900">Total Users</p>
+                                        <p class="text-2xl font-bold text-gray-800">{{ $totalUsers }}</p>
                                     </div>
                                 </div>
-                                <div class="text-3xl font-extrabold text-purple-600">
-                                    {{ \App\Models\User::where('role', 'admin')->count() }}
-                                </div>
-                            </div>
-
-                            <div
-                                class="flex items-center justify-between p-5 bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                                <div class="flex items-center">
-                                    <div
-                                        class="flex-shrink-0 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-3 shadow-lg">
-                                        <svg class="h-7 w-7 text-white" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
+                                <div class="flex-shrink-0">
+                                    <a href="{{ route('admin.users') }}"
+                                        class="inline-flex items-center px-3 py-1.5 text-xs font-bold rounded-full bg-purple-100 text-purple-600 hover:bg-purple-200 transition-all duration-300">
+                                        View all
+                                        <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                                d="M9 5l7 7-7 7"></path>
                                         </svg>
-                                    </div>
-                                    <div class="ml-4">
-                                        <p class="text-sm font-bold text-gray-900">Applicants</p>
-                                        <p class="text-xs text-gray-600 mt-0.5">Registered applicants</p>
-                                    </div>
-                                </div>
-                                <div class="text-3xl font-extrabold text-blue-600">
-                                    {{ \App\Models\User::where('role', 'applicant')->count() }}
+                                    </a>
                                 </div>
                             </div>
 
@@ -473,191 +585,111 @@
                                         <svg class="h-7 w-7 text-white" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                        </svg>
+                                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </div>
                                     <div class="ml-4">
-                                        <p class="text-sm font-bold text-gray-900">Scholars</p>
-                                        <p class="text-xs text-gray-600 mt-0.5">Active scholars</p>
+                                        <p class="text-sm font-medium text-gray-900">Approved Users</p>
+                                        <p class="text-2xl font-bold text-gray-800">{{ $approvedUsers }}</p>
                                     </div>
                                 </div>
-                                <div class="text-3xl font-extrabold text-green-600">
-                                    {{ \App\Models\User::where('role', 'scholar')->count() }}
-                                </div>
-                            </div>
-
-                            <div class="mt-6">
-                                <a href="{{ route('admin.users') }}"
-                                    class="w-full flex items-center justify-center px-5 py-4 border-2 border-purple-200 text-sm font-bold rounded-xl text-white bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                                    <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
-                                    Manage All Users
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Visitor Tracking Summary -->
-                <div class="bg-white overflow-hidden shadow-2xl rounded-2xl border border-gray-200 animate-fadeInUp"
-                    style="animation-delay: 0.9s">
-                    <div
-                        class="px-6 py-5 border-b border-gray-200 flex justify-between items-center bg-gradient-to-r from-indigo-50 to-white">
-                        <div class="flex items-center">
-                            <div class="bg-indigo-100 rounded-lg p-2 mr-3">
-                                <svg class="h-5 w-5 text-indigo-600" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z">
-                                    </path>
-                                </svg>
-                            </div>
-                            <h3 class="text-lg font-bold text-gray-900">Visitor Tracking</h3>
-                        </div>
-                        <a href="{{ route('admin.analytics') }}"
-                            class="text-sm text-indigo-600 hover:text-indigo-800 font-semibold flex items-center group">
-                            View analytics
-                            <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none"
-                                stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M9 5l7 7-7 7"></path>
-                            </svg>
-                        </a>
-                    </div>
-                    <div class="p-6">
-                        <div class="space-y-4">
-                            <div
-                                class="flex items-center justify-between p-5 bg-gradient-to-r from-indigo-50 to-indigo-100 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                                <div class="flex items-center">
-                                    <div
-                                        class="flex-shrink-0 bg-gradient-to-br from-indigo-500 to-indigo-600 rounded-xl p-3 shadow-lg">
-                                        <svg class="h-7 w-7 text-white" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
+                                <div class="flex-shrink-0">
+                                    <a href="{{ route('admin.users', ['status' => 'approved']) }}"
+                                        class="inline-flex items-center px-3 py-1.5 text-xs font-bold rounded-full bg-green-100 text-green-600 hover:bg-green-200 transition-all duration-300">
+                                        View all
+                                        <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
+                                                d="M9 5l7 7-7 7"></path>
                                         </svg>
-                                    </div>
-                                    <div class="ml-4">
-                                        <p class="text-sm font-bold text-gray-900">Visits Today</p>
-                                        <p class="text-xs text-gray-600 mt-0.5">Unique visitors today</p>
-                                    </div>
-                                </div>
-                                <div class="text-3xl font-extrabold text-indigo-600">
-                                    {{ \App\Models\Visitor::whereDate('last_visit_at', today())->count() }}
+                                    </a>
                                 </div>
                             </div>
 
                             <div
-                                class="flex items-center justify-between p-5 bg-gradient-to-r from-blue-50 to-blue-100 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                class="flex items-center justify-between p-5 bg-gradient-to-r from-red-50 to-red-100 rounded-xl shadow-sm hover:shadow-md transition-shadow">
                                 <div class="flex items-center">
                                     <div
-                                        class="flex-shrink-0 bg-gradient-to-br from-blue-500 to-blue-600 rounded-xl p-3 shadow-lg">
+                                        class="flex-shrink-0 bg-gradient-to-br from-red-500 to-red-600 rounded-xl p-3 shadow-lg">
                                         <svg class="h-7 w-7 text-white" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064" />
-                                        </svg>
+                                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                                     </div>
                                     <div class="ml-4">
-                                        <p class="text-sm font-bold text-gray-900">Total Page Views</p>
-                                        <p class="text-xs text-gray-600 mt-0.5">All time visits</p>
+                                        <p class="text-sm font-medium text-gray-900">Rejected Users</p>
+                                        <p class="text-2xl font-bold text-gray-800">{{ $rejectedUsers }}</p>
                                     </div>
                                 </div>
-                                <div class="text-3xl font-extrabold text-blue-600">
-                                    {{ \App\Models\Visitor::sum('visit_count') }}
+                                <div class="flex-shrink-0">
+                                    <a href="{{ route('admin.users', ['status' => 'rejected']) }}"
+                                        class="inline-flex items-center px-3 py-1.5 text-xs font-bold rounded-full bg-red-100 text-red-600 hover:bg-red-200 transition-all duration-300">
+                                        View all
+                                        <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M9 5l7 7-7 7"></path>
+                                        </svg>
+                                    </a>
                                 </div>
                             </div>
 
                             <div
-                                class="flex items-center justify-between p-5 bg-gradient-to-r from-green-50 to-green-100 rounded-xl shadow-sm hover:shadow-md transition-shadow">
+                                class="flex items-center justify-between p-5 bg-gradient-to-r from-yellow-50 to-yellow-100 rounded-xl shadow-sm hover:shadow-md transition-shadow">
                                 <div class="flex items-center">
                                     <div
-                                        class="flex-shrink-0 bg-gradient-to-br from-green-500 to-green-600 rounded-xl p-3 shadow-lg">
+                                        class="flex-shrink-0 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-xl p-3 shadow-lg">
                                         <svg class="h-7 w-7 text-white" fill="none" stroke="currentColor"
                                             viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        </svg>
+                                                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                     </div>
                                     <div class="ml-4">
-                                        <p class="text-sm font-bold text-gray-900">Top Country</p>
-                                        <p class="text-xs text-gray-600 mt-0.5">Most visitors from</p>
+                                        <p class="text-sm font-medium text-gray-900">Pending Users</p>
+                                        <p class="text-2xl font-bold text-gray-800">{{ $pendingUsers }}</p>
                                     </div>
                                 </div>
-                                <div class="text-right">
-                                    @php
-                                        $topCountry = \App\Models\Visitor::selectRaw('country, COUNT(*) as count')
-                                            ->whereNotNull('country')
-                                            ->groupBy('country')
-                                            ->orderBy('count', 'desc')
-                                            ->first();
-                                    @endphp
-                                    <div class="text-3xl font-extrabold text-green-600">
-                                        {{ $topCountry ? $topCountry->count : 0 }}
-                                    </div>
-                                    <div class="text-xs text-gray-600 mt-1 font-semibold">
-                                        {{ $topCountry ? $topCountry->country : 'N/A' }}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div
-                                class="flex items-center justify-between p-5 bg-gradient-to-r from-purple-50 to-purple-100 rounded-xl shadow-sm hover:shadow-md transition-shadow">
-                                <div class="flex items-center">
-                                    <div
-                                        class="flex-shrink-0 bg-gradient-to-br from-purple-500 to-purple-600 rounded-xl p-3 shadow-lg">
-                                        <svg class="h-7 w-7 text-white" fill="none" stroke="currentColor"
-                                            viewBox="0 0 24 24">
+                                <div class="flex-shrink-0">
+                                    <a href="{{ route('admin.users', ['status' => 'pending']) }}"
+                                        class="inline-flex items-center px-3 py-1.5 text-xs font-bold rounded-full bg-yellow-100 text-yellow-600 hover:bg-yellow-200 transition-all duration-300">
+                                        View all
+                                        <svg class="w-3 h-3 ml-1" fill="none" stroke="currentColor"
+                                            viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+                                                d="M9 5l7 7-7 7"></path>
                                         </svg>
-                                    </div>
-                                    <div class="ml-4">
-                                        <p class="text-sm font-bold text-gray-900">Top State</p>
-                                        <p class="text-xs text-gray-600 mt-0.5">Most visitors from</p>
-                                    </div>
+                                    </a>
                                 </div>
-                                <div class="text-right">
-                                    @php
-                                        $topState = \App\Models\Visitor::selectRaw('state, COUNT(*) as count')
-                                            ->whereNotNull('state')
-                                            ->groupBy('state')
-                                            ->orderBy('count', 'desc')
-                                            ->first();
-                                    @endphp
-                                    <div class="text-3xl font-extrabold text-purple-600">
-                                        {{ $topState ? $topState->count : 0 }}
-                                    </div>
-                                    <div class="text-xs text-gray-600 mt-1 font-semibold">
-                                        {{ $topState ? $topState->state : 'N/A' }}
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="mt-6">
-                                <a href="{{ route('admin.analytics') }}"
-                                    class="w-full flex items-center justify-center px-5 py-4 border-2 border-indigo-200 text-sm font-bold rounded-xl text-white bg-gradient-to-r from-indigo-600 to-indigo-700 hover:from-indigo-700 hover:to-indigo-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-0.5">
-                                    <svg class="h-5 w-5 mr-2" fill="none" stroke="currentColor"
-                                        viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                    </svg>
-                                    View Detailed Analytics
-                                </a>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+        <!-- Message Tray -->
+        <div class="bg-white rounded-xl shadow-lg p-6 border border-gray-200 mt-6">
+            <h3 class="text-xl font-semibold text-gray-900 mb-4">Message Tray</h3>
+            <div id="message-tray" class="space-y-3">
+                <!-- Messages will be dynamically loaded here -->
+            </div>
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    fetch('/messages/tray')
+                        .then(response => response.json())
+                        .then(messages => {
+                            const tray = document.getElementById('message-tray');
+                            tray.innerHTML = '';
+                            if (messages.length === 0) {
+                                tray.innerHTML = '<p class="text-gray-500">No messages yet.</p>';
+                            } else {
+                                messages.forEach(msg => {
+                                    tray.innerHTML +=
+                                        `<div class='p-3 bg-gray-50 rounded border mb-2'><span class='font-semibold'>${msg.content}</span><br><span class='text-xs text-gray-400'>${new Date(msg.created_at).toLocaleString()}</span></div>`;
+                                });
+                            }
+                        });
+                });
+            </script>
+        </div>
+    </div>
     </div>
 </x-app-layout>

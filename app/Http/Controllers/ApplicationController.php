@@ -191,10 +191,25 @@ class ApplicationController extends Controller
             $applicantUser = User::find($application->user_id);
             if ($applicantUser) {
                 Mail::to($applicantUser->email)->send(new ApplicationSubmitted($application));
+                // Log message to tray
+                \App\Models\Message::create([
+                    'sender_id' => auth()->id() ?? 1, // 1 = system/admin
+                    'receiver_id' => $applicantUser->id,
+                    'content' => 'Your application was submitted successfully. Application ID: ' . $application->application_id,
+                ]);
             }
 
             // Send notification email to admin
             Mail::to(config('mail.admin.address'))->send(new ApplicationSubmittedAdmin($application, $applicantUser));
+            // Log message to tray for admin
+            $adminUser = \App\Models\User::where('email', config('mail.admin.address'))->first();
+            if ($adminUser) {
+                \App\Models\Message::create([
+                    'sender_id' => $applicantUser ? $applicantUser->id : 1,
+                    'receiver_id' => $adminUser->id,
+                    'content' => 'A new application was submitted. Application ID: ' . $application->application_id,
+                ]);
+            }
 
             return response()->json([
                 'success' => true,
