@@ -177,7 +177,7 @@ Policy Statement           </div>
             <h3>3.2 Performance-Based Continuation</h3>
             <p>Funding for subsequent academic years is contingent upon the Beneficiary's academic performance.</p>
             <ul class="list-disc ml-6 space-y-2">
-                <li>Continuation: Beneficiaries must maintain a minimum Cumulative Grade Point Average (CGPA) of 3.5/5.0 (or equivalent).</li>
+                <li>Continuation: Beneficiaries must maintain a minimum Cumulative Grade Point Average (CGPA) of 4.0/5.0 (or equivalent).</li>
                 <li>Incentives: Beneficiaries who achieve First Class status (4.5/5.0 or equivalent) may be awarded full subsequent funding (up to the maximum cap).</li>
                 <li>Suspension: If a Beneficiary's CGPA falls below the minimum requirement, funding may be suspended for the following year until the standard is met.</li>
             </ul>
