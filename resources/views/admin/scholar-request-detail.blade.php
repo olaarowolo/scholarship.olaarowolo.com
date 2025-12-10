@@ -84,7 +84,7 @@
                             <div>
                                 <label class="block text-sm font-medium text-gray-500 mb-1">Request Type</label>
                                 <p class="text-lg font-semibold text-gray-900">
-                                    {{ ucfirst(str_replace('_', ' ', $request->type ?? 'General Request')) }}
+                                    {{ ucfirst(str_replace('_', ' ', $request->request_type ?? 'General Request')) }}
                                 </p>
                             </div>
 
@@ -98,15 +98,15 @@
                                 <label class="block text-sm font-medium text-gray-500 mb-1">Message</label>
                                 <div class="mt-2 p-4 bg-gray-50 rounded-lg border border-gray-200">
                                     <p class="text-gray-900 whitespace-pre-wrap">
-                                        {{ $request->message ?? 'No message provided' }}</p>
+                                        {{ $request->description ?? 'No message provided' }}</p>
                                 </div>
                             </div>
 
-                            @if ($request->attachments)
+                            @if ($request->attachments && count($request->attachments) > 0)
                                 <div>
                                     <label class="block text-sm font-medium text-gray-500 mb-1">Attachments</label>
                                     <div class="mt-2 space-y-2">
-                                        @foreach (json_decode($request->attachments, true) ?? [] as $attachment)
+                                        @foreach ($request->attachments as $attachment)
                                             <a href="{{ Storage::url($attachment) }}" target="_blank"
                                                 class="flex items-center space-x-2 text-blue-600 hover:text-blue-800">
                                                 <svg class="w-5 h-5" fill="none" stroke="currentColor"

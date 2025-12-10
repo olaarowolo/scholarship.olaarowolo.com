@@ -5,6 +5,7 @@ namespace App\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
+use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
@@ -51,6 +52,16 @@ class AdminScholarRequestNotification extends Mailable
      */
     public function attachments(): array
     {
-        return [];
+        $attachments = [];
+        if ($this->request->attachments) {
+            foreach ($this->request->attachments as $filePath) {
+                $fullPath = storage_path('app/public/' . $filePath);
+                if (file_exists($fullPath)) {
+                    $fileName = basename($filePath);
+                    $attachments[] = Attachment::fromPath($fullPath)->as($fileName);
+                }
+            }
+        }
+        return $attachments;
     }
 }

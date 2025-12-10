@@ -65,10 +65,22 @@ class ScholarController extends Controller
             'subject' => 'required|string|max:255',
             'description' => 'required|string',
             'priority' => 'required|in:low,medium,high',
+            'attachments' => 'nullable|array',
+            'attachments.*' => 'file|mimes:pdf,doc,docx,jpg,jpeg,png|max:5120', // 5MB max
         ]);
+
+        // Handle file uploads
+        $attachments = [];
+        if ($request->hasFile('attachments')) {
+            foreach ($request->file('attachments') as $file) {
+                $path = $file->store('scholar_requests', 'public');
+                $attachments[] = $path;
+            }
+        }
 
         $validated['user_id'] = Auth::id();
         $validated['status'] = 'pending';
+        $validated['attachments'] = $attachments;
 
         $scholarRequest = ScholarRequest::create($validated);
 

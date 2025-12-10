@@ -15,11 +15,13 @@ class ScholarRequest extends Model
         'priority',
         'status',
         'admin_notes',
+        'attachments',
     ];
 
     protected $casts = [
         'created_at' => 'datetime',
         'updated_at' => 'datetime',
+        'attachments' => 'array',
     ];
 
     public function user(): BelongsTo
