@@ -1,0 +1,84 @@
+[02-Dec-2025 04:01:12 America/Chicago] PHP Warning:  require(/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:01:12 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php83/root/usr/share/pear') in /home1/httprapu/scholarship.olaarowolo.com/public/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:04:40 America/Chicago] PHP Warning:  require(/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php): failed to open stream: No such file or directory in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:04:40 America/Chicago] PHP Fatal error:  require(): Failed opening required '/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:04:51 America/Chicago] PHP Warning:  require(/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php): failed to open stream: No such file or directory in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:04:51 America/Chicago] PHP Fatal error:  require(): Failed opening required '/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php74/root/usr/share/pear') in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:05:13 America/Chicago] PHP Warning:  require(/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:05:13 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php80/root/usr/share/pear') in /home1/httprapu/scholarship.olaarowolo.com/public/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:05:24 America/Chicago] PHP Warning:  require(/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:05:24 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php83/root/usr/share/pear') in /home1/httprapu/scholarship.olaarowolo.com/public/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:06:39 America/Chicago] PHP Warning:  require(/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:06:39 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home1/httprapu/scholarship.olaarowolo.com/public/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:08:21 America/Chicago] PHP Warning:  require(/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:08:21 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home1/httprapu/scholarship.olaarowolo.com/public/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:08:24 America/Chicago] PHP Warning:  require(/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:08:24 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home1/httprapu/scholarship.olaarowolo.com/public/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:09:13 America/Chicago] PHP Warning:  require(/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:09:13 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home1/httprapu/scholarship.olaarowolo.com/public/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:09:36 America/Chicago] PHP Warning:  require(/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:09:36 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home1/httprapu/scholarship.olaarowolo.com/public/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:11:11 America/Chicago] PHP Warning:  require(/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php): Failed to open stream: No such file or directory in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:11:11 America/Chicago] PHP Fatal error:  Uncaught Error: Failed opening required '/home1/httprapu/scholarship.olaarowolo.com/public/../vendor/autoload.php' (include_path='.:/opt/cpanel/ea-php82/root/usr/share/pear') in /home1/httprapu/scholarship.olaarowolo.com/public/index.php:14
+Stack trace:
+#0 {main}
+  thrown in /home1/httprapu/scholarship.olaarowolo.com/public/index.php on line 14
+[02-Dec-2025 04:13:43 America/Chicago] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 7.4.33. in /home1/httprapu/scholarship.olaarowolo.com/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home1/httprapu/scholarship.olaarowolo.com/vendor/composer/autoload_real.php(25): require()
+#1 /home1/httprapu/scholarship.olaarowolo.com/vendor/autoload.php(22): ComposerAutoloaderInitc514d8f7b9fc5970bdd94287905ef584::getLoader()
+#2 /home1/httprapu/scholarship.olaarowolo.com/public/index.php(14): require('/home1/httprapu...')
+#3 {main}
+  thrown in /home1/httprapu/scholarship.olaarowolo.com/vendor/composer/platform_check.php on line 22
+[02-Dec-2025 04:13:50 America/Chicago] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.0.30. in /home1/httprapu/scholarship.olaarowolo.com/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home1/httprapu/scholarship.olaarowolo.com/vendor/composer/autoload_real.php(25): require()
+#1 /home1/httprapu/scholarship.olaarowolo.com/vendor/autoload.php(22): ComposerAutoloaderInitc514d8f7b9fc5970bdd94287905ef584::getLoader()
+#2 /home1/httprapu/scholarship.olaarowolo.com/public/index.php(14): require('/home1/httprapu...')
+#3 {main}
+  thrown in /home1/httprapu/scholarship.olaarowolo.com/vendor/composer/platform_check.php on line 22
+[02-Dec-2025 04:13:54 America/Chicago] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.0.30. in /home1/httprapu/scholarship.olaarowolo.com/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home1/httprapu/scholarship.olaarowolo.com/vendor/composer/autoload_real.php(25): require()
+#1 /home1/httprapu/scholarship.olaarowolo.com/vendor/autoload.php(22): ComposerAutoloaderInitc514d8f7b9fc5970bdd94287905ef584::getLoader()
+#2 /home1/httprapu/scholarship.olaarowolo.com/public/index.php(14): require('/home1/httprapu...')
+#3 {main}
+  thrown in /home1/httprapu/scholarship.olaarowolo.com/vendor/composer/platform_check.php on line 22
+[02-Dec-2025 04:14:02 America/Chicago] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.0.30. in /home1/httprapu/scholarship.olaarowolo.com/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home1/httprapu/scholarship.olaarowolo.com/vendor/composer/autoload_real.php(25): require()
+#1 /home1/httprapu/scholarship.olaarowolo.com/vendor/autoload.php(22): ComposerAutoloaderInitc514d8f7b9fc5970bdd94287905ef584::getLoader()
+#2 /home1/httprapu/scholarship.olaarowolo.com/public/index.php(14): require('/home1/httprapu...')
+#3 {main}
+  thrown in /home1/httprapu/scholarship.olaarowolo.com/vendor/composer/platform_check.php on line 22
+[02-Dec-2025 04:14:07 America/Chicago] PHP Fatal error:  Uncaught RuntimeException: Composer detected issues in your platform: Your Composer dependencies require a PHP version ">= 8.2.0". You are running 8.0.30. in /home1/httprapu/scholarship.olaarowolo.com/vendor/composer/platform_check.php:22
+Stack trace:
+#0 /home1/httprapu/scholarship.olaarowolo.com/vendor/composer/autoload_real.php(25): require()
+#1 /home1/httprapu/scholarship.olaarowolo.com/vendor/autoload.php(22): ComposerAutoloaderInitc514d8f7b9fc5970bdd94287905ef584::getLoader()
+#2 /home1/httprapu/scholarship.olaarowolo.com/public/index.php(14): require('/home1/httprapu...')
+#3 {main}
+  thrown in /home1/httprapu/scholarship.olaarowolo.com/vendor/composer/platform_check.php on line 22
