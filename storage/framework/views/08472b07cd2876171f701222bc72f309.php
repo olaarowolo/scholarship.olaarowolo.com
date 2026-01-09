@@ -35,35 +35,35 @@
         $badgeClass = $statusColors[$application->status] ?? 'bg-gray-100 text-gray-800';
     ?>
 
+    <?php $__env->startSection('admin_breadcrumb'); ?>
+        <nav class="text-sm" aria-label="Breadcrumb">
+            <ol class="list-reset flex items-center space-x-2 text-gray-500">
+                <li>
+                    <a href="<?php echo e(route('admin.applications')); ?>" class="hover:text-gray-700">Applications</a>
+                </li>
+                <li><span class="text-gray-400">/</span></li>
+                <li class="text-gray-700"><?php echo e($application->application_id); ?></li>
+            </ol>
+        </nav>
+    <?php $__env->stopSection(); ?>
+
     <!-- Application Detail Content -->
     <div class="min-h-screen bg-gray-50">
         <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-            <!-- Header -->
-            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6 mb-6">
-                <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center">
-                    <div>
-                        <a href="<?php echo e(route('admin.applications')); ?>"
-                            class="inline-flex items-center px-4 py-2 bg-gray-100 hover:bg-gray-200 text-gray-700 rounded-lg font-medium transition duration-200 mb-4">
-                            <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
-                            </svg>
-                            Back to Applications
-                        </a>
-                        <h1 class="text-3xl font-bold text-gray-900">Application Details</h1>
-                        <p class="mt-1 text-lg text-gray-600">Application ID: <span class="font-mono text-sm bg-gray-100 px-2 py-1 rounded"><?php echo e($application->application_id); ?></span></p>
-                    </div>
-                    <div class="flex items-center space-x-4 mt-4 sm:mt-0">
-                        <span class="px-4 py-2 rounded-full text-sm font-semibold <?php echo e($badgeClass); ?>">
-                            <?php echo e(ucfirst($application->status)); ?>
+            <?php echo $__env->make('admin._header', [
+                'title' => 'Application Details',
+                'subtitle' => 'Application ID: ' . ($application->application_id ?? 'N/A'),
+                'actions' => '<a href="'.route('admin.applications').'" class="bg-gray-200 text-gray-800 hover:bg-gray-300 px-4 py-2 rounded-full text-sm font-semibold transition duration-200">← Back to Applications</a>'
+            ], array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 
-                        </span>
-                        <div class="text-right">
-                            <p class="text-sm text-gray-500">Submitted</p>
-                            <p class="text-sm font-medium text-gray-900"><?php echo e($application->created_at->format('M d, Y H:i')); ?></p>
-                            <p class="text-sm text-gray-500">Last Updated</p>
-                            <p class="text-sm font-medium text-gray-900"><?php echo e($application->updated_at->format('M d, Y H:i')); ?></p>
-                        </div>
-                    </div>
+            <div class="mb-6 flex items-center justify-end space-x-4">
+                <span class="inline-flex items-center px-3 py-1.5 text-sm font-semibold rounded-full <?php echo e($badgeClass); ?>">
+                    <?php echo e(ucfirst(str_replace('_',' ', $application->status))); ?>
+
+                </span>
+                <div class="text-right text-sm text-gray-500">
+                    <div>Submitted: <span class="font-medium text-gray-900"><?php echo e($application->created_at->format('M d, Y H:i')); ?></span></div>
+                    <div>Last Updated: <span class="font-medium text-gray-900"><?php echo e($application->updated_at->format('M d, Y H:i')); ?></span></div>
                 </div>
             </div>
 

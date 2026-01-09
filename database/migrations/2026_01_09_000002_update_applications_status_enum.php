@@ -14,6 +14,8 @@ return new class extends Migration
     {
         // For SQLite, recreate the table with the new enum values
         if (Schema::getConnection()->getDriverName() === 'sqlite') {
+            // Ensure leftover temp table from previous failed runs is removed
+            Schema::dropIfExists('applications_temp');
             Schema::create('applications_temp', function (Blueprint $table) {
                 $table->id();
                 $table->string('application_id')->unique();
@@ -34,7 +36,7 @@ return new class extends Migration
                 $table->string('gender')->nullable();
                 $table->string('state_of_origin')->nullable();
                 $table->string('lga_of_origin')->nullable();
-                $table->boolean('is_iba_indigene')->default(false);
+                $table->boolean('is_iba_indigene')->nullable()->default(false);
                 // 'address' already defined above as legacy column; do not duplicate
                 $table->string('institution')->nullable();
                 $table->string('course')->nullable();
@@ -78,6 +80,8 @@ return new class extends Migration
     public function down(): void
     {
         if (Schema::getConnection()->getDriverName() === 'sqlite') {
+            // Ensure leftover temp table from previous failed runs is removed
+            Schema::dropIfExists('applications_temp');
             Schema::create('applications_temp', function (Blueprint $table) {
                 $table->id();
                 $table->string('application_id')->unique();
@@ -98,7 +102,7 @@ return new class extends Migration
                 $table->string('gender')->nullable();
                 $table->string('state_of_origin')->nullable();
                 $table->string('lga_of_origin')->nullable();
-                $table->boolean('is_iba_indigene')->default(false);
+                $table->boolean('is_iba_indigene')->nullable()->default(false);
                 // 'address' already defined above as legacy column; do not duplicate
                 $table->string('institution')->nullable();
                 $table->string('course')->nullable();
