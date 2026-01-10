@@ -3,7 +3,10 @@ name: 🚀 FTP Deployment
 on:
   push:
     branches:
+      - main
       - master
+    tags:
+      - 'v*'
 
 jobs:
   deploy:
@@ -12,6 +15,28 @@ jobs:
     steps:
       - name: 📥 Checkout Repository
         uses: actions/checkout@v4
+
+      - name: 🛠️ Set up PHP 8.2
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: 8.2
+          tools: composer
+
+      - name: 📦 Install Composer dependencies
+        run: composer install --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: 🧰 Check for package.json
+        id: pkg
+        run: |
+          if [ -f package.json ]; then echo "exists=true" >> "$GITHUB_OUTPUT"; else echo "exists=false" >> "$GITHUB_OUTPUT"; fi
+
+      - name: 🧰 Install Node (if present) and build assets
+        if: steps.pkg.outputs.exists == 'true'
+        run: |
+          curl -sL https://deb.nodesource.com/setup_18.x | sudo -E bash -
+          sudo apt-get install -y nodejs
+          npm ci --silent
+          npm run build --if-present
 
       - name: 📤 Upload to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
@@ -34,3 +59,6 @@ jobs:
             node_modules/**
             vendor/**
             .vscode/**
+            storage/framework/views/**
+            storage/logs/**
+            storage/debugbar/**
