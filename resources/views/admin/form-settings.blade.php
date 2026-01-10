@@ -1,6 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Form Settings') }}
+        </h2>
+    </x-slot>
     <script src="https://cdn.tailwindcss.com"></script>
 
     @section('admin_breadcrumb')
@@ -124,6 +129,4 @@
             </div>
         </div>
     </div>
-
-    @include('partials.footer')
 @endsection

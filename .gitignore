@@ -1,0 +1,21 @@
+# Ignore live SQLite database
+/database/database.sqlite
+/database/database.sqlite.bak
+
+# Ignore all sqlite temporary/backups in database folder
+/database/*.sqlite*
+
+# Dependency directories
+/vendor/
+/node_modules/
+
+# IDE and OS files
+/.idea/
+*.sublime-workspace
+*.sublime-project
+.DS_Store
+Thumbs.db
+
+# Laravel environment
+.env
+.env.*.php

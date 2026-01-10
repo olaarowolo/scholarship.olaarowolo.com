@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('layouts.admin')
+
+@section('content')
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Application Details') }}
@@ -50,22 +52,22 @@
                         <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                             @if ($application->passport_photo)
                                 <div>
-                                    <p><strong>Passport Photo:</strong></p>
-                                    <img src="{{ Storage::url($application->passport_photo) }}" alt="Passport Photo"
+                                    <p><strong>Passport</strong></p>
+                                    <img src="{{ Storage::url($application->passport_photo) }}" alt="Passport"
                                         class="w-32 h-32 object-cover rounded">
                                 </div>
                             @endif
                             @if ($application->id_card)
                                 <div>
-                                    <p><strong>ID Card:</strong></p>
-                                    <img src="{{ Storage::url($application->id_card) }}" alt="ID Card"
+                                    <p><strong>ID card</strong></p>
+                                    <img src="{{ Storage::url($application->id_card) }}" alt="ID card"
                                         class="w-32 h-32 object-cover rounded">
                                 </div>
                             @endif
                             @if ($application->jamb_result)
                                 <div>
-                                    <p><strong>JAMB Result:</strong></p>
-                                    <img src="{{ Storage::url($application->jamb_result) }}" alt="JAMB Result"
+                                    <p><strong>JAMB result</strong></p>
+                                    <img src="{{ Storage::url($application->jamb_result) }}" alt="JAMB result"
                                         class="w-32 h-32 object-cover rounded">
                                 </div>
                             @endif
@@ -106,4 +108,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection

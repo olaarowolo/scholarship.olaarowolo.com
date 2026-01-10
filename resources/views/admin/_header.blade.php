@@ -13,7 +13,9 @@
     </div>
 
     <div class="mt-3">
-        @hasSection('admin_breadcrumb')
+        @if(!empty($breadcrumb))
+            {!! $breadcrumb !!}
+        @elseif(View::hasSection('admin_breadcrumb'))
             @yield('admin_breadcrumb')
         @else
             <nav class="text-sm" aria-label="Breadcrumb">

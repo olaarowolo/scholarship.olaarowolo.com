@@ -150,7 +150,6 @@
 
         
         <?php if(auth()->check() && auth()->user()->role === 'admin'): ?>
-            <?php echo $__env->make('admin._menu', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
             <style>
                 @media (max-width: 640px) {
                     main { padding-top: 0.5rem; }

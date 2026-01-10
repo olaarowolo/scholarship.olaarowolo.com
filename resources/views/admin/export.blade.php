@@ -1,6 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Export Data') }}
+        </h2>
+    </x-slot>
     <!-- Load Tailwind CSS configuration -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>

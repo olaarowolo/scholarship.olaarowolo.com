@@ -240,9 +240,13 @@ class AdminController extends Controller
         // Visitor statistics
         $visitorStats = Visitor::getStatistics();
 
+        // Submitted applications (status = 'submitted')
+        $submittedApplications = Application::where('status', 'submitted')->count();
+
         return view('admin.analytics', compact(
             'totalApplications',
             'pendingApplications',
+            'submittedApplications',
             'approvedApplications',
             'rejectedApplications',
             'applicationsByMonth',

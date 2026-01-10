@@ -1,4 +1,10 @@
 <?php $__env->startSection('content'); ?>
+     <?php $__env->slot('header', null, []); ?> 
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <?php echo e(__('Export Data')); ?>
+
+        </h2>
+     <?php $__env->endSlot(); ?>
     <!-- Load Tailwind CSS configuration -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -387,4 +393,4 @@
     </div>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\user\OneDrive\tech.olaarowolo.com\Dev\OAScholarshipLiveApp01092026\resources\views/admin/export.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\user\OneDrive\tech.olaarowolo.com\Dev\OAScholarshipLiveApp01092026\resources\views/admin/export.blade.php ENDPATH**/ ?>

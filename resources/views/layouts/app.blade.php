@@ -150,7 +150,6 @@
 
         {{-- Admin menu (visible to admin users) --}}
         @if(auth()->check() && auth()->user()->role === 'admin')
-            @include('admin._menu')
             <style>
                 @media (max-width: 640px) {
                     main { padding-top: 0.5rem; }

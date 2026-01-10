@@ -1,6 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.admin')
 
 @section('content')
+    <x-slot name="header">
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            {{ __('Request Details') }}
+        </h2>
+    </x-slot>
+
     <style>
         body {
             font-family: 'Inter', sans-serif;

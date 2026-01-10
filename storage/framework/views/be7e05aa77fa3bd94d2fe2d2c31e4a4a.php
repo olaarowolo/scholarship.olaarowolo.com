@@ -1,4 +1,10 @@
 <?php $__env->startSection('content'); ?>
+     <?php $__env->slot('header', null, []); ?> 
+        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
+            <?php echo e(__('Form Settings')); ?>
+
+        </h2>
+     <?php $__env->endSlot(); ?>
     <script src="https://cdn.tailwindcss.com"></script>
 
     <?php $__env->startSection('admin_breadcrumb'); ?>
@@ -124,8 +130,6 @@
             </div>
         </div>
     </div>
-
-    <?php echo $__env->make('partials.footer', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.app', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\user\OneDrive\tech.olaarowolo.com\Dev\OAScholarshipLiveApp01092026\resources\views/admin/form-settings.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\user\OneDrive\tech.olaarowolo.com\Dev\OAScholarshipLiveApp01092026\resources\views/admin/form-settings.blade.php ENDPATH**/ ?>

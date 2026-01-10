@@ -14,7 +14,10 @@
     </div>
 
     <div class="mt-3">
-        <?php if (! empty(trim($__env->yieldContent('admin_breadcrumb')))): ?>
+        <?php if(!empty($breadcrumb)): ?>
+            <?php echo $breadcrumb; ?>
+
+        <?php elseif(View::hasSection('admin_breadcrumb')): ?>
             <?php echo $__env->yieldContent('admin_breadcrumb'); ?>
         <?php else: ?>
             <nav class="text-sm" aria-label="Breadcrumb">
@@ -28,4 +31,5 @@
             </nav>
         <?php endif; ?>
     </div>
-</div><?php /**PATH C:\Users\user\OneDrive\tech.olaarowolo.com\Dev\OAScholarshipLiveApp01092026\resources\views/admin/_header.blade.php ENDPATH**/ ?>
+</div>
+<?php /**PATH C:\Users\user\OneDrive\tech.olaarowolo.com\Dev\OAScholarshipLiveApp01092026\resources\views/admin/_header.blade.php ENDPATH**/ ?>

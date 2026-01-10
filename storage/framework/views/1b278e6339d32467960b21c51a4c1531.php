@@ -1,13 +1,4 @@
-<?php if (isset($component)) { $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54 = $component; } ?>
-<?php if (isset($attributes)) { $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54 = $attributes; } ?>
-<?php $component = App\View\Components\AppLayout::resolve([] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
-<?php $component->withName('app-layout'); ?>
-<?php if ($component->shouldRender()): ?>
-<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
-<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
-<?php $attributes = $attributes->except(\App\View\Components\AppLayout::ignoredParameterNames()); ?>
-<?php endif; ?>
-<?php $component->withAttributes([]); ?>
+<?php $__env->startSection('content'); ?>
      <?php $__env->slot('header', null, []); ?> 
         <div class="flex items-center justify-between">
             <div>
@@ -110,12 +101,10 @@
                             </div>
                             <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Total</span>
                         </div>
-                        <div class="space-y-1">
+                        <dl class="space-y-1">
                             <dt class="text-sm font-semibold text-gray-600">Applications</dt>
-                            <dd class="text-4xl font-extrabold text-gray-900 tracking-tight"><?php echo e($totalApplications); ?>
-
-                            </dd>
-                        </div>
+                            <dd class="text-4xl font-extrabold text-gray-900 tracking-tight"><?php echo e($totalApplications); ?></dd>
+                        </dl>
                         <div class="mt-4 pt-4 border-t border-gray-100">
                             <a href="<?php echo e(route('admin.applications')); ?>"
                                 class="text-blue-600 hover:text-blue-700 text-sm font-semibold flex items-center group">
@@ -145,12 +134,10 @@
                             </div>
                             <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Pending</span>
                         </div>
-                        <div class="space-y-1">
+                        <dl class="space-y-1">
                             <dt class="text-sm font-semibold text-gray-600">Review Needed</dt>
-                            <dd class="text-4xl font-extrabold text-gray-900 tracking-tight"><?php echo e($pendingApplications); ?>
-
-                            </dd>
-                        </div>
+                            <dd class="text-4xl font-extrabold text-gray-900 tracking-tight"><?php echo e($pendingApplications); ?></dd>
+                        </dl>
                         <div class="mt-4 pt-4 border-t border-gray-100">
                             <a href="<?php echo e(route('admin.applications', ['status' => 'pending'])); ?>"
                                 class="text-yellow-600 hover:text-yellow-700 text-sm font-semibold flex items-center group">
@@ -180,12 +167,10 @@
                             </div>
                             <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Approved</span>
                         </div>
-                        <div class="space-y-1">
+                        <dl class="space-y-1">
                             <dt class="text-sm font-semibold text-gray-600">Successful</dt>
-                            <dd class="text-4xl font-extrabold text-gray-900 tracking-tight"><?php echo e($approvedApplications); ?>
-
-                            </dd>
-                        </div>
+                            <dd class="text-4xl font-extrabold text-gray-900 tracking-tight"><?php echo e($approvedApplications); ?></dd>
+                        </dl>
                         <div class="mt-4 pt-4 border-t border-gray-100">
                             <a href="<?php echo e(route('admin.applications', ['status' => 'approved'])); ?>"
                                 class="text-green-600 hover:text-green-700 text-sm font-semibold flex items-center group">
@@ -215,10 +200,10 @@
                             </div>
                             <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Users</span>
                         </div>
-                        <div class="space-y-1">
+                        <dl class="space-y-1">
                             <dt class="text-sm font-semibold text-gray-600">Registered</dt>
                             <dd class="text-4xl font-extrabold text-gray-900 tracking-tight"><?php echo e($totalUsers); ?></dd>
-                        </div>
+                        </dl>
                         <div class="mt-4 pt-4 border-t border-gray-100">
                             <a href="<?php echo e(route('admin.users')); ?>"
                                 class="text-purple-600 hover:text-purple-700 text-sm font-semibold flex items-center group">
@@ -251,11 +236,10 @@
                             </div>
                             <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Traffic</span>
                         </div>
-                        <div class="space-y-1">
+                        <dl class="space-y-1">
                             <dt class="text-sm font-semibold text-gray-600">Total Visitors</dt>
-                            <dd class="text-4xl font-extrabold text-gray-900 tracking-tight">
-                                <?php echo e(\App\Models\Visitor::count()); ?></dd>
-                        </div>
+                            <dd class="text-4xl font-extrabold text-gray-900 tracking-tight"><?php echo e(\App\Models\Visitor::count()); ?></dd>
+                        </dl>
                         <div class="mt-4 pt-4 border-t border-gray-100">
                             <a href="<?php echo e(route('admin.analytics')); ?>"
                                 class="text-indigo-600 hover:text-indigo-700 text-sm font-semibold flex items-center group">
@@ -286,10 +270,10 @@
                             </div>
                             <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Disabled</span>
                         </div>
-                        <div class="space-y-1">
+                        <dl class="space-y-1">
                             <dt class="text-sm font-semibold text-gray-600">Unverified Users</dt>
                             <dd class="text-4xl font-extrabold text-gray-900 tracking-tight"><?php echo e($disabledUsers); ?></dd>
-                        </div>
+                        </dl>
                         <div class="mt-4 pt-4 border-t border-gray-100">
                             <a href="<?php echo e(route('admin.users')); ?>"
                                 class="text-red-600 hover:text-red-700 text-sm font-semibold flex items-center group">
@@ -317,10 +301,10 @@
                             </div>
                             <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Under Review</span>
                         </div>
-                        <div class="space-y-1">
+                        <dl class="space-y-1">
                             <dt class="text-sm font-semibold text-gray-600">Applications Under Review</dt>
                             <dd class="text-4xl font-extrabold text-gray-900 tracking-tight"><?php echo e($underReviewApplications ?? 0); ?></dd>
-                        </div>
+                        </dl>
                         <div class="mt-4 pt-4 border-t border-gray-100">
                             <a href="<?php echo e(route('admin.applications', ['status' => 'under_review'])); ?>" class="text-indigo-600 hover:text-indigo-700 text-sm font-semibold flex items-center group">View applications
                                 <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -343,10 +327,10 @@
                             </div>
                             <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">In Progress</span>
                         </div>
-                        <div class="space-y-1">
+                        <dl class="space-y-1">
                             <dt class="text-sm font-semibold text-gray-600">Applications In Progress</dt>
                             <dd class="text-4xl font-extrabold text-gray-900 tracking-tight"><?php echo e($inProgressApplications ?? 0); ?></dd>
-                        </div>
+                        </dl>
                         <div class="mt-4 pt-4 border-t border-gray-100">
                             <a href="<?php echo e(route('admin.applications', ['status' => 'in_progress'])); ?>" class="text-yellow-600 hover:text-yellow-700 text-sm font-semibold flex items-center group">View applications
                                 <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -810,14 +794,6 @@
         </div>
     </div>
     </div>
- <?php echo $__env->renderComponent(); ?>
-<?php endif; ?>
-<?php if (isset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
-<?php $attributes = $__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
-<?php unset($__attributesOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
-<?php endif; ?>
-<?php if (isset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54)): ?>
-<?php $component = $__componentOriginal9ac128a9029c0e4701924bd2d73d7f54; ?>
-<?php unset($__componentOriginal9ac128a9029c0e4701924bd2d73d7f54); ?>
-<?php endif; ?>
-<?php /**PATH C:\Users\user\OneDrive\tech.olaarowolo.com\Dev\OAScholarshipLiveApp01092026\resources\views/admin/dashboard.blade.php ENDPATH**/ ?>
+<?php $__env->stopSection(); ?>
+
+<?php echo $__env->make('layouts.admin', array_diff_key(get_defined_vars(), ['__data' => 1, '__path' => 1]))->render(); ?><?php /**PATH C:\Users\user\OneDrive\tech.olaarowolo.com\Dev\OAScholarshipLiveApp01092026\resources\views/admin/dashboard.blade.php ENDPATH**/ ?>

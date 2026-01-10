@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('layouts.admin')
+
+@section('content')
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('Analytics Dashboard') }}
@@ -19,6 +21,10 @@
                         <div>
                             <h3 class="text-lg font-semibold mb-4">Applications by Status</h3>
                             <ul class="space-y-2">
+                                <li class="flex justify-between items-center p-3 bg-blue-50 rounded-lg">
+                                    <span class="font-medium text-gray-900">Submitted</span>
+                                    <span class="text-2xl font-bold text-blue-600">{{ $submittedApplications ?? 0 }}</span>
+                                </li>
                                 <li class="flex justify-between items-center p-3 bg-yellow-50 rounded-lg">
                                     <span class="font-medium text-gray-900">Pending</span>
                                     <span class="text-2xl font-bold text-yellow-600">{{ $pendingApplications }}</span>
@@ -339,4 +345,4 @@
             </div>
         </div>
     </div>
-</x-app-layout>
+@endsection

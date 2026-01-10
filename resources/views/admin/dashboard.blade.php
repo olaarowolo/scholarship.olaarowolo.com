@@ -1,4 +1,6 @@
-<x-app-layout>
+@extends('layouts.admin')
+
+@section('content')
     <x-slot name="header">
         <div class="flex items-center justify-between">
             <div>
@@ -99,11 +101,10 @@
                             </div>
                             <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Total</span>
                         </div>
-                        <div class="space-y-1">
+                        <dl class="space-y-1">
                             <dt class="text-sm font-semibold text-gray-600">Applications</dt>
-                            <dd class="text-4xl font-extrabold text-gray-900 tracking-tight">{{ $totalApplications }}
-                            </dd>
-                        </div>
+                            <dd class="text-4xl font-extrabold text-gray-900 tracking-tight">{{ $totalApplications }}</dd>
+                        </dl>
                         <div class="mt-4 pt-4 border-t border-gray-100">
                             <a href="{{ route('admin.applications') }}"
                                 class="text-blue-600 hover:text-blue-700 text-sm font-semibold flex items-center group">
@@ -133,11 +134,10 @@
                             </div>
                             <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Pending</span>
                         </div>
-                        <div class="space-y-1">
+                        <dl class="space-y-1">
                             <dt class="text-sm font-semibold text-gray-600">Review Needed</dt>
-                            <dd class="text-4xl font-extrabold text-gray-900 tracking-tight">{{ $pendingApplications }}
-                            </dd>
-                        </div>
+                            <dd class="text-4xl font-extrabold text-gray-900 tracking-tight">{{ $pendingApplications }}</dd>
+                        </dl>
                         <div class="mt-4 pt-4 border-t border-gray-100">
                             <a href="{{ route('admin.applications', ['status' => 'pending']) }}"
                                 class="text-yellow-600 hover:text-yellow-700 text-sm font-semibold flex items-center group">
@@ -167,11 +167,10 @@
                             </div>
                             <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Approved</span>
                         </div>
-                        <div class="space-y-1">
+                        <dl class="space-y-1">
                             <dt class="text-sm font-semibold text-gray-600">Successful</dt>
-                            <dd class="text-4xl font-extrabold text-gray-900 tracking-tight">{{ $approvedApplications }}
-                            </dd>
-                        </div>
+                            <dd class="text-4xl font-extrabold text-gray-900 tracking-tight">{{ $approvedApplications }}</dd>
+                        </dl>
                         <div class="mt-4 pt-4 border-t border-gray-100">
                             <a href="{{ route('admin.applications', ['status' => 'approved']) }}"
                                 class="text-green-600 hover:text-green-700 text-sm font-semibold flex items-center group">
@@ -201,10 +200,10 @@
                             </div>
                             <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Users</span>
                         </div>
-                        <div class="space-y-1">
+                        <dl class="space-y-1">
                             <dt class="text-sm font-semibold text-gray-600">Registered</dt>
                             <dd class="text-4xl font-extrabold text-gray-900 tracking-tight">{{ $totalUsers }}</dd>
-                        </div>
+                        </dl>
                         <div class="mt-4 pt-4 border-t border-gray-100">
                             <a href="{{ route('admin.users') }}"
                                 class="text-purple-600 hover:text-purple-700 text-sm font-semibold flex items-center group">
@@ -237,11 +236,10 @@
                             </div>
                             <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Traffic</span>
                         </div>
-                        <div class="space-y-1">
+                        <dl class="space-y-1">
                             <dt class="text-sm font-semibold text-gray-600">Total Visitors</dt>
-                            <dd class="text-4xl font-extrabold text-gray-900 tracking-tight">
-                                {{ \App\Models\Visitor::count() }}</dd>
-                        </div>
+                            <dd class="text-4xl font-extrabold text-gray-900 tracking-tight">{{ \App\Models\Visitor::count() }}</dd>
+                        </dl>
                         <div class="mt-4 pt-4 border-t border-gray-100">
                             <a href="{{ route('admin.analytics') }}"
                                 class="text-indigo-600 hover:text-indigo-700 text-sm font-semibold flex items-center group">
@@ -272,10 +270,10 @@
                             </div>
                             <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Disabled</span>
                         </div>
-                        <div class="space-y-1">
+                        <dl class="space-y-1">
                             <dt class="text-sm font-semibold text-gray-600">Unverified Users</dt>
                             <dd class="text-4xl font-extrabold text-gray-900 tracking-tight">{{ $disabledUsers }}</dd>
-                        </div>
+                        </dl>
                         <div class="mt-4 pt-4 border-t border-gray-100">
                             <a href="{{ route('admin.users') }}"
                                 class="text-red-600 hover:text-red-700 text-sm font-semibold flex items-center group">
@@ -303,10 +301,10 @@
                             </div>
                             <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">Under Review</span>
                         </div>
-                        <div class="space-y-1">
+                        <dl class="space-y-1">
                             <dt class="text-sm font-semibold text-gray-600">Applications Under Review</dt>
                             <dd class="text-4xl font-extrabold text-gray-900 tracking-tight">{{ $underReviewApplications ?? 0 }}</dd>
-                        </div>
+                        </dl>
                         <div class="mt-4 pt-4 border-t border-gray-100">
                             <a href="{{ route('admin.applications', ['status' => 'under_review']) }}" class="text-indigo-600 hover:text-indigo-700 text-sm font-semibold flex items-center group">View applications
                                 <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -329,10 +327,10 @@
                             </div>
                             <span class="text-xs font-medium text-gray-400 uppercase tracking-wider">In Progress</span>
                         </div>
-                        <div class="space-y-1">
+                        <dl class="space-y-1">
                             <dt class="text-sm font-semibold text-gray-600">Applications In Progress</dt>
                             <dd class="text-4xl font-extrabold text-gray-900 tracking-tight">{{ $inProgressApplications ?? 0 }}</dd>
-                        </div>
+                        </dl>
                         <div class="mt-4 pt-4 border-t border-gray-100">
                             <a href="{{ route('admin.applications', ['status' => 'in_progress']) }}" class="text-yellow-600 hover:text-yellow-700 text-sm font-semibold flex items-center group">View applications
                                 <svg class="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -790,4 +788,4 @@
         </div>
     </div>
     </div>
-</x-app-layout>
+@endsection
