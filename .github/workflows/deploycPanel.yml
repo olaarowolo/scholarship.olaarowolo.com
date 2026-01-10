@@ -59,6 +59,7 @@ jobs:
             node_modules/**
             vendor/**
             .vscode/**
+            storage/**
             storage/framework/views/**
             storage/logs/**
             storage/debugbar/**
